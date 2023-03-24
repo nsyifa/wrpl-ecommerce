@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap");
+
+/* Filter sidebar container */
+.filter-sidebar {
+  background: #4b55c0;
+  border-radius: 30px;
+  padding: 1.6em;
+}
+
+/* Filter title */
+.filter-title {
+  font-weight: bold;
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 1em;
+  color: #ffffff;
+}
+
+.filter-section {
+  margin-bottom: 1em;
+}
+
+.filter-section h3 {
+  font-weight: bold;
+  font-size: 24px;
+  color: #ffffff;
+  margin-bottom: 0.3em;
+}
+
+.filter-section-line {
+  border: 1px solid #ffffff;
+  margin-bottom: 0.5em;
+}
+
+/* Filter checkbox list */
+.filter-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Filter checkbox item */
+.filter-item {
+  margin-bottom: 0.6em;
+}
+
+.filter-item label {
+  display: flex;
+  align-items: center;
+}
+
+.filter-item input {
+  cursor: pointer;
+}
+
+/* Filter checkbox label */
+.filter-label {
+  display: inline-block;
+  margin-left: 0.7em;
+  font-size: 15px;
+  color: white;
+}
+
+/* Filter button */
+.filter-button {
+  display: block;
+  margin-top: 10px;
+  background-color: white;
+  width: 100%;
+  color: #4b55c0;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 20px;
+  border: none;
+  padding: 0.4em 1em;
+  cursor: pointer;
+}
+
+/* Filter button:hover */
+.filter-button:hover {
+  background-color: #e8e8e8;
+}

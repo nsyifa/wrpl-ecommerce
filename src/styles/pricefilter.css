@@ -1,0 +1,31 @@
+form.price-dropdown {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 1rem 0;
+}
+
+.price-dropdown label {
+  margin-right: 0.5rem;
+  color: white;
+  margin-bottom: 0.5em;
+  font-size: 15px;
+}
+
+.price-dropdown select {
+  padding: 0.25rem;
+  margin-right: 1rem;
+  background: rgba(167, 174, 255, 0.47);
+  border: 1px solid #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  color: white;
+  padding: 0.5em 1em;
+  margin-bottom: 1em;
+  cursor: pointer;
+}
+
+.price-dropdown option {
+  color: black;
+}

@@ -1,0 +1,36 @@
+/* SortDropdown styles */
+.sort-dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5em;
+}
+
+.sort-dropdown label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.sort-dropdown select {
+  font-size: 14px;
+  border: 1px solid black;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.25);
+  padding: 8px 10px;
+  border-radius: 24px;
+  background-color: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.sort-dropdown select:focus {
+  outline: none;
+  border-color: #4c9aff;
+  box-shadow: 0px 0px 4px rgba(76, 154, 255, 0.4);
+}
+
+.sort-dropdown select option {
+  font-size: 14px;
+  font-weight: 400;
+}
