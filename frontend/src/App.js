@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import Home from "./pages/Home";
+import Test from "./pages/Test";
 import About from "./pages/About";
 import Products from "./pages/Products";
 import Layout from "./components/Layout";
@@ -12,6 +13,7 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="products" element={<Products />} />
+        <Route path="test" element={<Test />} />
 
         <Route
           path="products/0-2years"
@@ -21,7 +23,7 @@ const App = () => {
                 categories: [],
                 ages: ["0-2"],
                 brands: [],
-                prices: []
+                prices: [],
               }}
             />
           }
@@ -34,7 +36,7 @@ const App = () => {
                 categories: [],
                 ages: ["3-6"],
                 brands: [],
-                prices: []
+                prices: [],
               }}
             />
           }
@@ -47,7 +49,7 @@ const App = () => {
                 categories: [],
                 ages: ["7-10"],
                 brands: [],
-                prices: []
+                prices: [],
               }}
             />
           }
@@ -60,7 +62,7 @@ const App = () => {
                 categories: [],
                 ages: ["10+"],
                 brands: [],
-                prices: []
+                prices: [],
               }}
             />
           }
@@ -74,7 +76,7 @@ const App = () => {
                 categories: ["action figures & playsets"],
                 ages: [],
                 brands: [],
-                prices: []
+                prices: [],
               }}
             />
           }
@@ -87,7 +89,7 @@ const App = () => {
                 categories: ["baby, toddler, & preschool learning toys"],
                 ages: [],
                 brands: [],
-                prices: []
+                prices: [],
               }}
             />
           }
@@ -100,7 +102,7 @@ const App = () => {
                 categories: ["building sets & blocks"],
                 ages: [],
                 brands: [],
-                prices: []
+                prices: [],
               }}
             />
           }
@@ -113,7 +115,7 @@ const App = () => {
                 categories: ["dolls, collectibles, and stuffed animals"],
                 ages: [],
                 brands: [],
-                prices: []
+                prices: [],
               }}
             />
           }
@@ -126,7 +128,7 @@ const App = () => {
                 categories: ["games & puzzles"],
                 ages: [],
                 brands: [],
-                prices: []
+                prices: [],
               }}
             />
           }
@@ -139,7 +141,7 @@ const App = () => {
                 categories: ["kids arts and crafts"],
                 ages: [],
                 brands: [],
-                prices: []
+                prices: [],
               }}
             />
           }
@@ -152,7 +154,7 @@ const App = () => {
                 categories: ["vehicles and remote controls"],
                 ages: [],
                 brands: [],
-                prices: []
+                prices: [],
               }}
             />
           }
