@@ -10,10 +10,12 @@ const ProductCard = ({ product }) => {
       </div> */}
       <h2 className="product-title">{product.name}</h2>
       <div className="price-rating-wrapper">
-        <h2 className="product-price">{"$" + product.price}</h2>
+        <h2 className="product-price">
+          {"$" + parseFloat(product.price).toFixed(2)}
+        </h2>
         <Rating
           name="read-only"
-          value={product.rating}
+          value={parseFloat(product.rating)}
           precision={0.1}
           size="small"
           readOnly
