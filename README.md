@@ -1,5 +1,8 @@
 # 4kiddos
 
+## Requirements:
+1) Sudah install Node.js
+
 ## Cara ngerun backend:
 1) Pastikan database e-shoppingnya sudah ada di lokal mysql server (pastikan udah up-to-date)
 2) di cd backend-node:  
@@ -7,8 +10,26 @@
 run command 'npm install'
 4) Di file db.config.js di folder config, ubah datanya supaya sesuai sama database lokal masing-masing
 ![image](https://user-images.githubusercontent.com/89928533/227908009-749c9978-4dfb-4fda-a5ca-49becef85008.png)
-3) run command 'node server.js'
+3) run command 'node server.js' untuk ngerun backend.
 4) Kalau sudah connected, di terminal akan keluar:  
-![image](https://user-images.githubusercontent.com/89928533/227908593-ed5863df-bc1b-4665-a15e-8c027873b47c.png)
+![image](https://user-images.githubusercontent.com/89928533/227908593-ed5863df-bc1b-4665-a15e-8c027873b47c.png)  
+
+## Cara ngerun frontend:
+1) di file package.json, hilangin brainhubeu-react carousel dari dependencies:  
+![image](https://user-images.githubusercontent.com/89928533/227909896-69307eaa-10ba-47ed-8c76-b3cec7302c94.png)
+2) di file package-lock.json, juga hilangin brainhubeu-react carousel dari dependencies:  
+![image](https://user-images.githubusercontent.com/89928533/227910130-ff36c54b-7037-4a74-9c9e-5c0bdafd9581.png)
+3) di cd frontend:  
+![image](https://user-images.githubusercontent.com/89928533/227909704-a097d3b2-929c-45f8-9f10-60632e97cae9.png)  
+run 'npm install'
+4) run command 'npm i @brainhubeu/react-carousel --legacy-peer-deps'
+5) run command 'npm run start' untuk ngerun frontend
+
+## Agar frontend + backend dua-duanya jalan, run keduanya di terminal yang terpisah
+
+
+
+
+
 
 
