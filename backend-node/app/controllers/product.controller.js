@@ -11,3 +11,58 @@ exports.getAllProducts = (req, res) => {
     else res.send(data);
   });
 };
+
+exports.getCustomerFromEmail = (req, res) => {
+  console.log(req.query, "HI");
+  Database.getCustomerFromEmail(req.query.email, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving customer.",
+      });
+    else res.send(data);
+  });
+};
+
+exports.getLatestCustomer = (req, res) => {
+  Database.getLatestCustomer((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving customer.",
+      });
+    else res.send(data);
+  });
+};
+
+exports.createCustomer = (req, res) => {
+  // Validate request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!",
+    });
+  }
+
+  console.log(req);
+  // Create a Tutorial
+  const customer = {
+    cust_id: req.body.cust_id,
+    cust_name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+    phone: req.body.phone,
+    country: req.body.country || null,
+    city: req.body.city || null,
+    address: req.body.address || null,
+  };
+
+  // Save Tutorial in the database
+  Database.createCustomer(customer, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the customer.",
+      });
+    else res.send(data);
+  });
+};

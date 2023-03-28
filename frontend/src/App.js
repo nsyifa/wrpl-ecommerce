@@ -1,18 +1,37 @@
-import Header from "./components/Header";
+import { useEffect, useState } from "react";
 import Home from "./pages/Home";
 // import Test from "./pages/Test";
 import About from "./pages/About";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
+import Register from "./pages/Register";
 import Layout from "./components/Layout";
+import Login from "./pages/Login";
 import { Routes, Route } from "react-router-dom";
 
 const App = () => {
+  const [user, setUser] = useState();
+
+  // useEffect(() => {
+  //   const loggedInUser = localStorage.getItem("user");
+  //   if (loggedInUser) {
+  //     console.log(loggedInUser);
+  //     const foundUser = JSON.parse(loggedInUser);
+  //     setUser(foundUser);
+  //   }
+  // }, []);
+
+  const updateUser = (customer) => {
+    setUser(customer);
+    console.log("Log in successful", user);
+  };
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
+        <Route path="register" element={<Register />} />
+        <Route path="login" element={<Login updateUser={updateUser} />} />
         <Route path="products" element={<Products />} />
         <Route path="/products/product-detail" element={<ProductDetail />} />
         {/* <Route path="test" element={<Test />} /> */}
