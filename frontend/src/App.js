@@ -1,8 +1,9 @@
 import Header from "./components/Header";
 import Home from "./pages/Home";
-import Test from "./pages/Test";
+// import Test from "./pages/Test";
 import About from "./pages/About";
 import Products from "./pages/Products";
+import ProductDetail from "./pages/ProductDetail";
 import Layout from "./components/Layout";
 import { Routes, Route } from "react-router-dom";
 
@@ -13,7 +14,8 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="products" element={<Products />} />
-        <Route path="test" element={<Test />} />
+        <Route path="/products/product-detail" element={<ProductDetail />} />
+        {/* <Route path="test" element={<Test />} /> */}
 
         <Route
           path="products/0-2years"

@@ -1,0 +1,184 @@
+:root {
+  --hijau1: #03c958;
+  --hijau2: #149d4f;
+  --biru: #4b55c0;
+  --abu: #ededed;
+  --oren: #fea31b;
+  --kuning1: #fbe83f;
+  --kuning2: #fad405;
+  --merah: #fe1b1b;
+}
+
+.product-detail-wrapper {
+  width: 100%;
+  margin-top: 3em;
+  padding-left: 4.5em;
+  padding-right: 4.5em;
+}
+
+.product-image-desc {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.pd-left-col {
+  width: 40%;
+}
+
+.quantity-cart-wrapper {
+  width: 25em;
+  margin: auto;
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+}
+.quantity-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  justify-content: space-between;
+  margin-top: 1.5em;
+  font-size: 16px;
+  color: gray;
+  align-items: center;
+}
+
+.quantity-button-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: black;
+  gap: 1.2em;
+  margin-left: 2.5em;
+  border-radius: 5px;
+  border: solid gray 0.5px;
+}
+.quantity-button {
+  font-size: 1.5em;
+  border: none;
+  padding: 1px 0.8em;
+  cursor: pointer;
+}
+
+.pd-cart-button {
+  display: block;
+  margin: auto;
+  font-size: 1.5em;
+  font-family: "Some Time Later";
+  padding: 0.3em;
+  color: white;
+  display: flex;
+  gap: 0.5em;
+  margin-top: 10px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  background-color: var(--hijau2);
+  border-radius: 30px;
+  width: 100%;
+}
+
+.pd-cart-button:hover {
+  scale: 1.03;
+}
+
+.pd-cart-button img {
+  width: 1.3em;
+  height: 1.3em;
+}
+
+.pd-buy-button {
+  display: block;
+  margin: auto;
+  font-size: 1.5em;
+  font-family: "Some Time Later";
+  padding: 0.3em;
+  color: white;
+  display: flex;
+  gap: 0.5em;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  background-color: var(--biru);
+  border-radius: 30px;
+  width: 100%;
+}
+
+.pd-buy-button:hover {
+  scale: 1.03;
+}
+
+.pd-buy-button img {
+  width: 1.3em;
+  height: 1.3em;
+}
+
+.pd-right-col {
+  width: 55%;
+  margin-left: 2em;
+}
+
+.pd-brand {
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 1.2em;
+  color: gray;
+}
+.pd-title {
+  font-family: "Some Time Later";
+  font-size: 2.5em;
+  margin-top: 0.3em;
+}
+
+.rating-sales-wrapper {
+  width: 100%;
+  gap: 1em;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.price-share-wrapper {
+  display: flex;
+  margin-top: 0.5em;
+  font-size: 1.4em;
+  gap: 0.8em;
+  font-weight: bold;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 1em;
+}
+
+.price-share-wrapper img {
+  width: 1em;
+  height: 1em;
+  cursor: pointer;
+}
+
+.price-share-wrapper img:hover {
+  scale: 1.04;
+}
+
+.description-heading {
+  font-weight: bold;
+  margin-top: 0.4em;
+  font-size: 1.7em;
+}
+
+.pd-description {
+  margin-top: 0.4em;
+  font-size: 1.2em;
+}
+
+.pd-description-list {
+  margin-top: 0.4em;
+  font-size: 1.2em;
+  list-style-position: inside;
+}

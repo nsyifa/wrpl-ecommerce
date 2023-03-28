@@ -16,7 +16,7 @@ const Database = function (database) {
 };
 
 Database.getAllProducts = (result) => {
-  sql.query("SELECT * FROM products", (err, res) => {
+  sql.query("CALL spShowProducts()", (err, res) => {
     if (err) {
       console.log("error:", err);
       result(null, err);

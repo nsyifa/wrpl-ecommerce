@@ -1,23 +1,46 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import FilterSidebar from "../components/FilterSidebar";
 import SortDropdown from "../components/SortDropdown";
 import SearchBar from "../components/SearchBar";
 import ProductCard from "../components/ui/ProductCard";
-import { productData } from "../constants/productData";
+import { Link } from "react-router-dom";
+// import { productData } from "../constants/productData";
 
 function Products({
   filter = {
     categories: [],
     ages: [],
     brands: [],
-    prices: []
-  }
+    prices: [],
+  },
 }) {
-  const [filteredProducts, setFilteredProducts] = useState(productData);
+  const apiUrl = "http://localhost:8080";
+
+  const [productData, setProductData] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [filters, setFilters] = useState(filter);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOption, setSortOption] = useState("relevance");
+  const productDataFetch = async () => {
+    const response = await axios.get(`${apiUrl}/api/data/products`);
+    console.log(response.data);
+    setProductData(response.data[0]);
+    return response.data;
+  };
 
+  useEffect(function () {
+    productDataFetch();
+  }, []);
+
+  useEffect(
+    function () {
+      console.log(productData, "HELLO");
+      setFilteredProducts(productData);
+      console.log(filteredProducts);
+    },
+    [productData]
+  );
   function handleFilterInput(filter) {
     setFilters(filter);
   }
@@ -75,7 +98,7 @@ function Products({
 
       if (filters.brands.length > 0) {
         newFilteredProducts = newFilteredProducts.filter((product) =>
-          filters.brands.includes(product.brand)
+          filters.brands.includes(product.brand.replace(/(\r\n|\n|\r)/gm, ""))
         );
       }
 
@@ -119,7 +142,7 @@ function Products({
               "dolls, collectibles, and stuffed animals",
               "games & puzzles",
               "kids arts and crafts",
-              "vehicles and remote controls"
+              "vehicles and remote controls",
             ]}
             ages={["0-2", "3-6", "7-10", "10+"]}
             brands={[
@@ -130,7 +153,7 @@ function Products({
               "marvel",
               "disney",
               "hot wheels",
-              "others"
+              "others",
             ]}
             prices={[
               "0",
@@ -142,14 +165,18 @@ function Products({
               "5000",
               "6000",
               "8000",
-              "10000"
+              "10000",
             ]}
             onFilterChange={handleFilterInput}
           />
         </div>
         <div className="products-list">
           {filteredProducts.map((product, index) => {
-            return <ProductCard product={product} key={product.product_id} />;
+            return (
+              <Link to="product-detail" state={product}>
+                <ProductCard product={product} key={product.product_id} />
+              </Link>
+            );
           })}
         </div>
       </div>

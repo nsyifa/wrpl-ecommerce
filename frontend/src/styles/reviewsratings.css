@@ -1,0 +1,121 @@
+.reviews-ratings-wrapper {
+  width: 90%;
+  margin: auto;
+  margin-top: 4em;
+  padding: 3em 5em;
+  border: solid 1px black;
+  border-radius: 30px;
+  position: relative;
+}
+
+.reviews-title {
+  font-family: "Some Time Later";
+  font-size: 3.5em;
+  color: #fea31b;
+  position: absolute;
+  top: -25px;
+  background-color: white;
+  padding: 0 0.2em;
+}
+
+.ratings-add-reviews-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ratings-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+}
+
+.big-rating {
+  color: white;
+  display: flex;
+  background-color: #fea31b;
+  padding: 1em;
+  border-radius: 30px;
+  gap: 0.2em;
+  flex-direction: column;
+  align-items: center;
+}
+
+.big-rating .rating {
+  font-size: 2.2em;
+  font-weight: bold;
+}
+
+.rating-amount {
+  font-size: 1em;
+}
+
+.small-rating {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+.small-rating-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.add-review-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8em;
+  justify-content: center;
+}
+
+.add-review-ask {
+  font-size: 1.6em;
+}
+
+.add-review-bonus {
+  color: gray;
+}
+
+.add-review-button {
+  color: #fea31b;
+  font-weight: bold;
+  font-size: 1.4em;
+  padding: 0.5em 1.5em;
+  border: solid #fea31b 2px;
+  border-radius: 10px;
+  margin-top: 0.2em;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.add-review-button:hover {
+  scale: 1.04;
+}
+
+.reviews-wrapper {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8em;
+}
+
+.review-name {
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+.review-rating-date {
+  display: flex;
+  margin-top: 0.4em;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+  color: gray;
+}
