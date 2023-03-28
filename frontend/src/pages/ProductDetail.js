@@ -13,7 +13,7 @@ const ProductDetail = () => {
   console.log(product);
   const [quantity, setQuantity] = useState(1);
   const randomSales = useRef(Math.floor(Math.random() * 500));
-  const randomRatings = useRef(Math.floor(Math.random() * randomSales));
+  const randomRatings = useRef(Math.floor(Math.random() * randomSales.current));
 
   function updateQuantity(newQuantity) {
     setQuantity(newQuantity);
@@ -90,7 +90,10 @@ const ProductDetail = () => {
           </ul>
         </div>
       </div>
-      <ReviewsRatings rating={product.rating} ratingamount={randomRatings} />
+      <ReviewsRatings
+        rating={product.rating}
+        ratingamount={randomRatings.current}
+      />
     </div>
   );
 };

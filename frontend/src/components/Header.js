@@ -11,8 +11,12 @@ const Header = () => {
         </Link>
         <Navbar />
         <div className="profile">
-          <button className="reg">Register</button>
-          <button className="login">Log in</button>
+          <Link to="register">
+            <button className="reg">Register</button>
+          </Link>
+          <Link to="login">
+            <button className="login">Log in</button>
+          </Link>
         </div>
       </div>
     </header>
