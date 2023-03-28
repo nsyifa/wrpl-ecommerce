@@ -122,7 +122,7 @@ function Products({
       setFilteredProducts(newFilteredProducts);
       onSort(sortOption, newFilteredProducts);
     },
-    [filters, searchQuery, sortOption]
+    [filters, searchQuery, sortOption, productData]
   );
 
   return (
