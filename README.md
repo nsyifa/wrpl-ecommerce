@@ -1,5 +1,8 @@
 # 4kiddos
 
+## Link Drive
+https://drive.google.com/drive/folders/1htCgO5FRlL0djQy3NOuWSHoEGXxx9I_R?usp=share_link
+
 ## Requirements:
 1) Sudah install Node.js
 
