@@ -109,8 +109,6 @@ const Register = () => {
 
     console.log(cust_id);
 
-    setShowSuccessModal(true);
-    console.log("modal", showSuccessModal);
     axios
       .post("http://localhost:8080/api/data/customers", {
         cust_id: cust_id,
@@ -121,6 +119,7 @@ const Register = () => {
       })
       .then((response) => {
         console.log(response);
+        setShowSuccessModal(true);
       });
   };
 

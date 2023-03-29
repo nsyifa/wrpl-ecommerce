@@ -91,25 +91,26 @@ function Products({
   useEffect(
     function handleFilterChange() {
       let newFilteredProducts = productData;
-      if (filters.categories.length > 0) {
+
+      if (filters.categories[0]) {
         newFilteredProducts = newFilteredProducts.filter((product) =>
           filters.categories.includes(product.category)
         );
       }
 
-      if (filters.ages.length > 0) {
+      if (filters.ages[0]) {
         newFilteredProducts = newFilteredProducts.filter((product) =>
           filters.ages.includes(product.age)
         );
       }
 
-      if (filters.brands.length > 0) {
+      if (filters.brands[0]) {
         newFilteredProducts = newFilteredProducts.filter((product) =>
           filters.brands.includes(product.brand.replace(/(\r\n|\n|\r)/gm, ""))
         );
       }
 
-      if (filters.prices.length > 0) {
+      if (filters.prices[0] > 1) {
         newFilteredProducts = newFilteredProducts.filter((product) => {
           for (let priceRange of filters.prices) {
             const [min, max] = priceRange.split("-").map(parseFloat);
@@ -126,8 +127,10 @@ function Products({
           product.name.toLowerCase().includes(searchQuery.toLowerCase())
         );
       }
+
       setFilteredProducts(newFilteredProducts);
       onSort(sortOption, newFilteredProducts);
+      console.log("after filter result after sort", newFilteredProducts);
     },
     [filters, searchQuery, sortOption, productData]
   );
@@ -184,6 +187,7 @@ function Products({
                 to="product-detail"
                 style={{ textDecoration: "none" }}
                 state={product}
+                key={index}
               >
                 <ProductCard
                   product={product}

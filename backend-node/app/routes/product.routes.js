@@ -12,5 +12,7 @@ module.exports = (app) => {
 
   router.get("/customers/email/:email", database.getCustomerFromEmail);
 
+  router.get("/cart/:id", database.getCustomerCartProducts);
+
   app.use("/api/data", router);
 };

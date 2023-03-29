@@ -13,9 +13,15 @@ const Header = ({ user, updateUser }) => {
     if (user.cust_name) {
       console.log(user);
       return (
-        <button className="login" onClick={handleLogout}>
-          Log out
-        </button>
+        <React.Fragment>
+          <Link to="cart">
+            <img src="/icons/header_cart.svg" />
+          </Link>
+
+          <button className="login" onClick={handleLogout}>
+            Log out
+          </button>
+        </React.Fragment>
       );
     } else {
       return (

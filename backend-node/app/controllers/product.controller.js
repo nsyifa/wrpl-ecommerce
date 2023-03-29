@@ -13,7 +13,6 @@ exports.getAllProducts = (req, res) => {
 };
 
 exports.getCustomerFromEmail = (req, res) => {
-  console.log(req.query, "HI");
   Database.getCustomerFromEmail(req.query.email, (err, data) => {
     if (err)
       res.status(500).send({
@@ -44,7 +43,7 @@ exports.createCustomer = (req, res) => {
   }
 
   console.log(req);
-  // Create a Tutorial
+  // Create a Customer
   const customer = {
     cust_id: req.body.cust_id,
     cust_name: req.body.name,
@@ -56,12 +55,25 @@ exports.createCustomer = (req, res) => {
     address: req.body.address || null,
   };
 
-  // Save Tutorial in the database
+  // Save Customer in the database
   Database.createCustomer(customer, (err, data) => {
     if (err)
       res.status(500).send({
         message:
           err.message || "Some error occurred while creating the customer.",
+      });
+    else res.send(data);
+  });
+};
+
+// get customer cart info from cust_id
+exports.getCustomerCartProducts = (req, res) => {
+  console.log(req.query, "HI");
+  Database.getCustomerCartProducts(req.query.cust_id, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving cart info.",
       });
     else res.send(data);
   });

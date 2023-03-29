@@ -67,4 +67,21 @@ Database.createCustomer = (newCustomer, result) => {
   });
 };
 
+Database.getCustomerCartProducts = (cust_id, result) => {
+  sql.query(
+    `CALL spGetCustomerCartProducts('${cust_id}')`,
+    cust_id,
+    (err, res) => {
+      if (err) {
+        console.log("error:", err);
+        result(null, err);
+        return;
+      }
+
+      console.log("cart info:", res);
+      result(null, res);
+    }
+  );
+};
+
 module.exports = Database;
