@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import RegisterSuccessModal from "../components/RegisterSuccessModal";
 import "../styles/register.css";
 
 const Register = () => {
-  // const [latestCustomer, setLatestCustomer] = useState();
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [input, setInput] = useState({
     name: "",
     phone: "",
@@ -108,6 +109,8 @@ const Register = () => {
 
     console.log(cust_id);
 
+    setShowSuccessModal(true);
+    console.log("modal", showSuccessModal);
     axios
       .post("http://localhost:8080/api/data/customers", {
         cust_id: cust_id,
@@ -242,6 +245,10 @@ const Register = () => {
           Sign in
         </a>
       </div>
+      <RegisterSuccessModal
+        isOpen={showSuccessModal}
+        onRequestClose={() => setShowSuccessModal(false)}
+      />
     </form>
   );
 };

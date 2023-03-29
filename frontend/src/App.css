@@ -152,9 +152,16 @@ button span {
 .reg {
   margin-right: 20px;
   background-color: var(--oren);
+  cursor: pointer;
 }
 .login {
   background-color: var(--kuning2);
+  cursor: pointer;
+}
+
+.login:hover,
+.reg:hover {
+  scale: 1.04;
 }
 
 /* content */
