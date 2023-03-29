@@ -25,9 +25,9 @@ const HomeCarousel = ({ data, color }) => {
           {
             resolve: slidesToShowPlugin,
             options: {
-              numberOfSlides: cardNumbers
-            }
-          }
+              numberOfSlides: cardNumbers,
+            },
+          },
         ]}
       >
         {data.title === "by brand"

@@ -1,10 +1,10 @@
 import Rating from "@mui/material/Rating";
 // import { batman } from "/img";
 import "../../styles/productcard.css";
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, image }) => {
   return (
     <div className="product-card-container">
-      <img className="product-image" src="/img/batman.jpg" />
+      <img className="product-image" src={image} />
       {/* <div className="title-wrapper">
         
       </div> */}

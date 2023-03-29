@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "../../styles/reviewsratings.css";
 import Rating from "@mui/material/Rating";
 import { reviewData } from "../../constants/reviewData";
@@ -16,6 +16,8 @@ const ReviewsRatings = ({ rating, ratingamount }) => {
     console.log(numbers);
     return numbers;
   };
+
+  const ratingNumbers = useRef(ratingAmountArray());
   return (
     <div className="reviews-ratings-wrapper">
       <p className="reviews-title">Reviews</p>
@@ -45,7 +47,7 @@ const ReviewsRatings = ({ rating, ratingamount }) => {
             </p>
           </div>
           <div className="small-rating">
-            {ratingAmountArray().map((amount, index) => {
+            {ratingNumbers.current.map((amount, index) => {
               return (
                 <div className="small-rating-line" key={index}>
                   <Rating

@@ -3,7 +3,7 @@ import axios from "axios";
 import "../styles/register.css";
 
 const Login = ({ updateUser }) => {
-  const [customer, setCustomer] = useState();
+  // const [customer, setCustomer] = useState();
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -50,8 +50,8 @@ const Login = ({ updateUser }) => {
     event.preventDefault();
   };
 
-  const customerFetchByEmail = async (email) => {
-    const response = await axios.get(
+  const customerFetchByEmail = (email) => {
+    return axios.get(
       `http://localhost:8080/api/data/customers/email/:${email}`,
       {
         params: {
@@ -59,9 +59,12 @@ const Login = ({ updateUser }) => {
         },
       }
     );
-    console.log(response.data);
-    setCustomer(response.data[0][0]);
-    return response.data;
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     setCustomer(response.data[0][0]);
+    //   });
+
+    // return response.data;
   };
 
   const verifyCustomer = async () => {
@@ -69,15 +72,15 @@ const Login = ({ updateUser }) => {
 
     const email = input.email;
     const password = input.password;
-    await customerFetchByEmail(email);
-    if (customer) {
-      if (customer.password === password) {
-        updateUser(customer);
-        localStorage.setItem("user", customer);
-        console.log("HEYHO", customer);
-      } else {
-        console.log("not success");
-      }
+    const customer = (await customerFetchByEmail(email)).data[0][0];
+    // if (customer) {
+    if (customer.password === password) {
+      console.log("before update", customer);
+      updateUser(customer);
+      localStorage.setItem("user", JSON.stringify(customer));
+      console.log("Log", customer);
+    } else {
+      console.log("not success");
     }
   };
 

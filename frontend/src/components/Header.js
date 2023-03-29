@@ -1,8 +1,35 @@
 import Navbar from "./Navbar";
+import React from "react";
 import { Link } from "react-router-dom";
 // import { logo } from "../../public/img/index";
 
-const Header = () => {
+const Header = ({ user, updateUser }) => {
+  const handleLogout = () => {
+    updateUser({});
+    localStorage.clear();
+    window.location.reload(false);
+  };
+  const userButton = () => {
+    if (user.cust_name) {
+      console.log(user);
+      return (
+        <button className="login" onClick={handleLogout}>
+          Log out
+        </button>
+      );
+    } else {
+      return (
+        <React.Fragment>
+          <Link to="register">
+            <button className="reg">Register</button>
+          </Link>
+          <Link to="login">
+            <button className="login">Log in</button>
+          </Link>
+        </React.Fragment>
+      );
+    }
+  };
   return (
     <header>
       <div className="nav-area">
@@ -11,12 +38,13 @@ const Header = () => {
         </Link>
         <Navbar />
         <div className="profile">
-          <Link to="register">
+          {/* <Link to="register">
             <button className="reg">Register</button>
           </Link>
           <Link to="login">
             <button className="login">Log in</button>
-          </Link>
+          </Link> */}
+          {userButton()}
         </div>
       </div>
     </header>

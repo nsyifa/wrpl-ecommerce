@@ -6,7 +6,14 @@ import SearchBar from "../components/SearchBar";
 import ProductCard from "../components/ui/ProductCard";
 import { Link } from "react-router-dom";
 // import { productData } from "../constants/productData";
-
+const imageArray = [
+  "/img/batman.jpg",
+  "/img/barbie.jpeg",
+  "/img/harrypotter.jpg",
+  "/img/princess.jpg",
+  "/img/batman.jpg",
+  "/img/mlp.jpg",
+];
 function Products({
   filter = {
     categories: [],
@@ -173,8 +180,16 @@ function Products({
         <div className="products-list">
           {filteredProducts.map((product, index) => {
             return (
-              <Link to="product-detail" state={product}>
-                <ProductCard product={product} key={product.product_id} />
+              <Link
+                to="product-detail"
+                style={{ textDecoration: "none" }}
+                state={product}
+              >
+                <ProductCard
+                  product={product}
+                  image={imageArray[index % 6]}
+                  key={product.product_id}
+                />
               </Link>
             );
           })}

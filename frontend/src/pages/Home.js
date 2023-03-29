@@ -8,7 +8,7 @@ import { carouselData } from "../constants/carouselData.js";
 // import wave3 from "../img/landing-page/Rectangle 10.png";
 // import circle from "../img/landing-page/circle.png";
 // import hiasan from "../img/landing-page/Doodle stars.png";
-const Home = () => {
+const Home = ({ user }) => {
   return (
     <div>
       <div className="banner">
@@ -16,6 +16,11 @@ const Home = () => {
         <div className="banner-text">
           <h2>For kids, by kids</h2>
           <p> Welcome to 4Kiddos, where playtime never ends! </p>
+          {user.cust_name ? (
+            <p> {"Welcome to 4Kiddos " + user.cust_name + "!"}</p>
+          ) : (
+            ""
+          )}
           <p>
             We offer a wide range of toys and games that are perfect for kids of
             all ages.

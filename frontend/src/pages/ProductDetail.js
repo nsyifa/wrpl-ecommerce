@@ -53,7 +53,7 @@ const ProductDetail = () => {
             />
             <p>|</p>
             <p>
-              <b>{Math.floor(Math.random() * 500)}</b> people bought this
+              <b>{randomSales.current}</b> people bought this
             </p>
           </div>
           <div className="price-share-wrapper">

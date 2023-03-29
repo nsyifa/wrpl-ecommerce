@@ -3,7 +3,7 @@ import axios from "axios";
 import "../styles/register.css";
 
 const Register = () => {
-  const [latestCustomer, setLatestCustomer] = useState();
+  // const [latestCustomer, setLatestCustomer] = useState();
   const [input, setInput] = useState({
     name: "",
     phone: "",
@@ -85,19 +85,19 @@ const Register = () => {
     event.preventDefault();
   };
 
-  const latestCustomerFetch = async () => {
-    const response = await axios.get(
-      "http://localhost:8080/api/data/customers/latest"
-    );
-    console.log(response.data);
-    setLatestCustomer(response.data[0][0]);
-    return response.data;
+  const latestCustomerFetch = () => {
+    return axios.get("http://localhost:8080/api/data/customers/latest");
+    // .then((response) => {
+    //   console.log("hi", response.data);
+    //   // setLatestCustomer(response.data[0][0]);
+    //   return response.data[0][0];
+    // });
   };
 
   const addCustomer = async () => {
     console.log(input);
 
-    await latestCustomerFetch();
+    const latestCustomer = await (await latestCustomerFetch()).data[0][0];
 
     let cust_id = parseInt(latestCustomer.cust_id.replace("CB", "")) + 1;
     cust_id = "CB" + cust_id;

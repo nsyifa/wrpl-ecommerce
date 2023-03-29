@@ -28,7 +28,7 @@ Database.getAllProducts = (result) => {
   });
 };
 
-Database.getCustomerFromEmail = (result) => {
+Database.getLatestCustomer = (result) => {
   sql.query("CALL spGetLatestCustomer()", (err, res) => {
     if (err) {
       console.log("error:", err);
