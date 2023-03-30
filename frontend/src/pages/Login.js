@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../styles/register.css";
+import RegisterSuccessModal from "../components/RegisterSuccessModal";
+import "../styles/login.css";
 
 const Login = ({ updateUser }) => {
   // const [customer, setCustomer] = useState();
@@ -85,51 +86,63 @@ const Login = ({ updateUser }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="register-form">
-      <div className="register-form__input-container">
-        <label htmlFor="email" className="register-form__label">
-          Email:
-        </label>
-        <input
-          type="email"
-          id="email"
-          value={input.email}
-          onChange={(e) => {
-            onInputChange(e);
-          }}
-          onBlur={(e) => {
-            validateInput(e);
-          }}
-          className="register-form__input"
-        />
-        {error.email && <span className="err">{error.email}</span>}
-      </div>
-      <div className="register-form__input-container">
-        <label htmlFor="password" className="register-form__label">
-          Password:
-        </label>
-        <input
-          type="password"
-          id="password"
-          value={input.password}
-          onChange={(e) => {
-            onInputChange(e);
-          }}
-          onBlur={(e) => {
-            validateInput(e);
-          }}
-          className="register-form__input"
-        />
-        {error.password && <span className="err">{error.password}</span>}
-      </div>
-      <button
-        className="register-form__submit-button"
-        type="submit"
-        onClick={() => verifyCustomer()}
-      >
-        Sign in
-      </button>
-    </form>
+    <div className="login-page">
+      <p className = "login-title">Sign In</p>
+      <img className = "wave1-login" src="/img/wave/intersect 3.png"></img>
+      <img className = "wave2-login" src="/img/wave/intersect 4.png"></img>
+      <form onSubmit={handleSubmit} className="register-form">
+        <div className="register-form__input-container">
+          <label htmlFor="email" className="register-form__label">
+            Email:
+          </label>
+          <input
+            type="email"
+            id="email"
+            value={input.email}
+            onChange={(e) => {
+              onInputChange(e);
+            }}
+            onBlur={(e) => {
+              validateInput(e);
+            }}
+            className="register-form__input"
+          />
+          {error.email && <span className="err">{error.email}</span>}
+        </div>
+        <div className="register-form__input-container">
+          <label htmlFor="password" className="register-form__label">
+            Password:
+          </label>
+          <input
+            type="password"
+            id="password"
+            value={input.password}
+            onChange={(e) => {
+              onInputChange(e);
+            }}
+            onBlur={(e) => {
+              validateInput(e);
+            }}
+            className="register-form__input"
+          />
+          {error.password && <span className="err">{error.password}</span>}
+        </div>
+        <button
+          className="login-form__submit-button"
+          type="submit"
+          onClick={() => verifyCustomer()}
+        >
+          Sign in
+        </button>
+        <div className="already-account">
+          New to 4Kiddos?{" "}
+          <a href="/register" className="login-form__sign-in-link">
+            Create a new account
+          </a>
+        </div>
+      </form>
+      <div className="footer-login"></div>
+    </div>
   );
 };
 

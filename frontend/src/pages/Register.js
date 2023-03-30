@@ -125,7 +125,7 @@ const Register = () => {
 
   return (
   <div className="register-page">
-    <p>Register</p>
+    <p className = "register-title">Register</p>
     <img className = "wave1-register" src="/img/wave/intersect 1.png"></img>
     <img className = "wave2-register" src="img/wave/intersect 2.png"></img>
     <form onSubmit={handleSubmit} className="register-form">
