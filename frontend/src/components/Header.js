@@ -15,11 +15,11 @@ const Header = ({ user, updateUser }) => {
       return (
         <React.Fragment>
           <Link to="cart">
-            <img src="/icons/header_cart.svg" />
+            <img src="/icons/header_cart.svg" className = "cart-icon" />
           </Link>
 
           <button className="login" onClick={handleLogout}>
-            Log out
+            Sign out
           </button>
         </React.Fragment>
       );
@@ -30,7 +30,7 @@ const Header = ({ user, updateUser }) => {
             <button className="reg">Register</button>
           </Link>
           <Link to="login">
-            <button className="login">Log in</button>
+            <button className="login">Sign in</button>
           </Link>
         </React.Fragment>
       );
