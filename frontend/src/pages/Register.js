@@ -126,8 +126,8 @@ const Register = () => {
   return (
   <div className="register-page">
     <p>Register</p>
-    <img className = "wave1-register" src="/img/wave/Intersect.png"></img>
-    <img className = "wave2-register" src="img/wave/Intersect (1).png"></img>
+    <img className = "wave1-register" src="/img/wave/intersect 1.png"></img>
+    <img className = "wave2-register" src="img/wave/intersect 2.png"></img>
     <form onSubmit={handleSubmit} className="register-form">
       <div className="register-form__input-container">
         <label htmlFor="name" className="register-form__label">
