@@ -49,7 +49,10 @@ const App = () => {
         />
         <Route path="cart" element={<Cart user={user} />} />
         <Route path="products" element={<Products />} />
-        <Route path="/products/product-detail" element={<ProductDetail />} />
+        <Route
+          path="/products/product-detail"
+          element={<ProductDetail user={user} />}
+        />
         {/* <Route path="test" element={<Test />} /> */}
         <Route
           path="products/0-2years"

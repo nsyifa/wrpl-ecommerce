@@ -184,7 +184,8 @@ function Products({
           {filteredProducts.map((product, index) => {
             return (
               <Link
-                to="product-detail"
+                to="/products/product-detail"
+                replace={true}
                 style={{ textDecoration: "none" }}
                 state={product}
                 key={index}

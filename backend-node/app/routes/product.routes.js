@@ -12,7 +12,13 @@ module.exports = (app) => {
 
   router.get("/customers/email/:email", database.getCustomerFromEmail);
 
-  router.get("/cart/:id", database.getCustomerCartProducts);
+  router.get("/cart", database.getCustomerCartProducts);
+
+  router.put("/cart/update", database.updateCartQuantity);
+
+  router.post("/cart/add", database.addCartQuantity);
+
+  router.delete("/cart/:cust_id/:product_id", database.deleteCart);
 
   app.use("/api/data", router);
 };

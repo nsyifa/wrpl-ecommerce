@@ -1,12 +1,13 @@
 import React, { useState, useRef } from "react";
 import Rating from "@mui/material/Rating";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import ProductImageGallery from "../components/ProductImageGallery";
 import Quantity from "../components/productdetail/Quantity";
 import ReviewsRatings from "../components/productdetail/ReviewsRatings";
+import { addCartQuantity } from "../services/cart";
 import "../styles/productdetail.css";
 
-const ProductDetail = () => {
+const ProductDetail = ({ user }) => {
   //   const location = useLocation();
   const { state } = useLocation();
   const product = state;
@@ -18,6 +19,16 @@ const ProductDetail = () => {
   function updateQuantity(newQuantity) {
     setQuantity(newQuantity);
   }
+
+  async function handleAddCart(addQuantity) {
+    const res = await addCartQuantity(
+      user.cust_id,
+      product.product_id,
+      addQuantity
+    );
+    window.alert("Added to cart!");
+  }
+
   return (
     <div className="product-detail-wrapper">
       <div className="product-image-desc">
@@ -32,10 +43,30 @@ const ProductDetail = () => {
               stock={product.stock}
               updateQuantity={updateQuantity}
             />
-            <button className="pd-cart-button">
+            {user.cust_name ? (
+              <button
+                className="pd-cart-button"
+                onClick={() => handleAddCart(quantity)}
+              >
+                <img src="/icons/pd-cart.svg" />
+                Add to Cart
+              </button>
+            ) : (
+              <Link
+                style={{ textDecoration: "none" }}
+                replace={true}
+                to="/login"
+              >
+                <button className="pd-cart-button">
+                  <img src="/icons/pd-cart.svg" />
+                  Add to Cart
+                </button>
+              </Link>
+            )}
+            {/* <button className="pd-cart-button">
               <img src="/icons/pd-cart.svg" />
               Add to Cart
-            </button>
+            </button> */}
             <button className="pd-buy-button">Buy Now</button>
           </div>
         </div>
