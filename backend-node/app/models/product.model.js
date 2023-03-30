@@ -120,8 +120,8 @@ Database.updateCartQuantity = (cust_id, product_id, quantity, result) => {
 
 Database.addCartQuantity = (cust_id, product_id, add_quantity, result) => {
   sql.query(
-    "INSERT into cart(cust_id,product_id,quantity) VALUES(?, ?,?) ON DUPLICATE KEY UPDATE quantity=quantity+?",
-    [cust_id, product_id, add_quantity, add_quantity],
+    "CALL spUpdateCart1(?,?,?)",
+    [cust_id, product_id, add_quantity],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
