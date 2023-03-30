@@ -1,12 +1,11 @@
 * {
   background-color: transparent;
+  z-index: 1000;
 }
-
 .wave-footer {
   width: 104%;
   margin-left: -4%;
   z-index: 0;
-  margin-top: -100px;
   padding: 0;
   margin-bottom: 0;
 }
@@ -31,9 +30,9 @@
 }
 
 footer {
-  padding-top: 50px;
+  position: relative;
+  bottom: 0;
   width: 100%;
-  margin-top: 70px;
 }
 
 footer h4 {
@@ -46,6 +45,7 @@ footer p {
   color: #149d4f;
   font-size: 13px;
   line-height: 26px;
+  font-family: "Lato";
 }
 
 footer ul li {

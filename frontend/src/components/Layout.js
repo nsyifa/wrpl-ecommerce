@@ -9,7 +9,9 @@ const Layout = ({ user, updateUser }) => {
       <div className="content">
         <Outlet />
       </div>
-      <Footer />
+      <div className="footer-all">
+        <Footer />
+      </div>
     </div>
   );
 };

@@ -124,10 +124,14 @@ const Register = () => {
   };
 
   return (
+  <div className="register-page">
+    <p>Register</p>
+    <img className = "wave1-register" src="/img/wave/Intersect.png"></img>
+    <img className = "wave2-register" src="img/wave/Intersect (1).png"></img>
     <form onSubmit={handleSubmit} className="register-form">
       <div className="register-form__input-container">
         <label htmlFor="name" className="register-form__label">
-          Name:
+          Name
         </label>
         <input
           type="text"
@@ -145,7 +149,7 @@ const Register = () => {
       </div>
       <div className="register-form__input-container">
         <label className="register-form__label" htmlFor="phone">
-          Phone:
+          Phone
         </label>
         <input
           type="tel"
@@ -163,7 +167,7 @@ const Register = () => {
       </div>
       <div className="register-form__input-container">
         <label htmlFor="email" className="register-form__label">
-          Email:
+          Email
         </label>
         <input
           type="email"
@@ -181,7 +185,7 @@ const Register = () => {
       </div>
       <div className="register-form__input-container">
         <label htmlFor="password" className="register-form__label">
-          Password:
+          Password
         </label>
         <input
           type="password"
@@ -199,7 +203,7 @@ const Register = () => {
       </div>
       <div className="register-form__input-container">
         <label htmlFor="confirm-password" className="register-form__label">
-          Confirm Password:
+          Confirm Password
         </label>
         <input
           type="password"
@@ -219,13 +223,15 @@ const Register = () => {
       </div>
       <div className="register-form__input-container">
         <label htmlFor="terms-agreement" className="register-form__label">
-          <input
-            type="checkbox"
-            id="termsAgreement"
-            checked={termsAgreed}
-            onChange={handleTermsAgreement}
-          />
-          I agree to the terms of service
+          <span className = "check">
+            <input
+              type="checkbox"
+              id="termsAgreement"
+              checked={termsAgreed}
+              onChange={handleTermsAgreement}
+            />
+          </span>
+          I agree to the <a href="#" className = "terms-of-service">terms of service</a>
           {error.termsAgreement && (
             <span className="err">{error.termsAgreement}</span>
           )}
@@ -249,6 +255,8 @@ const Register = () => {
         onRequestClose={() => setShowSuccessModal(false)}
       />
     </form>
+    <div className="footer-regist"></div>
+  </div> 
   );
 };
 

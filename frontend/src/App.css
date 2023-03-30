@@ -129,12 +129,17 @@ button span {
 
 .dropdown.show {
   display: block;
+  position: absolute;
+  z-index: 9999;
+  background-color: white;
 }
 
 .dropdown .dropdown-submenu {
   position: absolute;
   left: 100%;
   top: -7px;
+  z-index: 9999;
+  background: white;
 }
 
 .profile {
