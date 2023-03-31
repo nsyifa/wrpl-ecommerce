@@ -101,7 +101,7 @@ const ItemRow = ({
   );
   return (
     <div className="item-row-wrapper">
-      <label>
+      <label className="item-checkbox">
         <input type="checkbox" checked={isChecked} onChange={handleChange} />
       </label>
       <img className="item-image" src={image} />
@@ -111,9 +111,12 @@ const ItemRow = ({
         <p>{"$" + parseFloat(product.price).toFixed(2)}</p>
       </div>
       <CartQuantity quantity={quantity} updateQuantity={updateQuantity} />
-      <p className="item-quantity-price">
-        {"$" + parseFloat(product.price * quantity).toFixed(2)}
-      </p>
+      <div className="item-quantity-price-container">
+        <p className="item-quantity-price">
+          {"$" + parseFloat(product.price * quantity).toFixed(2)}
+        </p>
+      </div>
+      
       <img
         className="cart-delete-icon"
         src="/icons/cart-trash.svg"

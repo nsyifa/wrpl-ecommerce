@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import ItemRow from "../components/cart/ItemRow";
 import { useGetCustomerCartProducts } from "../services/cart";
 import "../styles/cart.css";
@@ -60,35 +61,69 @@ const Cart = ({ user }) => {
   function updateCart(newCart) {
     setCart(newCart);
   }
+
   return (
-    <div className="cart-wrapper">
-      <div className="item-list-wrapper">
-        {cart && cart.length > 0 ? (
-          cart.map((item, index) => {
-            return (
-              <ItemRow
-                product={item}
-                image={imageArray[index % 6]}
-                checkAll={checkAll}
-                checkedIdPrice={checkedIdPrice}
-                updateCheckedIdPrice={updateCheckedIdPrice}
-                cart={cart}
-                updateCart={updateCart}
-                index={index}
-                key={index}
-              />
-            );
-          })
-        ) : (
-          <p>No items in cart</p>
-        )}
-        <label>
-          <input type="checkbox" checked={checkAll} onChange={handleChange} />
-          Select all
-        </label>
-        <div className="cart-total-price-wrapper">
-          <p>Total</p>
-          <p>{"$" + totalPrice.toFixed(2)}</p>
+    <div className = "cart-container">
+      <img className="wave-cart-header" src="img/wave/Rectangle 43.png"></img>
+      <h3 className = "cart-title">Your cart</h3>
+      <div className="cart-order-container">
+        <div className="cart-wrapper">
+          <div className="item-list-wrapper">
+            {cart && cart.length > 0 ? (
+              cart.map((item, index) => {
+                return (
+                  <ItemRow
+                    product={item}
+                    image={imageArray[index % 6]}
+                    checkAll={checkAll}
+                    checkedIdPrice={checkedIdPrice}
+                    updateCheckedIdPrice={updateCheckedIdPrice}
+                    cart={cart}
+                    updateCart={updateCart}
+                    index={index}
+                    key={index}
+                  />
+                );
+              })
+            ) : (
+              <p>No items in cart</p>
+            )}
+            <label className = "select-all">
+              <input type="checkbox" checked={checkAll} onChange={handleChange} />
+              Select all
+            </label>
+          </div>
+          <div className="cart-total-price-wrapper">
+            <p>Total</p>
+            <p>{"$" + totalPrice.toFixed(2)}</p>
+          </div>
+        </div>
+        <div className="cart-summary-wrapper"> 
+          <h2 className="cart-summary-title">Order Summary</h2>
+          <div className = "cart-summary-price-wrapper">
+            <p>Total product price</p>
+            <p>{"$" + totalPrice.toFixed(2)}</p>
+          </div>
+          <div className = "cart-summary-btn">
+            <Link
+              style={{ textDecoration: "none" }}
+              replace={true}
+              to="/checkout"
+            >
+              <button className="cart-checkout-btn">
+                Checkout
+              </button>
+            </Link>
+            <Link
+              style={{ textDecoration: "none" }}
+              replace={true}
+              to="/products"
+            >
+              <button className="cart-back-to-shopping-btn">
+                Back to shopping
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
