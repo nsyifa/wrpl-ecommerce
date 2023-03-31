@@ -26,9 +26,7 @@
 
 .cart-title {
   font-family: SomeTimeLater;
-  -webkit-text-stroke-width: 0.3px;
-  -webkit-text-stroke-color: white;
-  color: transparent;
+  color: white;
   letter-spacing: 0.06em;
   font-size: 5.5em;
   position: absolute;
