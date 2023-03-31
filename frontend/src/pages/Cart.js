@@ -86,12 +86,17 @@ const Cart = ({ user }) => {
                 );
               })
             ) : (
-              <p>No items in cart</p>
+              <p className = "no-items-cart">No items in cart</p>
             )}
-            <label className = "select-all">
-              <input type="checkbox" checked={checkAll} onChange={handleChange} />
-              Select all
+            {cart && cart.length > 0 ? (
+              <label className = "select-all">
+                <input type="checkbox" checked={checkAll} onChange={handleChange} />
+                Select all
             </label>
+            ) : (
+              <span></span>
+            )}
+            
           </div>
           <div className="cart-total-price-wrapper">
             <p>Total</p>

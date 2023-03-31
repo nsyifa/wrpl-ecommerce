@@ -126,7 +126,7 @@ button span {
   padding: 0.5rem 0;
   list-style: none;
   background-color: #fff;
-  border-radius: 0.5rem;
+  border-radius: 0.3rem;
   display: none;
 }
 
@@ -184,6 +184,7 @@ button span {
 
 .content {
   margin: 0 auto;
+  position: relative;
   z-index: 0;
 }
 
