@@ -120,7 +120,9 @@ const Register = () => {
       .then((response) => {
         console.log(response);
         setShowSuccessModal(true);
+        window.alert("Successfully registered! Sign in to access your account.");
       });
+      
   };
 
   return (

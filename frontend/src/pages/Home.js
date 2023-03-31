@@ -17,7 +17,7 @@ const Home = ({ user }) => {
           <h2>For kids, by kids</h2>
           <p> Welcome to 4Kiddos, where playtime never ends! </p>
           {user.cust_name ? (
-            <p> {"Welcome to 4Kiddos " + user.cust_name + "!"}</p>
+            <p> {"Welcome to 4Kiddos, " + user.cust_name + "!"}</p>
           ) : (
             ""
           )}

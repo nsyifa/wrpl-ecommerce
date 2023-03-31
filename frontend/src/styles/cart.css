@@ -42,6 +42,7 @@
   min-height: 23em;
   margin-top: -110px;
   z-index: 0;
+  flex-wrap: nowrap;
 }
 
 .item-list-wrapper {
@@ -55,6 +56,7 @@
   margin-top: 2em;
   gap: 1.2em;
   padding: 2em;
+  flex-wrap: nowrap;
 }
 
 .item-row-wrapper {
@@ -64,6 +66,7 @@
   border-bottom: solid lightgray 1px;
   padding-bottom: 1em;
   width: 100%;
+  flex-wrap: nowrap;
 }
 
 .item-image {
@@ -121,6 +124,7 @@
   width: 1em;
   margin-left: 0.5em;
   cursor: pointer;
+  flex-wrap: nowrap;
 }
 
 .select-all {
