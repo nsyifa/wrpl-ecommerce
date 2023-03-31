@@ -63,11 +63,24 @@ const ProductDetail = ({ user }) => {
                 </button>
               </Link>
             )}
-            {/* <button className="pd-cart-button">
-              <img src="/icons/pd-cart.svg" />
-              Add to Cart
-            </button> */}
-            <button className="pd-buy-button">Buy Now</button>
+            {user.cust_name ? (
+              <button
+                className="pd-buy-button"
+                // onClick={() => handleAddCart(quantity)}
+              >
+                Buy Now
+              </button>
+            ) : (
+              <Link
+                style={{ textDecoration: "none" }}
+                replace={true}
+                to="/login"
+              >
+                <button className="pd-buy-button">
+                  Buy Now
+                </button>
+              </Link>
+            )}
           </div>
         </div>
 
