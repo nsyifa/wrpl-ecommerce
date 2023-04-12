@@ -110,7 +110,7 @@ function Products({
         );
       }
 
-      if (filters.prices[0] > 1) {
+      if (filters.prices[0]?.length > 1) {
         newFilteredProducts = newFilteredProducts.filter((product) => {
           for (let priceRange of filters.prices) {
             const [min, max] = priceRange.split("-").map(parseFloat);

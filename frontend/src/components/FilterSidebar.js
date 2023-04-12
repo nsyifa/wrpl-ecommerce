@@ -7,7 +7,7 @@ const FilterSidebar = ({
   ages,
   brands,
   prices,
-  onFilterChange
+  onFilterChange,
 }) => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedAges, setSelectedAges] = useState([]);
@@ -49,10 +49,12 @@ const FilterSidebar = ({
   };
 
   const handlePriceChange = (pricerange) => {
+    console.log(pricerange);
     if (selectedPrices.includes(pricerange)) {
       setSelectedPrices(selectedPrices.filter((price) => price !== pricerange));
     } else {
       setSelectedPrices([pricerange]);
+      console.log("selectedPrices", selectedPrices);
     }
   };
 
@@ -65,11 +67,12 @@ const FilterSidebar = ({
   };
 
   const handleFilterApply = () => {
+    console.log(selectedBrands, selectedPrices);
     onFilterChange({
       categories: selectedCategories,
       ages: selectedAges,
       brands: selectedBrands,
-      prices: selectedPrices
+      prices: selectedPrices,
     });
   };
 
