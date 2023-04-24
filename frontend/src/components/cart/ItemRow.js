@@ -22,7 +22,11 @@ const ItemRow = ({
     if (event.target.checked) {
       newChecked.push({
         product_id: product.product_id,
+        name: product.name,
+        weight: product.weight,
+        quantity: quantity,
         price: parseFloat(product.price * quantity),
+        unit_price: product.price,
       });
     } else {
       newChecked = newChecked.filter(function (obj) {
@@ -63,7 +67,11 @@ const ItemRow = ({
 
         newChecked.push(...checkedIdPrice, {
           product_id: product.product_id,
+          name: product.name,
+          weight: product.weight,
+          quantity: quantity,
           price: parseFloat(product.price * quantity),
+          unit_price: product.price,
         });
       } else {
         // setIsChecked(false);
@@ -116,7 +124,7 @@ const ItemRow = ({
           {"$" + parseFloat(product.price * quantity).toFixed(2)}
         </p>
       </div>
-      
+
       <img
         className="cart-delete-icon"
         src="/icons/cart-trash.svg"

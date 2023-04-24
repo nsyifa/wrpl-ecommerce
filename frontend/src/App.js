@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 const App = () => {
@@ -48,6 +49,7 @@ const App = () => {
           }
         />
         <Route path="cart" element={<Cart user={user} />} />
+        <Route path="checkout" element={<Checkout user={user} />} />
         <Route path="products" element={<Products />} />
         <Route
           path="/products/product-detail"

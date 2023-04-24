@@ -63,9 +63,9 @@ const Cart = ({ user }) => {
   }
 
   return (
-    <div className = "cart-container">
+    <div className="cart-container">
       <img className="wave-cart-header" src="img/wave/Rectangle 43.png"></img>
-      <h3 className = "cart-title">Your cart</h3>
+      <h3 className="cart-title">Your cart</h3>
       <div className="cart-order-container">
         <div className="cart-wrapper">
           <div className="item-list-wrapper">
@@ -86,38 +86,40 @@ const Cart = ({ user }) => {
                 );
               })
             ) : (
-              <p className = "no-items-cart">No items in cart</p>
+              <p className="no-items-cart">No items in cart</p>
             )}
             {cart && cart.length > 0 ? (
-              <label className = "select-all">
-                <input type="checkbox" checked={checkAll} onChange={handleChange} />
+              <label className="select-all">
+                <input
+                  type="checkbox"
+                  checked={checkAll}
+                  onChange={handleChange}
+                />
                 Select all
-            </label>
+              </label>
             ) : (
               <span></span>
             )}
-            
           </div>
           <div className="cart-total-price-wrapper">
             <p>Total</p>
             <p>{"$" + totalPrice.toFixed(2)}</p>
           </div>
         </div>
-        <div className="cart-summary-wrapper"> 
+        <div className="cart-summary-wrapper">
           <h2 className="cart-summary-title">Order Summary</h2>
-          <div className = "cart-summary-price-wrapper">
+          <div className="cart-summary-price-wrapper">
             <p>Total product price</p>
             <p>{"$" + totalPrice.toFixed(2)}</p>
           </div>
-          <div className = "cart-summary-btn">
+          <div className="cart-summary-btn">
             <Link
               style={{ textDecoration: "none" }}
               replace={true}
+              state={checkedIdPrice}
               to="/checkout"
             >
-              <button className="cart-checkout-btn">
-                Checkout
-              </button>
+              <button className="cart-checkout-btn">Checkout</button>
             </Link>
             <Link
               style={{ textDecoration: "none" }}

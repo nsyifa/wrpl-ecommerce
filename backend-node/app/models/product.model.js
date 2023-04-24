@@ -41,8 +41,47 @@ Database.getLatestCustomer = (result) => {
   });
 };
 
+Database.getLatestPayment = (result) => {
+  sql.query("CALL spGetLatestPayment()", (err, res) => {
+    if (err) {
+      console.log("error:", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("payment:", res);
+    result(null, res);
+  });
+};
+
+Database.getLatestOrder = (result) => {
+  sql.query("CALL spGetLatestOrder()", (err, res) => {
+    if (err) {
+      console.log("error:", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("order:", res);
+    result(null, res);
+  });
+};
+
 Database.getCustomerFromEmail = (email, result) => {
   sql.query(`CALL spGetCustomerFromEmail('${email}')`, email, (err, res) => {
+    if (err) {
+      console.log("error:", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("customer:", res);
+    result(null, res);
+  });
+};
+
+Database.getCustomerFromCustId = (cust_id, result) => {
+  sql.query(`CALL spGetCustomerFromCustId(?)`, cust_id, (err, res) => {
     if (err) {
       console.log("error:", err);
       result(null, err);
@@ -65,6 +104,35 @@ Database.createCustomer = (newCustomer, result) => {
     console.log("created tutorial: ", { id: res.insertId, ...newCustomer });
     result(null, { id: res.insertId, ...newCustomer });
   });
+};
+
+Database.updateCustomerAddress = (cust_id, new_address, result) => {
+  sql.query(
+    "CALL spUpdateCustomerAddress(?,?)",
+    [cust_id, new_address],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      if (res.affectedRows == 0) {
+        // not found Tutorial with the id
+        result({ kind: "not_found" }, null);
+        return;
+      }
+
+      console.log("updated customer address: ", {
+        cust_id: cust_id,
+        address: new_address,
+      });
+      result(null, {
+        cust_id: cust_id,
+        address: new_address,
+      });
+    }
+  );
 };
 
 Database.getCustomerCartProducts = (cust_id, result) => {
@@ -168,6 +236,114 @@ Database.deleteCart = (cust_id, product_id, result) => {
       result(null, res);
     }
   );
+};
+
+Database.insertPayment = (payment_id, payment_type, result) => {
+  sql.query(
+    "CALL spInsertPayment(?,?)",
+    [payment_id, payment_type],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+
+      console.log("created payment: ", {
+        payment_id: payment_id,
+        payment_type: payment_type,
+      });
+      result(null, {
+        payment_id: payment_id,
+        payment_type: payment_type,
+      });
+    }
+  );
+};
+
+Database.insertOrder = (
+  order_number,
+  cust_id,
+  shipper_id,
+  payment_id,
+  ship_date,
+  status,
+  result
+) => {
+  sql.query(
+    "CALL spInsertOrder(?,?,?,?,?,?)",
+    [order_number, cust_id, shipper_id, payment_id, ship_date, status],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+
+      console.log("created order: ", {
+        order_number: order_number,
+        cust_id: cust_id,
+        shipper_id: shipper_id,
+        payment_id: payment_id,
+        ship_date: ship_date,
+        status: status,
+      });
+      result(null, {
+        order_number: order_number,
+        cust_id: cust_id,
+        shipper_id: shipper_id,
+        payment_id: payment_id,
+        ship_date: ship_date,
+        status: status,
+      });
+    }
+  );
+};
+
+Database.insertOrderDetail = (
+  order_number,
+  product_id,
+  quantity,
+  total_price,
+  result
+) => {
+  sql.query(
+    "CALL spInsertOrderDetail(?,?,?,?)",
+    [order_number, product_id, quantity, total_price],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+
+      console.log("created order: ", {
+        order_number: order_number,
+        product_id: product_id,
+        quantity: quantity,
+        total_price: total_price,
+      });
+      result(null, {
+        order_number: order_number,
+        product_id: product_id,
+        quantity: quantity,
+        total_price: total_price,
+      });
+    }
+  );
+};
+
+Database.getAllShippers = (result) => {
+  sql.query("CALL spShowShippers()", (err, res) => {
+    if (err) {
+      console.log("error:", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("shippers:", res);
+    result(null, res);
+  });
 };
 
 module.exports = Database;
