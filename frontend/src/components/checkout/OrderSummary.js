@@ -7,7 +7,7 @@ const OrderSummary = ({ product_price }) => {
       <div className="order-list-wrapper">
         <div className="order-list-item">
           <p>Total product price</p>
-          <p>{"$" + product_price}</p>
+          <p>{"$" + product_price.toFixed(2)}</p>
         </div>
         <div className="order-list-item">
           <p>Shipping cost</p>

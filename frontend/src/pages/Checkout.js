@@ -88,7 +88,7 @@ const Checkout = ({ user }) => {
 
   return (
     <div className="checkout-container">
-      <img className="wave-cart-header" src="img/wave/Rectangle 43.png"></img>
+      <img className="wave-cart-header" src="img/wave/Rectangle 44.png"></img>
       <h3 className="checkout-title">Checkout</h3>
       <div className="checkout-content-container">
         <div className="checkout-address-wrapper">

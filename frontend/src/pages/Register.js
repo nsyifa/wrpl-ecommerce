@@ -121,6 +121,7 @@ const Register = () => {
         console.log(response);
         setShowSuccessModal(true);
         window.alert("Successfully registered! Sign in to access your account.");
+        window.location.href = "/login";
       });
       
   };

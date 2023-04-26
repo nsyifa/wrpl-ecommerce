@@ -194,8 +194,11 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  align-content: flex-end;
   width: 100px;
   margin: auto 0 auto 2.2em;
+  position: relative;
+  left: 52px;
 }
 
 .item-quantity-price {
