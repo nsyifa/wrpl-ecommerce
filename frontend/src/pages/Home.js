@@ -1,16 +1,10 @@
 import HomeCarousel from "../components/HomeCarousel";
 import HomeHotCarousel from "../components/HomeHotCarousel";
 import { carouselData } from "../constants/carouselData.js";
-// import kids from "../img/landing-page/kids.png";
-// import toystory from "../img/landing-page/toy-story.png";
-// import wave1 from "../img/landing-page/Intersect.png";
-// import wave2 from "../img/landing-page/Intersect (1).png";
-// import wave3 from "../img/landing-page/Rectangle 10.png";
-// import circle from "../img/landing-page/circle.png";
-// import hiasan from "../img/landing-page/Doodle stars.png";
+
 const Home = ({ user }) => {
   return (
-    <div>
+    <div className = "home-container">
       <div className="banner">
         <img className="kids-img" src="/img/landing-page/kids.png" />
         <div className="banner-text">

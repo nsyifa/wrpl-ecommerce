@@ -12,10 +12,10 @@ const CheckoutItemRow = ({ product, image }) => {
         <p>{product.weight / 100 + " kg/item"}</p>
         <p>{"$" + parseFloat(product.unit_price).toFixed(2)}</p>
       </div>
-      <div className="item-quantity-price-container">
-        <p className="item-quantity-price">{"$" + product.price.toFixed(2)}</p>
+      <div className="checkout-item-quantity-price-container">
+        <p className="checkout-item-quantity-price">{"$" + product.price.toFixed(2)}</p>
       </div>
-      <p>{product.quantity + " items"}</p>
+      <p className="checkout-product-quantity">{product.quantity + " items"}</p>
     </div>
   );
 };

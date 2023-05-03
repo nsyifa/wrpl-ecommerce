@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CheckoutItemRow from "../components/cart/CheckoutItemRow";
 import CheckoutAddress from "../components/checkout/CheckoutAddress";
 import PaymentMethod from "../components/checkout/PaymentMethod";
@@ -26,11 +26,12 @@ const imageArray = [
 const Checkout = ({ user }) => {
   const { state } = useLocation();
   const products = state;
+  let paymentType;
+  let orderID;
+  const navigate = useNavigate();
   const { data: customerFetch } = useGetCustomerFromCustId(user);
   const [customer, setCustomer] = useState(user);
-
   const [paymentMethod, setPaymentMethod] = useState("");
-
   const total_product_price = products.reduce(
     (acc, item) => acc + item.price,
     0
@@ -52,6 +53,7 @@ const Checkout = ({ user }) => {
       let payment_id =
         parseInt(latest_payment.payment_id.replace("PA", "")) + 1;
       payment_id = "PA" + payment_id;
+     
 
       const res1 = await insertPayment(payment_id, paymentMethod);
       const shippers = await (await getAllShippers()).data[0];
@@ -63,6 +65,8 @@ const Checkout = ({ user }) => {
       let order_number =
         parseInt(latest_order.order_number.replace("O", "")) + 1;
       order_number = "O" + order_number;
+      orderID = order_number;
+      paymentType = paymentMethod;
 
       const res2 = await insertOrder(
         order_number,
@@ -82,7 +86,13 @@ const Checkout = ({ user }) => {
         );
       }
 
-      window.alert("Successfully paid and ordered!");
+      navigate("/payment", { 
+        state: {
+          products: products, 
+          paymentType: paymentType,
+          orderID: orderID,
+        }
+      })
     }
   }
 
@@ -121,12 +131,12 @@ const Checkout = ({ user }) => {
             <div className="total-pay-wrapper">
               <p>Total</p>
               <p className="total-pay-price">
-                {"$" + (total_product_price + 10)}
+                {"$" + (total_product_price + 10).toFixed(2)}
               </p>
             </div>
-            <button className="order-pay-button" onClick={handlePay}>
-              Pay
-            </button>
+              <button className="order-pay-button" onClick={handlePay}>
+                Pay
+              </button>
           </div>
         </div>
       </div>

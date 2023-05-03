@@ -107,6 +107,10 @@
   flex-wrap: nowrap;
 }
 
+.checkout-list-wrapper h2{
+  margin: 0;
+}
+
 .pay-method-container,
 .order-summary-container {
   background-color: #ffffff;
@@ -189,19 +193,18 @@
   padding: 1px 0.8em;
   cursor: pointer;
 }
-
-.item-quantity-price-container {
+.checkout-item-quantity-price-container {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-content: flex-end;
   width: 100px;
-  margin: auto 0 auto 2.2em;
+  margin: auto 0 auto 5.5em;
   position: relative;
   left: 52px;
 }
 
-.item-quantity-price {
+.checkout-item-quantity-price {
   font-size: 1.2em;
   align-self: flex-end;
   margin-left: 1em;
@@ -242,6 +245,7 @@
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: -15px;
 }
 
 .total-pay-wrapper p {
