@@ -36,5 +36,7 @@ module.exports = (app) => {
 
   router.post("/orderdetails", database.insertOrderDetail);
 
+  router.get("/snap", database.getSnap);
+
   app.use("/api/data", router);
 };

@@ -1,10 +1,34 @@
 import HomeCarousel from "../components/HomeCarousel";
+import { useEffect } from "react";
 import HomeHotCarousel from "../components/HomeHotCarousel";
 import { carouselData } from "../constants/carouselData.js";
 
 const Home = ({ user }) => {
+  // KODE DIBAWAH CUMA BUAT TESTING MIDTRANS PAYMENT GATEWAY
+  // useEffect(() => {
+  //   // You can also change below url value to any script url you wish to load,
+  //   // for example this is snap.js for Sandbox Env (Note: remove `.sandbox` from url if you want to use production version)
+  //   const midtransScriptUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
+
+  //   let scriptTag = document.createElement("script");
+  //   scriptTag.src = midtransScriptUrl;
+
+  //   // Optional: set script attribute, for example snap.js have data-client-key attribute
+  //   // (change the value according to your client-key)
+  //   const myMidtransClientKey = "your-client-key-goes-here";
+  //   scriptTag.setAttribute("data-client-key", myMidtransClientKey);
+
+  //   document.body.appendChild(scriptTag);
+
+  //   return () => {
+  //     document.body.removeChild(scriptTag);
+  //   };
+  // }, []);
+
+  // Then somewhere else on your React component, `window.snap` global object will be available to use
+  // e.g. you can then call `window.snap.pay( ... )` function.
   return (
-    <div className = "home-container">
+    <div className="home-container">
       <div className="banner">
         <img className="kids-img" src="/img/landing-page/kids.png" />
         <div className="banner-text">
@@ -76,6 +100,13 @@ const Home = ({ user }) => {
             <img src="/img/landing-page/Doodle stars.png" className="hiasan" />
           </div>
           <HomeCarousel data={carouselData[2]} color="green" />
+          {/* <button
+            onClick={() =>
+              window.snap.pay("c5142b4e-207e-4cff-b782-dc468c9ffc42")
+            }
+          >
+            Pay
+          </button> */}
         </div>
       </div>
     </div>
