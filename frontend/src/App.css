@@ -20,11 +20,11 @@
   padding: 0;
   box-sizing: border-box;
   background-color: transparent;
-  font-family: "Lato", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 /* header */
@@ -41,11 +41,20 @@ header {
 
 .nav-area {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
+  margin: 0 20px;
   padding: 10px 20px;
+}
+
+.upper-nav-area {
+  width: 100%;
+  margin: 0 20px;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  border-bottom:1px solid rgba(71, 63, 79, 0.16)
 }
 
 .logo {
@@ -64,12 +73,12 @@ header {
   align-items: center;
   flex-wrap: wrap;
   list-style: none;
+  margin-top: 10px;
 }
 
 .menu-items {
   position: relative;
   font-size: 16px;
-  font-weight: 700;
 }
 
 .menu-items a {
@@ -98,7 +107,6 @@ button span {
 .menu-items button {
   text-align: left;
   padding: 0.7rem 1rem;
-  font-weight: 700;
 }
 
 .menu-items a:hover,
@@ -148,29 +156,39 @@ button span {
   background: white;
 }
 
+.search-bar-wrapper {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
 .profile {
   width: 250px;
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
   text-align: center;
+  margin-top: 10px;
 }
+
 .profile button {
   width: 110px;
   height: 35px;
-  border-radius: 20px;
-  border-style: none;
+  border-radius: 5px;
   box-shadow: 1px 2px 6px lightgrey;
-  font-weight: bold;
-  font-size: 1em;
+  font-size: 0.8em;
+  font-family: "Inter", sans-serif;
+
 }
 .reg {
   margin-right: 20px;
-  background-color: var(--oren);
+  border: 1px solid black;
   cursor: pointer;
 }
 .login {
-  background-color: var(--kuning2);
+  background-color: black;
   cursor: pointer;
+  color: white;
 }
 .cart-icon{
   width: 30px;

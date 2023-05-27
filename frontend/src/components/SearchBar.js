@@ -24,7 +24,7 @@ function SearchBar(props) {
         onChange={handleInputChange}
       />
       <button className="search-button" type="submit">
-        Search
+        <img src="/img/ecommerce/search.svg"/>
       </button>
     </form>
   );

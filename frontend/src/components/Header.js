@@ -1,6 +1,7 @@
 import Navbar from "./Navbar";
 import React from "react";
 import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
 // import { logo } from "../../public/img/index";
 
 const Header = ({ user, updateUser }) => {
@@ -15,7 +16,7 @@ const Header = ({ user, updateUser }) => {
       return (
         <React.Fragment>
           <Link to="cart">
-            <img src="/icons/header_cart.svg" className = "cart-icon" />
+            <img src="/img/ecommerce/icon-cart.svg" className = "cart-icon" />
           </Link>
 
           <button className="login" onClick={handleLogout}>
@@ -39,19 +40,19 @@ const Header = ({ user, updateUser }) => {
   return (
     <header>
       <div className="nav-area">
-        <Link to="/" className="logo">
-          <img src="/img/4Kiddos.png" alt="logo"></img>
-        </Link>
-        <Navbar />
-        <div className="profile">
-          {/* <Link to="register">
-            <button className="reg">Register</button>
+        <div className = "upper-nav-area">
+          <Link to="/" className="logo">
+            <img src="/img/ecommerce/logo.png" alt="logo"></img>
           </Link>
-          <Link to="login">
-            <button className="login">Log in</button>
-          </Link> */}
-          {userButton()}
+          <div className = "search-bar-wrapper">
+            <SearchBar></SearchBar>
+          </div>
+          <div className="profile">
+            {userButton()}
+          </div>
         </div>
+        <Navbar />
+        
       </div>
     </header>
   );

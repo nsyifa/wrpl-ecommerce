@@ -4,28 +4,7 @@ export const menuItems = [
     url: "/"
   },
   {
-    title: "Shop by age",
-    submenu: [
-      {
-        title: "0 - 2 years",
-        url: "products/0-2years"
-      },
-      {
-        title: "3 - 6 years",
-        url: "products/3-6years"
-      },
-      {
-        title: "7 - 10 years",
-        url: "products/7-10years"
-      },
-      {
-        title: "10+ years",
-        url: "products/10years"
-      }
-    ]
-  },
-  {
-    title: "Shop by category",
+    title: "Category",
     submenu: [
       {
         title: "Action figures & playsets",
@@ -58,6 +37,6 @@ export const menuItems = [
     ]
   },
   {
-    title: "Shop by brand"
+    title: "Brand"
   }
 ];
