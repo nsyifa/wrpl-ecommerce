@@ -52,14 +52,11 @@ const Login = ({ updateUser }) => {
   };
 
   const customerFetchByEmail = (email) => {
-    return axios.get(
-      `http://localhost:8080/api/data/customers/email/:${email}`,
-      {
-        params: {
-          email: email,
-        },
-      }
-    );
+    return axios.get(`http://localhost:8081/api/customer/email/:${email}`, {
+      params: {
+        email: email,
+      },
+    });
     //   .then((response) => {
     //     console.log(response.data);
     //     setCustomer(response.data[0][0]);
@@ -73,7 +70,7 @@ const Login = ({ updateUser }) => {
 
     const email = input.email;
     const password = input.password;
-    const customer = (await customerFetchByEmail(email)).data[0][0];
+    const customer = (await customerFetchByEmail(email)).data[0];
     // if (customer) {
     if (customer.password === password) {
       console.log("before update", customer);
@@ -87,9 +84,9 @@ const Login = ({ updateUser }) => {
 
   return (
     <div className="login-page">
-      <p className = "login-title">Sign In</p>
-      <img className = "wave1-login" src="/img/wave/intersect 3.png"></img>
-      <img className = "wave2-login" src="/img/wave/intersect 4.png"></img>
+      <p className="login-title">Sign In</p>
+      <img className="wave1-login" src="/img/wave/intersect 3.png"></img>
+      <img className="wave2-login" src="/img/wave/intersect 4.png"></img>
       <form onSubmit={handleSubmit} className="register-form">
         <div className="register-form__input-container">
           <label htmlFor="email" className="register-form__label">
