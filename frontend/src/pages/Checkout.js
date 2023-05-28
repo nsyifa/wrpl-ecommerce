@@ -26,6 +26,7 @@ const imageArray = [
 const Checkout = ({ user }) => {
   const { state } = useLocation();
   const products = state;
+  console.log("products", products);
   let paymentType;
   let orderID;
   const navigate = useNavigate();
@@ -53,7 +54,6 @@ const Checkout = ({ user }) => {
       let payment_id =
         parseInt(latest_payment.payment_id.replace("PA", "")) + 1;
       payment_id = "PA" + payment_id;
-     
 
       const res1 = await insertPayment(payment_id, paymentMethod);
       const shippers = await (await getAllShippers()).data[0];
@@ -86,13 +86,13 @@ const Checkout = ({ user }) => {
         );
       }
 
-      navigate("/payment", { 
+      navigate("/payment", {
         state: {
-          products: products, 
+          products: products,
           paymentType: paymentType,
           orderID: orderID,
-        }
-      })
+        },
+      });
     }
   }
 
@@ -134,9 +134,9 @@ const Checkout = ({ user }) => {
                 {"$" + (total_product_price + 10).toFixed(2)}
               </p>
             </div>
-              <button className="order-pay-button" onClick={handlePay}>
-                Pay
-              </button>
+            <button className="order-pay-button" onClick={handlePay}>
+              Pay
+            </button>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export const useGetCustomerCartProducts = (user) => {
+export const useGetCustomerCart = (user) => {
   const [cart, setCart] = useState([]);
   const [error, setError] = useState(null);
 
@@ -11,7 +11,7 @@ export const useGetCustomerCartProducts = (user) => {
       return;
     }
     axios
-      .get(`http://localhost:8080/api/data/cart`, {
+      .get(`http://localhost:8085/api/ecommerce/cart`, {
         params: {
           cust_id: user.cust_id,
         },
@@ -33,7 +33,7 @@ export const deleteCart = async (item) => {
   console.log(item);
   try {
     const res = await axios.delete(
-      `http://localhost:8080/api/data/cart/${item.cust_id}/${item.product_id}`
+      `http://localhost:8085/api/ecommerce/cart/${item.cust_id}/${item.product_id}`
     );
     if (!res.data.ok) throw new Error(res.data.error);
 
@@ -51,7 +51,7 @@ export const deleteCart = async (item) => {
 export const updateCartQuantity = async (item, quantity) => {
   try {
     const res = await axios.put(
-      "http://localhost:8080/api/data/cart/update",
+      "http://localhost:8085/api/ecommerce/cart/update",
       null,
       {
         params: {
@@ -76,11 +76,14 @@ export const updateCartQuantity = async (item, quantity) => {
 
 export const addCartQuantity = async (cust_id, product_id, add_quantity) => {
   try {
-    const res = await axios.post("http://localhost:8080/api/data/cart/add", {
-      cust_id: cust_id,
-      product_id: product_id,
-      add_quantity: add_quantity,
-    });
+    const res = await axios.post(
+      "http://localhost:8085/api/ecommerce/cart/add",
+      {
+        cust_id: cust_id,
+        product_id: product_id,
+        add_quantity: add_quantity,
+      }
+    );
     console.log(res);
 
     if (!res.data.ok) throw new Error(res.data.error);

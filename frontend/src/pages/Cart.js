@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ItemRow from "../components/cart/ItemRow";
-import { useGetCustomerCartProducts } from "../services/cart";
+import { useGetCustomerCart } from "../services/cart";
+import axios from "axios";
 import "../styles/cart.css";
 const imageArray = [
   "/img/batman.jpg",
@@ -17,9 +18,15 @@ const imageArray = [
 
 const Cart = ({ user }) => {
   const cust_id = user.cust_id;
-  const { data: cartFetch } = useGetCustomerCartProducts(user);
+  const apiUrlEffe = "http://localhost:8082";
+  const apiUrlLumiere = "http://localhost:8083";
+  const apiUrlZalya = "http://localhost:8084";
+
+  const { data: cartFetch } = useGetCustomerCart(user);
 
   const [cart, setCart] = useState([]);
+  const [productData, setProductData] = useState([]);
+  const [cartProducts, setCartProducts] = useState([]);
   const [checkedIdPrice, setCheckedIdPrice] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [checkAll, setCheckAll] = useState(false);
@@ -28,11 +35,54 @@ const Cart = ({ user }) => {
     setCheckAll(event.target.checked);
   };
 
+  const productDataFetch = async () => {
+    const response_effe = await axios.get(`${apiUrlEffe}/api/effe/products`);
+    const response_lumiere = await axios.get(
+      `${apiUrlLumiere}/api/lumiere/products`
+    );
+    const response_zalya = await axios.get(`${apiUrlZalya}/api/zalya/products`);
+    console.log(response_effe.data);
+    const response_data = response_effe.data.concat(
+      response_lumiere.data,
+      response_zalya.data
+    );
+    console.log(response_data);
+    setProductData(response_data);
+    return response_data;
+  };
+
+  useEffect(function () {
+    productDataFetch();
+  }, []);
+
   useEffect(() => {
     if (cartFetch && cartFetch.length > 0) {
-      setCart(cartFetch[0]);
+      setCart(cartFetch);
     }
   }, [cartFetch]);
+
+  useEffect(
+    function () {
+      if (cart?.length > 0 && productData?.length > 0) {
+        let cartProductId = cart.map((product) => product.product_id);
+        let productsInCart = productData.filter((product) =>
+          cartProductId.includes(product.product_id)
+        );
+        for (let i = 0; i < productsInCart.length; i++) {
+          productsInCart[i].quantity =
+            cart[
+              cart.findIndex(
+                (item) => item.product_id == productsInCart[i].product_id
+              )
+            ].quantity;
+          productsInCart[i].cust_id = cust_id;
+        }
+        setCartProducts(productsInCart);
+        console.log("products and quantity", productsInCart);
+      }
+    },
+    [cart, productData]
+  );
 
   function updateCheckedIdPrice(data) {
     setCheckedIdPrice(data);
@@ -58,8 +108,8 @@ const Cart = ({ user }) => {
     [checkedIdPrice]
   );
 
-  function updateCart(newCart) {
-    setCart(newCart);
+  function updateCartProducts(newCart) {
+    setCartProducts(newCart);
   }
 
   return (
@@ -69,8 +119,8 @@ const Cart = ({ user }) => {
       <div className="cart-order-container">
         <div className="cart-wrapper">
           <div className="item-list-wrapper">
-            {cart && cart.length > 0 ? (
-              cart.map((item, index) => {
+            {cartProducts && cartProducts.length > 0 ? (
+              cartProducts.map((item, index) => {
                 return (
                   <ItemRow
                     product={item}
@@ -78,8 +128,8 @@ const Cart = ({ user }) => {
                     checkAll={checkAll}
                     checkedIdPrice={checkedIdPrice}
                     updateCheckedIdPrice={updateCheckedIdPrice}
-                    cart={cart}
-                    updateCart={updateCart}
+                    cart={cartProducts}
+                    updateCart={updateCartProducts}
                     index={index}
                     key={index}
                   />
@@ -88,7 +138,7 @@ const Cart = ({ user }) => {
             ) : (
               <p className="no-items-cart">No items in cart</p>
             )}
-            {cart && cart.length > 0 ? (
+            {cartProducts && cartProducts.length > 0 ? (
               <label className="select-all">
                 <input
                   type="checkbox"
@@ -103,14 +153,14 @@ const Cart = ({ user }) => {
           </div>
           <div className="cart-total-price-wrapper">
             <p>Total</p>
-            <p>{"$" + totalPrice.toFixed(2)}</p>
+            <p>{"Rp " + totalPrice.toLocaleString()}</p>
           </div>
         </div>
         <div className="cart-summary-wrapper">
           <h2 className="cart-summary-title">Order Summary</h2>
           <div className="cart-summary-price-wrapper">
             <p>Total product price</p>
-            <p>{"$" + totalPrice.toFixed(2)}</p>
+            <p>{"Rp " + totalPrice.toLocaleString()}</p>
           </div>
           <div className="cart-summary-btn">
             <Link

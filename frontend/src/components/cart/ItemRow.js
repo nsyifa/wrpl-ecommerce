@@ -16,13 +16,20 @@ const ItemRow = ({
   const [quantity, setQuantity] = useState(product.quantity);
   const [isChecked, setIsChecked] = useState(false);
 
+  const capitalizeFirst = (str) => {
+    const str2 = str.charAt(0).toUpperCase() + str.slice(1);
+    return str2;
+  };
+
   const handleChange = (event) => {
     setIsChecked(event.target.checked);
     let newChecked = [...checkedIdPrice];
     if (event.target.checked) {
       newChecked.push({
         product_id: product.product_id,
-        name: product.name,
+        product_name: product.product_name,
+        category: product.category,
+        brand: product.brand,
         weight: product.weight,
         quantity: quantity,
         price: parseFloat(product.price * quantity),
@@ -67,7 +74,9 @@ const ItemRow = ({
 
         newChecked.push(...checkedIdPrice, {
           product_id: product.product_id,
-          name: product.name,
+          product_name: product.product_name,
+          category: product.category,
+          brand: product.brand,
           weight: product.weight,
           quantity: quantity,
           price: parseFloat(product.price * quantity),
@@ -114,14 +123,15 @@ const ItemRow = ({
       </label>
       <img className="item-image" src={image} />
       <div className="item-information-wrapper">
-        <p>{product.name}</p>
+        <p>{product.product_name.replace(/[^\w\s]/gi, "")}</p>
+        <p>{capitalizeFirst(product.category)}</p>
         <p>{product.weight / 100 + " kg/item"}</p>
-        <p>{"$" + parseFloat(product.price).toFixed(2)}</p>
+        <p>{"Rp " + parseInt(product.price).toLocaleString()}</p>
       </div>
       <CartQuantity quantity={quantity} updateQuantity={updateQuantity} />
       <div className="item-quantity-price-container">
         <p className="item-quantity-price">
-          {"$" + parseFloat(product.price * quantity).toFixed(2)}
+          {"Rp " + parseInt(product.price * quantity).toLocaleString()}
         </p>
       </div>
 
