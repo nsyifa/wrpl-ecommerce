@@ -34,7 +34,7 @@ const PriceFilter = ({ handleFilter, prices }) => {
         {prices.map((price, index) => {
           return (
             <option value={price} key={index}>
-              {"$" + price}
+              {"Rp " + parseInt(price).toLocaleString()}
             </option>
           );
         })}
@@ -45,7 +45,7 @@ const PriceFilter = ({ handleFilter, prices }) => {
         {prices.map((price, index) => {
           return (
             <option value={price} key={index}>
-              {"$" + price}
+              {"Rp " + parseInt(price).toLocaleString()}
             </option>
           );
         })}

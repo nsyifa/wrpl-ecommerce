@@ -2,15 +2,8 @@ import { useState } from "react";
 import "../styles/filtersidebar.css";
 import PriceFilter from "./filtersidebar/PriceFilter";
 
-const FilterSidebar = ({
-  categories,
-  ages,
-  brands,
-  prices,
-  onFilterChange,
-}) => {
+const FilterSidebar = ({ categories, brands, prices, onFilterChange }) => {
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [selectedAges, setSelectedAges] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedPrices, setSelectedPrices] = useState([]);
 
@@ -27,15 +20,6 @@ const FilterSidebar = ({
       );
     } else {
       setSelectedCategories([...selectedCategories, value]);
-    }
-  };
-
-  const handleAgeChange = (event) => {
-    const value = event.target.value;
-    if (selectedAges.includes(value)) {
-      setSelectedAges(selectedAges.filter((age) => age !== value));
-    } else {
-      setSelectedAges([...selectedAges, value]);
     }
   };
 
@@ -60,7 +44,6 @@ const FilterSidebar = ({
 
   const handleFilterClear = () => {
     setSelectedCategories([]);
-    setSelectedAges([]);
     setSelectedBrands([]);
     setSelectedPrices([]);
     onFilterChange({ categories: [], ages: [], brands: [], prices: [] });
@@ -70,7 +53,6 @@ const FilterSidebar = ({
     console.log(selectedBrands, selectedPrices);
     onFilterChange({
       categories: selectedCategories,
-      ages: selectedAges,
       brands: selectedBrands,
       prices: selectedPrices,
     });
@@ -96,26 +78,6 @@ const FilterSidebar = ({
                 <span className="filter-label">
                   {capitalizeFirst(category)}
                 </span>
-              </label>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="filter-section">
-        <h3>Age</h3>
-        <div className="filter-section-line" />
-        <ul className="filter-list">
-          {ages.map((age) => (
-            <li key={age} className="filter-item">
-              <label>
-                <input
-                  type="checkbox"
-                  value={age}
-                  checked={selectedAges.includes(age)}
-                  onChange={handleAgeChange}
-                />
-                <span className="filter-label">{age + " years"}</span>
               </label>
             </li>
           ))}
