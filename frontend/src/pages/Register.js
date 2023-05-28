@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import RegisterSuccessModal from "../components/RegisterSuccessModal";
 import "../styles/register.css";
@@ -123,12 +123,30 @@ const Register = () => {
       });
   };
 
+  const objectRef = useRef(null);
+
+  useEffect(() => {
+    const objectElement = objectRef.current;
+    const objectPosition = objectElement.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const objectHeight = objectPosition.height;
+
+    const scrollToPosition = objectPosition.top + window.pageYOffset - (windowHeight / 2) + (objectHeight / 2);
+
+    window.scrollTo({
+      top: scrollToPosition,
+      behavior: 'smooth',
+    });
+  }, []);
+
   return (
     <div className="register-page">
-      <p className="register-title">Register</p>
-      <img className="wave1-register" src="/img/wave/intersect 1.png"></img>
-      <img className="wave2-register" src="img/wave/intersect 2.png"></img>
-      <form onSubmit={handleSubmit} className="register-form">
+      <img className = "reglog-img-1" src = "img/ecommerce/image1-reglog.png"></img>
+      <img className = "reglog-img-2" src = "img/ecommerce/image2-reglog.png"></img>
+      <img className = "reglog-img-3" src = "img/ecommerce/image3-reglog-2.png"></img>
+      <img className = "reglog-img-4" src = "img/ecommerce/image4-reglog.png"></img>
+      <form onSubmit={handleSubmit} className="register-form" ref={objectRef}>
+        <p className="register-title">Register</p>
         <div className="register-form__input-container">
           <label htmlFor="name" className="register-form__label">
             Name
@@ -221,7 +239,7 @@ const Register = () => {
             <span className="err">{error.confirmPassword}</span>
           )}
         </div>
-        <div className="register-form__input-container">
+        <div className="register-form__input-container agreement">
           <label htmlFor="terms-agreement" className="register-form__label">
             <span className="check">
               <input
