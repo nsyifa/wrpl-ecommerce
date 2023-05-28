@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import RegisterSuccessModal from "../components/RegisterSuccessModal";
-import "../styles/login.css";
+// import loginSuccessModal from "../components/loginSuccessModal";
+import "../styles/login2.css";
 
 const Login = ({ updateUser }) => {
   // const [customer, setCustomer] = useState();
@@ -82,14 +82,32 @@ const Login = ({ updateUser }) => {
     }
   };
 
+  const objectRef = useRef(null);
+
+  useEffect(() => {
+    const objectElement = objectRef.current;
+    const objectPosition = objectElement.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const objectHeight = objectPosition.height;
+
+    const scrollToPosition = objectPosition.top + window.pageYOffset - (windowHeight / 2) + (objectHeight / 2);
+
+    window.scrollTo({
+      top: scrollToPosition,
+      behavior: 'smooth',
+    });
+  }, []);
+
   return (
     <div className="login-page">
-      <p className="login-title">Sign In</p>
-      <img className="wave1-login" src="/img/wave/intersect 3.png"></img>
-      <img className="wave2-login" src="/img/wave/intersect 4.png"></img>
-      <form onSubmit={handleSubmit} className="register-form">
-        <div className="register-form__input-container">
-          <label htmlFor="email" className="register-form__label">
+      <img className="reglog-img-1" src="/img/ecommerce/image1-reglog.png"></img>
+      <img className="reglog-img-2" src="/img/ecommerce/image2-reglog.png"></img>
+      <img className="reglog-img-3" src="/img/ecommerce/image3-reglog-2.png"></img>
+      <img className="reglog-img-4" src="/img/ecommerce/image4-reglog.png"></img>
+      <form onSubmit={handleSubmit} className="login-form" ref = {objectRef}>
+        <p className="login-title">Sign In</p> 
+        <div className="login-form__input-container">
+          <label htmlFor="email" className="login-form__label">
             Email:
           </label>
           <input
@@ -102,12 +120,12 @@ const Login = ({ updateUser }) => {
             onBlur={(e) => {
               validateInput(e);
             }}
-            className="register-form__input"
+            className="login-form__input"
           />
           {error.email && <span className="err">{error.email}</span>}
         </div>
-        <div className="register-form__input-container">
-          <label htmlFor="password" className="register-form__label">
+        <div className="login-form__input-container">
+          <label htmlFor="password" className="login-form__label">
             Password:
           </label>
           <input
@@ -120,7 +138,7 @@ const Login = ({ updateUser }) => {
             onBlur={(e) => {
               validateInput(e);
             }}
-            className="register-form__input"
+            className="login-form__input"
           />
           {error.password && <span className="err">{error.password}</span>}
         </div>
@@ -132,7 +150,7 @@ const Login = ({ updateUser }) => {
           Sign in
         </button>
         <div className="already-account">
-          New to 4Kiddos?{" "}
+          New to Reverie?{" "}
           <a href="/register" className="login-form__sign-in-link">
             Create a new account
           </a>
