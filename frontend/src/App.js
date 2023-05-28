@@ -59,12 +59,11 @@ const App = () => {
         />
         {/* <Route path="test" element={<Test />} /> */}
         <Route
-          path="products/0-2years"
+          path="products/perfume"
           element={
             <Products
               filter={{
-                categories: [],
-                ages: ["0-2"],
+                categories: ["perfume"],
                 brands: [],
                 prices: [],
               }}
@@ -72,12 +71,11 @@ const App = () => {
           }
         />
         <Route
-          path="products/3-6years"
+          path="products/cosmetic"
           element={
             <Products
               filter={{
-                categories: [],
-                ages: ["3-6"],
+                categories: ["cosmetic"],
                 brands: [],
                 prices: [],
               }}
@@ -85,63 +83,11 @@ const App = () => {
           }
         />
         <Route
-          path="products/7-10years"
+          path="products/clothing"
           element={
             <Products
               filter={{
-                categories: [],
-                ages: ["7-10"],
-                brands: [],
-                prices: [],
-              }}
-            />
-          }
-        />
-        <Route
-          path="products/10years"
-          element={
-            <Products
-              filter={{
-                categories: [],
-                ages: ["10+"],
-                brands: [],
-                prices: [],
-              }}
-            />
-          }
-        />
-        <Route
-          path="products/action-figures-playsets"
-          element={
-            <Products
-              filter={{
-                categories: ["action figures & playsets"],
-                ages: [],
-                brands: [],
-                prices: [],
-              }}
-            />
-          }
-        />
-        <Route
-          path="products/baby-toddler-preschool"
-          element={
-            <Products
-              filter={{
-                categories: ["baby, toddler, & preschool learning toys"],
-                ages: [],
-                brands: [],
-                prices: [],
-              }}
-            />
-          }
-        />
-        <Route
-          path="products/building-sets-blocks"
-          element={
-            <Products
-              filter={{
-                categories: ["building sets & blocks"],
+                categories: ["clothing"],
                 ages: [],
                 brands: [],
                 prices: [],
