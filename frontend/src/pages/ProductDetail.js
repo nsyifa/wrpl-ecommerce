@@ -76,17 +76,17 @@ const ProductDetail = ({ user }) => {
                 replace={true}
                 to="/login"
               >
-                <button className="pd-buy-button">
-                  Buy Now
-                </button>
+                <button className="pd-buy-button">Buy Now</button>
               </Link>
             )}
           </div>
         </div>
 
         <div className="pd-right-col">
-          <p className="pd-brand">{product.brand}</p>
-          <p className="pd-title">{product.name}</p>
+          <p className="pd-brand">{product.brand.replace(/[^\w\s]/gi, "")}</p>
+          <p className="pd-title">
+            {product.product_name.replace(/[^\w\s]/gi, "")}
+          </p>
           <div className="rating-sales-wrapper">
             <Rating
               name="read-only"
@@ -101,23 +101,15 @@ const ProductDetail = ({ user }) => {
             </p>
           </div>
           <div className="price-share-wrapper">
-            <p>{"$" + parseFloat(product.price).toFixed(2)}</p>
+            <p>{"Rp " + parseInt(product.price).toLocaleString()}</p>
             <img src="/icons/pd-share.svg" />
             <img src="/icons/pd-like.svg" />
           </div>
 
           <hr />
           <p className="description-heading">Description</p>
-          <p className="pd-description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-          <ul className="pd-description-list">
+          <p className="pd-description">{product.description}</p>
+          {/* <ul className="pd-description-list">
             <li>
               Arcu cursus vitae congue mauris rhoncus aenean vel elit
               scelerisque.
@@ -131,11 +123,11 @@ const ProductDetail = ({ user }) => {
               Justo eget magna fermentum iaculis eu non. Nisi lacus sed viverra
               tellus in.
             </li>
-          </ul>
+          </ul> */}
         </div>
       </div>
       <ReviewsRatings
-        rating={product.rating}
+        rating={parseFloat(product.rating)}
         ratingamount={randomRatings.current}
       />
     </div>

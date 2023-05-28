@@ -17,12 +17,31 @@ const imageArray = [
 function Products({
   filter = {
     categories: [],
-    ages: [],
     brands: [],
     prices: [],
   },
 }) {
-  const apiUrl = "http://localhost:8080";
+  const non_other_brands = [
+    "FRESH",
+    "LA MER",
+    "DRUNK ELEPHANT",
+    "LANEIGE",
+    "SUNDAY RILEY",
+    "TATCHA",
+    "SK-II",
+    "BDK Parfums",
+    "Vilhelm Parfumerie",
+    "Rook Perfumes",
+    "PRIN",
+    "PARX",
+    "SPYKAR",
+    "SEJ by Nisha Gupta",
+    "PARFAIT",
+    "Gini and Jony",
+  ];
+  const apiUrlEffe = "http://localhost:8082";
+  const apiUrlLumiere = "http://localhost:8083";
+  const apiUrlZalya = "http://localhost:8084";
 
   const [productData, setProductData] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -30,10 +49,19 @@ function Products({
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOption, setSortOption] = useState("relevance");
   const productDataFetch = async () => {
-    const response = await axios.get(`${apiUrl}/api/data/products`);
-    console.log(response.data);
-    setProductData(response.data[0]);
-    return response.data;
+    const response_effe = await axios.get(`${apiUrlEffe}/api/effe/products`);
+    const response_lumiere = await axios.get(
+      `${apiUrlLumiere}/api/lumiere/products`
+    );
+    const response_zalya = await axios.get(`${apiUrlZalya}/api/zalya/products`);
+    console.log(response_effe.data);
+    const response_data = response_effe.data.concat(
+      response_lumiere.data,
+      response_zalya.data
+    );
+    console.log(response_data);
+    setProductData(response_data);
+    return response_data;
   };
 
   useEffect(function () {
@@ -98,16 +126,21 @@ function Products({
         );
       }
 
-      if (filters.ages[0]) {
-        newFilteredProducts = newFilteredProducts.filter((product) =>
-          filters.ages.includes(product.age)
-        );
-      }
-
       if (filters.brands[0]) {
+        const after_cat_before_brand = [...newFilteredProducts];
         newFilteredProducts = newFilteredProducts.filter((product) =>
           filters.brands.includes(product.brand.replace(/(\r\n|\n|\r)/gm, ""))
         );
+        if (filters.brands.includes("others")) {
+          newFilteredProducts = newFilteredProducts.concat(
+            after_cat_before_brand.filter(
+              (product) =>
+                !non_other_brands.includes(
+                  product.brand.replace(/(\r\n|\n|\r)/gm, "")
+                )
+            )
+          );
+        }
       }
 
       if (filters.prices[0]?.length > 1) {
@@ -124,7 +157,7 @@ function Products({
 
       if (searchQuery.length > 0) {
         newFilteredProducts = newFilteredProducts.filter((product) =>
-          product.name.toLowerCase().includes(searchQuery.toLowerCase())
+          product.product_name.toLowerCase().includes(searchQuery.toLowerCase())
         );
       }
 
@@ -145,37 +178,37 @@ function Products({
       <div className="products-page-wrapper">
         <div className="filtersidebar">
           <FilterSidebar
-            categories={[
-              "action figures & playsets",
-              "baby, toddler, & preschool learning toys",
-              "building sets & blocks",
-              "dolls, collectibles, and stuffed animals",
-              "games & puzzles",
-              "kids arts and crafts",
-              "vehicles and remote controls",
-            ]}
-            ages={["0-2", "3-6", "7-10", "10+"]}
+            categories={["perfume", "cosmetic", "clothing"]}
             brands={[
-              "lego",
-              "barbie",
-              "funko",
-              "play-doh",
-              "marvel",
-              "disney",
-              "hot wheels",
+              "FRESH",
+              "LA MER",
+              "DRUNK ELEPHANT",
+              "LANEIGE",
+              "SUNDAY RILEY",
+              "TATCHA",
+              "SK-II",
+              "BDK Parfums",
+              "Vilhelm Parfumerie",
+              "Rook Perfumes",
+              "PRIN",
+              "PARX",
+              "SPYKAR",
+              "SEJ by Nisha Gupta",
+              "PARFAIT",
+              "Gini and Jony",
               "others",
             ]}
             prices={[
               "0",
-              "500",
-              "1000",
-              "2000",
-              "3000",
-              "4000",
-              "5000",
-              "6000",
-              "8000",
-              "10000",
+              "50000",
+              "100000",
+              "150000",
+              "200000",
+              "250000",
+              "300000",
+              "400000",
+              "500000",
+              "600000",
             ]}
             onFilterChange={handleFilterInput}
           />
@@ -185,7 +218,7 @@ function Products({
             return (
               <Link
                 to="/products/product-detail"
-                replace={true}
+                replace={false}
                 style={{ textDecoration: "none" }}
                 state={product}
                 key={index}

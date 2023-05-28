@@ -8,10 +8,15 @@ const ProductCard = ({ product, image }) => {
       {/* <div className="title-wrapper">
         
       </div> */}
-      <h2 className="product-title">{product.name}</h2>
+      <h2 className="product-title">
+        {product.product_name.replace(/[^\w\s]/gi, "")}
+      </h2>
+      <h2 className="product-price">
+        {product.brand.replace(/[^\w\s]/gi, "")}
+      </h2>
       <div className="price-rating-wrapper">
         <h2 className="product-price">
-          {"$" + parseFloat(product.price).toFixed(2)}
+          {"Rp " + parseInt(product.price).toLocaleString()}
         </h2>
         <Rating
           name="read-only"
