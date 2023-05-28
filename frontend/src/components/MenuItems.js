@@ -52,7 +52,9 @@ const MenuItems = ({ items, depthLevel }) => {
             {window.innerWidth < 960 && depthLevel === 0 ? (
               items.title
             ) : (
-              <Link to={items.url}>{items.title}</Link>
+              <Link reloadDocument to={items.url}>
+                {items.title}
+              </Link>
             )}
             {depthLevel > 0 && window.innerWidth < 960 ? null : depthLevel >
                 0 && window.innerWidth > 960 ? (
@@ -89,7 +91,9 @@ const MenuItems = ({ items, depthLevel }) => {
           />
         </>
       ) : (
-        <Link to={items.url}>{items.title}</Link>
+        <Link reloadDocument to={items.url}>
+          {items.title}
+        </Link>
       )}
     </li>
   );
