@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 import FilterSidebar from "../components/FilterSidebar";
 import SortDropdown from "../components/SortDropdown";
 import SearchBar from "../components/SearchBar";
@@ -43,10 +44,15 @@ function Products({
   const apiUrlLumiere = "http://localhost:8083";
   const apiUrlZalya = "http://localhost:8084";
 
+  const state = useLocation().state;
+  console.log("product state", state);
+
   const [productData, setProductData] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filters, setFilters] = useState(filter);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(
+    state?.searchQuery.length > 0 ? state.searchQuery : ""
+  );
   const [sortOption, setSortOption] = useState("relevance");
   const productDataFetch = async () => {
     const response_effe = await axios.get(`${apiUrlEffe}/api/effe/products`);
