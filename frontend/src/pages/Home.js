@@ -30,30 +30,15 @@ const Home = ({ user }) => {
   return (
     <div className="home-container">
       <div className="banner">
-        <img className="kids-img" src="/img/landing-page/kids.png" />
         <div className="banner-text">
-          <h2>For kids, by kids</h2>
-          <p> Welcome to 4Kiddos, where playtime never ends! </p>
-          {user.cust_name ? (
-            <p> {"Welcome to 4Kiddos, " + user.cust_name + "!"}</p>
-          ) : (
-            ""
-          )}
-          <p>
-            We offer a wide range of toys and games that are perfect for kids of
-            all ages.
-          </p>
-          <p> Shop with us today and discover the joy of play!</p>
+          <h2>Upgrade your style at unbelievable prices. Don't miss out!</h2>
+          <button className="banner-button">Buy Now</button>
         </div>
         <img
-          className="toy-story-img"
-          src="/img/landing-page/toy-story.png"
-          alt="toystory"
+          className="banner-woman-img"
+          src="/img/landing-page-reverie/banner-woman.png"
+          alt="banner-woman"
         />
-      </div>
-
-      <div className="wave-img">
-        <img className="wave1" src="/img/landing-page/Intersect.png" />
       </div>
 
       <div className="hottest-products">

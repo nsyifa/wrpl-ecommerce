@@ -13,6 +13,10 @@
   --kuning1: #fbe83f;
   --kuning2: #fad405;
   --merah: #fe1b1b;
+  --darkblue: #2b3a55;
+  --darkpink: #ce7777;
+  --mediumpink: #e8c4c4;
+  --softpink: #f2e5e5;
 }
 
 * {
@@ -37,6 +41,7 @@ header {
 }
 .home-container {
   margin-bottom: 50px;
+  width: 100%;
 }
 
 .nav-area {
@@ -54,7 +59,7 @@ header {
   padding-bottom: 15px;
   display: flex;
   flex-direction: row;
-  border-bottom:1px solid rgba(71, 63, 79, 0.16)
+  border-bottom: 1px solid rgba(71, 63, 79, 0.16);
 }
 
 .logo {
@@ -124,7 +129,6 @@ button span {
   border-left: 0.32em solid transparent;
 }
 
-
 .dropdown {
   position: absolute;
   right: 0;
@@ -178,7 +182,6 @@ button span {
   box-shadow: 1px 2px 6px lightgrey;
   font-size: 0.8em;
   font-family: "Inter", sans-serif;
-
 }
 .reg {
   margin-right: 20px;
@@ -190,7 +193,7 @@ button span {
   cursor: pointer;
   color: white;
 }
-.cart-icon{
+.cart-icon {
   width: 30px;
   margin-right: 30px;
   margin-top: 2px;
@@ -222,34 +225,43 @@ button span {
 .banner {
   display: flex;
   flex-direction: row;
-  height: 450px;
-  width: 100%;
-  overflow: hidden;
-  background-color: #4b55c0;
+  height: 334px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  overflow: auto;
   justify-content: flex-start;
-  gap: 5em;
-  margin: 0;
+  background-color: var(--mediumpink);
   align-items: center;
+  justify-content: center;
 }
 
 .banner-text {
   background-color: transparent;
-  max-width: 80%;
+  max-width: 50%;
   z-index: 1;
-  margin-top: -80px;
-  margin-left: -20px;
 }
 
 .banner-text h2 {
   background-color: transparent;
-  color: #fea31b;
-  -webkit-text-stroke-width: 0.1px;
-  -webkit-text-stroke-color: black;
-  text-shadow: 4px 3px white;
-  font-weight: 900;
-  font-size: 5.7em;
-  text-align: center;
-  font-family: "Some Time Later";
+  color: var(--darkblue);
+  letter-spacing: 2px;
+  font-weight: 800;
+  font-size: 2.25em;
+  text-align: left;
+  font-family: "Inter";
+}
+
+.banner-button {
+  background-color: var(--darkblue);
+  padding: 0.8em 2em 0.8em 2em;
+  border-radius: 50px;
+  font-family: "Inter";
+  font-weight: 600;
+  margin-top: 1.5em;
+  letter-spacing: 2px;
+  font-size: 1.375em;
+  color: white;
 }
 
 .banner-text p:first-of-type {
@@ -262,27 +274,11 @@ button span {
   margin-bottom: 10px;
 }
 
-.banner-text p {
-  background-color: transparent;
-  font-size: 1.2em;
-  line-height: 1.8em;
-  color: white;
-  font-weight: 400;
-  text-align: center;
-}
-
-.banner > .kids-img {
-  width: 400px;
-  object-fit: cover;
-  margin: 0;
-}
-
-.banner > .toy-story-img {
-  width: 300px;
+.banner > .banner-woman-img {
+  width: 408px;
   margin: 0;
   align-items: center;
 }
-
 /* pembatas */
 .wave-img {
   position: relative;
