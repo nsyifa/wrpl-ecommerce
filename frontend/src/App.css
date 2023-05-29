@@ -228,7 +228,7 @@ button span {
   height: 334px;
   margin-left: auto;
   margin-right: auto;
-  width: 95%;
+  width: 92%;
   overflow: auto;
   justify-content: flex-start;
   background-color: var(--mediumpink);
@@ -261,7 +261,12 @@ button span {
   margin-top: 1.5em;
   letter-spacing: 2px;
   font-size: 1.375em;
+  cursor: pointer;
   color: white;
+}
+
+.banner-button:hover {
+  scale: 1.04;
 }
 
 .banner-text p:first-of-type {
@@ -280,17 +285,6 @@ button span {
   align-items: center;
 }
 /* pembatas */
-.wave-img {
-  position: relative;
-  width: 100%;
-  margin-top: -130px;
-  padding: 0;
-}
-
-.wave1 {
-  margin-top: 20px;
-  width: 100%;
-}
 
 .wave2 {
   margin-top: -60px;
@@ -301,31 +295,19 @@ button span {
 .hottest-products {
   width: 100%;
   height: 850px;
-  background-color: var(--hijau1);
-  margin-top: -10px;
-  padding: 0;
+  padding: 0 4% 0 4%;
+  margin-top: 3em;
   position: relative;
 }
 
 .hottest-products-text {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-}
-
-.hottest-products-text h2 {
-  position: relative;
-  top: 30px;
   background-color: transparent;
-  color: var(--kuning1);
-  -webkit-text-stroke-width: 0.15px;
-  -webkit-text-stroke-color: var(--biru);
-  text-shadow: 3px 3px var(--biru);
-  font-weight: 900;
-  font-size: 4em;
-  text-align: center;
-  font-family: "Some Time Later";
+  color: var(--darkblue);
+  letter-spacing: 2px;
+  font-weight: 800;
+  font-size: 2.25em;
+  text-align: left;
+  font-family: "Inter";
 }
 
 .circle {
@@ -340,6 +322,45 @@ button span {
   margin-top: 10px;
   color: white;
   font-size: 1.35em;
+}
+
+/*home based on categories section*/
+.based-on-category {
+  width: 100%;
+  height: 363px;
+  padding: 0 4% 0 4%;
+  margin-top: 8em;
+  position: relative;
+  margin-bottom: 8em;
+}
+
+.category-cards-container {
+  width: 100%;
+  margin-top: 2em;
+  display: flex;
+  justify-content: center;
+  gap: 6em;
+  flex-direction: row;
+}
+
+.category-card {
+  padding: 1.5em;
+  border: 3px solid var(--mediumpink);
+  border-radius: 30px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.category-card:hover {
+  scale: 1.02;
+}
+
+.category-card h2 {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 1.25em;
+  color: var(--darkpink);
+  letter-spacing: 0.05em;
 }
 
 /* home ways to shop section*/
@@ -475,12 +496,27 @@ button span {
   vertical-align: center;
 }
 
+.carousel-card-button {
+  border: 1px solid var(--mediumpink);
+  padding: 0.8em 2em 0.8em 2em;
+  cursor: pointer;
+  border-radius: 50px;
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 0.75em;
+  letter-spacing: 0.5px;
+  float: right;
+}
+
+.carousel-card-button:hover {
+  background-color: var(--mediumpink);
+}
 /* hottest products carousel component */
 .hottest-products-carousel {
   display: block;
   z-index: 10;
-  height: 400px;
-  margin: 2em 7%;
+  margin: 0;
+  margin-top: 2em;
   position: relative;
 }
 
@@ -512,15 +548,59 @@ button span {
 
 /* hottest products carousel card component */
 .carousel-card-hot-container {
-  width: 280px;
-  height: 400px;
+  width: 287px;
+  height: 383px;
   background-color: white;
+}
+
+.carousel-card-hot-container > .img-container {
+  height: 60%;
+  width: 100%;
+  border: 1px solid black;
   border-radius: 30px;
 }
 .carousel-card-hot-container img {
   width: 100%;
   height: 100%;
   object-fit: scale-down;
+}
+
+.carousel-card-product-info {
+  width: 100%;
+  margin-top: 1em;
+  letter-spacing: 0.5px;
+  display: flex;
+  padding-left: 2%;
+  padding-right: 2%;
+  gap: 0.6em;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.carousel-card-product-info h2 {
+  font-family: "Inter";
+  font-weight: 600;
+  height: 2.4em;
+  font-size: 1.125em;
+  margin: 0;
+  margin-bottom: 0.3em;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+.carousel-card-product-info p {
+  margin-bottom: 0.3em;
+}
+
+.carousel-card-hot-column {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 2em;
 }
 /* Products page */
 .products-page-wrapper {
