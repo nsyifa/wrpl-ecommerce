@@ -28,7 +28,12 @@ const CarouselCardHot = ({ product, user }) => {
             <Link
               to="/products/product-detail"
               replace={false}
-              style={{ textDecoration: "none", color: "inherit" }}
+              style={{
+                textDecoration: "none",
+                color: "inherit",
+                marginBottom: 0,
+              }}
+              className="no-margin-link"
               state={product}
             >
               <h2>{product.product_name.replace(/[^\w\s]/gi, "")}</h2>

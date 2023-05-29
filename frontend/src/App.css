@@ -294,7 +294,7 @@ button span {
 /* hottest products */
 .hottest-products {
   width: 100%;
-  height: 850px;
+  height: 944px;
   padding: 0 4% 0 4%;
   margin-top: 3em;
   position: relative;
@@ -549,7 +549,7 @@ button span {
 /* hottest products carousel card component */
 .carousel-card-hot-container {
   width: 287px;
-  height: 383px;
+  height: 430px;
   background-color: white;
 }
 
@@ -580,8 +580,8 @@ button span {
 .carousel-card-product-info h2 {
   font-family: "Inter";
   font-weight: 600;
-  height: 2.4em;
   font-size: 1.125em;
+  height: 2.4em;
   margin: 0;
   margin-bottom: 0.3em;
   -webkit-box-orient: vertical;
@@ -590,6 +590,10 @@ button span {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
+}
+
+.no-margin-link {
+  margin-bottom: 0;
 }
 
 .carousel-card-product-info p {

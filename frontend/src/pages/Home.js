@@ -160,7 +160,7 @@ const Home = ({ user }) => {
 
       <div
         className="hottest-products"
-        style={{ height: "460px", marginTop: "8em" }}
+        style={{ height: "507px", marginTop: "8em" }}
       >
         <h2 className="hottest-products-text">You Might Like</h2>
         <div className="hottest-products-carousel">
