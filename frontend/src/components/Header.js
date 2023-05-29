@@ -13,7 +13,7 @@ const Header = ({ user, updateUser }) => {
     window.location.reload(false);
   };
   const userButton = () => {
-    if (user.cust_name) {
+    if (user.cust_id) {
       console.log(user);
       return (
         <React.Fragment>

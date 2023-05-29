@@ -77,14 +77,14 @@ exports.createCustomer = (req, res) => {
   // Create a Customer
   const customer = {
     cust_id: req.body.cust_id,
-    cust_name: req.body.name,
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
     email: req.body.email,
     password: req.body.password,
     phone: req.body.phone,
+    city: req.body.city || null,
     country: req.body.country || null,
     address: req.body.address || null,
-    gopay_id: req.body.gopay_id || null,
-    bni_id: req.body.bni_id || null,
   };
 
   // Save Customer in the database

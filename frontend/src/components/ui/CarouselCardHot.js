@@ -25,7 +25,14 @@ const CarouselCardHot = ({ product, user }) => {
         />
         <div className="carousel-card-product-info">
           <div className="card-info-col1">
-            <h2>{product.product_name.replace(/[^\w\s]/gi, "")}</h2>
+            <Link
+              to="/products/product-detail"
+              replace={false}
+              style={{ textDecoration: "none", color: "inherit" }}
+              state={product}
+            >
+              <h2>{product.product_name.replace(/[^\w\s]/gi, "")}</h2>
+            </Link>
             <p>{capitalizeFirst(product.category)}</p>
             <Rating
               name="read-only"
@@ -44,7 +51,7 @@ const CarouselCardHot = ({ product, user }) => {
             <h2>{"Rp" + parseInt(product.price).toLocaleString()}</h2>
           </div>
         </div>
-        {user.cust_name ? (
+        {user.cust_id ? (
           <button
             className="carousel-card-button"
             onClick={() => handleAddCart(1)}

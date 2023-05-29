@@ -63,29 +63,10 @@ const HomeTrendingCarousel = ({ data, user, col = 2 }) => {
                     className="carousel-card-hot-column"
                     key={product.product_id}
                   >
-                    <Link
-                      to="/products/product-detail"
-                      replace={false}
-                      style={{ textDecoration: "none", color: "inherit" }}
-                      state={product}
-                      key={index}
-                    >
-                      <CarouselCardHot user={user} product={product} />
-                    </Link>
+                    <CarouselCardHot user={user} product={product} />
 
                     {data[index + 1] && (
-                      <Link
-                        to="/products/product-detail"
-                        replace={false}
-                        style={{ textDecoration: "none", color: "inherit" }}
-                        state={data[index + 1]}
-                        key={index + 1}
-                      >
-                        <CarouselCardHot
-                          user={user}
-                          product={data[index + 1]}
-                        />
-                      </Link>
+                      <CarouselCardHot user={user} product={data[index + 1]} />
                     )}
                   </div>
                 );
@@ -97,15 +78,7 @@ const HomeTrendingCarousel = ({ data, user, col = 2 }) => {
                 className="carousel-card-hot-column"
                 key={product.product_id}
               >
-                <Link
-                  to="/products/product-detail"
-                  replace={false}
-                  style={{ textDecoration: "none", color: "inherit" }}
-                  state={product}
-                  key={index}
-                >
-                  <CarouselCardHot user={user} product={product} />
-                </Link>
+                <CarouselCardHot user={user} product={product} />
               </div>
             ))}
       </Carousel>

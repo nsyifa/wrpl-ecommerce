@@ -6,14 +6,16 @@ import "../styles/register.css";
 const Register = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [input, setInput] = useState({
-    name: "",
+    first_name: "",
+    last_name: "",
     phone: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
   const [error, setError] = useState({
-    name: "",
+    first_name: "",
+    last_name: "",
     phone: "",
     email: "",
     password: "",
@@ -42,7 +44,13 @@ const Register = () => {
       const stateObj = { ...prev, [id]: "" };
 
       switch (id) {
-        case "name":
+        case "first_name":
+          if (value.length <= 0) {
+            stateObj[id] = "Please enter your name.";
+          }
+          break;
+
+        case "last_name":
           if (value.length <= 0) {
             stateObj[id] = "Please enter your name.";
           }
@@ -98,7 +106,8 @@ const Register = () => {
     console.log(latestCustomer);
     let cust_id = parseInt(latestCustomer.cust_id.replace("CT", "")) + 1;
     cust_id = "CT" + cust_id;
-    const name = input.name;
+    const first_name = input.first_name;
+    const last_name = input.last_name;
     const email = input.email;
     const phone = input.phone;
     const password = input.password;
@@ -108,7 +117,8 @@ const Register = () => {
     axios
       .post("http://localhost:8081/api/customer/new", {
         cust_id: cust_id,
-        name: name,
+        first_name: first_name,
+        last_name: last_name,
         email: email,
         phone: phone,
         password: password,
@@ -131,29 +141,54 @@ const Register = () => {
     const windowHeight = window.innerHeight;
     const objectHeight = objectPosition.height;
 
-    const scrollToPosition = objectPosition.top + window.pageYOffset - (windowHeight / 2) + (objectHeight / 2);
+    const scrollToPosition =
+      objectPosition.top +
+      window.pageYOffset -
+      windowHeight / 2 +
+      objectHeight / 2;
 
     window.scrollTo({
       top: scrollToPosition,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   }, []);
 
   return (
     <div className="register-page">
-      <img className = "reglog-img-1" src = "img/ecommerce/image1-reglog.png"></img>
-      <img className = "reglog-img-2" src = "img/ecommerce/image2-reglog.png"></img>
-      <img className = "reglog-img-3" src = "img/ecommerce/image3-reglog-2.png"></img>
-      <img className = "reglog-img-4" src = "img/ecommerce/image4-reglog.png"></img>
+      <img className="reglog-img-1" src="img/ecommerce/image1-reglog.png"></img>
+      <img className="reglog-img-2" src="img/ecommerce/image2-reglog.png"></img>
+      <img
+        className="reglog-img-3"
+        src="img/ecommerce/image3-reglog-2.png"
+      ></img>
+      <img className="reglog-img-4" src="img/ecommerce/image4-reglog.png"></img>
       <form onSubmit={handleSubmit} className="register-form" ref={objectRef}>
         <p className="register-title">Register</p>
         <div className="register-form__input-container">
-          <label htmlFor="name" className="register-form__label">
-            Name
+          <label htmlFor="first_name" className="register-form__label">
+            First Name
           </label>
           <input
             type="text"
-            id="name"
+            id="first_name"
+            value={input.name}
+            onChange={(e) => {
+              onInputChange(e);
+            }}
+            onBlur={(e) => {
+              validateInput(e);
+            }}
+            className="register-form__input"
+          />
+          {error.name && <span className="err">{error.name}</span>}
+        </div>
+        <div className="register-form__input-container">
+          <label htmlFor="last_name" className="register-form__label">
+            Last Name
+          </label>
+          <input
+            type="text"
+            id="last_name"
             value={input.name}
             onChange={(e) => {
               onInputChange(e);

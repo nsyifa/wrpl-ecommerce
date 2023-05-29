@@ -43,7 +43,7 @@ const ProductDetail = ({ user }) => {
               stock={product.stock}
               updateQuantity={updateQuantity}
             />
-            {user.cust_name ? (
+            {user.cust_id ? (
               <button
                 className="pd-cart-button"
                 onClick={() => handleAddCart(quantity)}

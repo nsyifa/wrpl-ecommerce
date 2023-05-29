@@ -42,7 +42,7 @@ const App = () => {
         <Route
           path="/login"
           element={
-            user.cust_name ? (
+            user.cust_id ? (
               <Navigate to="/" />
             ) : (
               <Login updateUser={updateUser} />
