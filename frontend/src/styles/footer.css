@@ -1,33 +1,17 @@
+:root {
+  --darkblue: #2b3a55;
+  --darkpink: #CE7777;
+  --mediumpink: #E8C4C4;
+  --lightgrey: #ededed;
+  --softpink: #F2E5E5;
+  --bluegrey: #6D8493;
+  --darkred: #C61E1E;
+  --merah: #fe1b1b;
+}
+
 * {
   background-color: transparent;
   z-index: 1000;
-}
-
-.wave-footer {
-  width: 104%;
-  margin-left: -4%;
-  z-index: 0;
-  padding: 0;
-  margin-bottom: 0;
-}
-
-.logo-circle {
-  width: 180px;
-  margin-top: -210px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 0;
-  padding-bottom: 0;
-  display: block;
-  border-radius: 50%;
-}
-
-.logo-shortened {
-  margin-top: -135px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  height: 100px;
 }
 
 footer {
@@ -37,63 +21,112 @@ footer {
 }
 
 footer h4 {
-  color: #149d4f;
-  font-size: 30px;
-  font-family: "Some Time Later";
+  color: var(--darkblue);
+  font-size: 1.3em;
 }
 
 footer p {
-  color: #149d4f;
+  color: var(--darkblue);
   font-size: 13px;
   line-height: 26px;
   font-family: "Lato";
 }
 
 footer ul li {
-  color: #149d4f;
+  color: var(--darkblue);
   font-size: 13px;
   line-height: 26px;
-}
-
-footer ul li i {
-  color: #ff8a00;
-  font-size: 13px;
-  margin-right: 10px;
+  list-style: none;
 }
 
 footer ul li a {
-  color: #149d4f;
-  font-size: 13px;
+  color: var(--darkblue);
+  font-size: 1em;
   line-height: 26px;
 }
 
 footer ul li a:hover {
-  color: #ff8a00;
+  color: var(--lightgrey);
   text-decoration: none;
 }
 
 footer .container {
   margin: 0 auto;
-  background-color: #fad405;
+  background-color:var(--softpink);
   padding: 0;
-  height: 150px;
+  height: 40%;
   margin-top: 70px;
 }
 
 footer .row {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   width: 100%;
   justify-content: space-evenly;
+  padding-top: 30px;
+  /* margin: 0 60px; */
 }
 
-footer .col-md-4 {
-  margin-top: 20px;
-  margin-left: -40px;
-  max-width: 20%;
+footer .row-2 {
+  padding: 0 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+footer .row-1 {
+  padding-bottom: 30px;
+  gap: 10px;
+  height: 40%;
+  width: 100%;
   min-width: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--softpink);
+  flex-wrap: wrap;
 }
 
+.col1 img {
+  width: 250px;
+}
+
+.col2 p {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.1em;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.row-3 {
+  margin-top: 20px;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  align-items: center;
+  background-color: var(--darkpink);
+  width: 100%;
+}
+
+.row-3 p{
+  color: var(--lightgrey);
+  font-size: 1.1em;
+}
+
+.member-team li {
+  color: var(--lightgrey);
+  font-size: 0.9em;
+}
+
+.member-team {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  list-style: none;
+}
 @media (max-width: 767px) {
   footer .col-md-4 {
     width: 100%;
