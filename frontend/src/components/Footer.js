@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="row">
           <div className="row-1">
             <div className="col1">
-              <img className = "footer-logo" src="img/ecommerce/logo-blue.svg"/>
+              <img className = "footer-logo" src="/img/ecommerce/logo-blue.svg"/>
             </div>
             <div className="col2">
               <p>Help you get the look that you always dream of</p>
