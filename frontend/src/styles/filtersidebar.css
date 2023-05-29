@@ -2,7 +2,7 @@
 
 /* Filter sidebar container */
 .filter-sidebar {
-  background: #E8C4C4;
+  background: #4b55c0;
   border-radius: 30px;
   padding: 1.6em;
 }
@@ -13,7 +13,7 @@
   font-size: 40px;
   text-align: center;
   margin-bottom: 1em;
-  color: black;
+  color: #ffffff;
 }
 
 .filter-section {
@@ -23,7 +23,7 @@
 .filter-section h3 {
   font-weight: bold;
   font-size: 24px;
-  color: black;
+  color: #ffffff;
   margin-bottom: 0.3em;
 }
 
@@ -65,9 +65,9 @@
 .filter-button {
   display: block;
   margin-top: 10px;
-  background-color: #2B3A55;
+  background-color: white;
   width: 100%;
-  color: white;
+  color: #4b55c0;
   font-weight: 700;
   font-size: 15px;
   border-radius: 20px;
