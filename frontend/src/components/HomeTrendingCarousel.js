@@ -56,23 +56,26 @@ const HomeTrendingCarousel = ({ data, user, col = 2 }) => {
         ]}
       >
         {col === 2
-          ? data.map((product, index) => {
-              if (index % 2 === 0) {
+          ? Array.from({ length: Math.ceil(data.length / 2) }).map(
+              (_, index) => {
+                const product = data[index * 2];
+                const nextProduct = data[index * 2 + 1];
+
                 return (
                   <div
                     className="carousel-card-hot-column"
-                    key={product.product_id}
+                    key={product?.product_id || index}
                   >
-                    <CarouselCardHot user={user} product={product} />
-
-                    {data[index + 1] && (
-                      <CarouselCardHot user={user} product={data[index + 1]} />
+                    {product && (
+                      <CarouselCardHot user={user} product={product} />
+                    )}
+                    {nextProduct && (
+                      <CarouselCardHot user={user} product={nextProduct} />
                     )}
                   </div>
                 );
               }
-              return null;
-            })
+            )
           : data.map((product, index) => (
               <div
                 className="carousel-card-hot-column"

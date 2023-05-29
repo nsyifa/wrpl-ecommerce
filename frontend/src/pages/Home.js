@@ -157,7 +157,13 @@ const Home = ({ user }) => {
           )}
         </div>
       </div>
-
+      <div
+        className="hottest-products"
+        style={{ height: "200px", marginTop: "8em" }}
+      >
+        <h2 className="hottest-products-text">Choose Your Brand</h2>
+        {productData ? <HomeCarousel data={carouselData[2]} /> : ""}
+      </div>
       <div
         className="hottest-products"
         style={{ height: "507px", marginTop: "8em" }}
@@ -171,31 +177,6 @@ const Home = ({ user }) => {
           )}
         </div>
       </div>
-      {/* <div className="ways-to-shop">
-        <div className="based-on-age text">
-          <img src="/img/landing-page/Doodle stars.png" className="hiasan" />
-          <span>Based on age</span>
-          <img src="/img/landing-page/Doodle stars.png" className="hiasan" />
-        </div>
-        <HomeCarousel data={carouselData[0]} color="blue" />
-        <div style={{ marginTop: "20px" }}>
-          <div className="based-on-category text">
-            <img src="/img/landing-page/Doodle stars.png" className="hiasan" />
-            <span>Based on category</span>
-            <img src="/img/landing-page/Doodle stars.png" className="hiasan" />
-          </div>
-          <HomeCarousel data={carouselData[1]} color="orange" />
-        </div>
-        <div style={{ marginTop: "40px" }}>
-          <div className="based-on-brand text">
-            <img src="/img/landing-page/Doodle stars.png" className="hiasan" />
-            <span>Based on brand</span>
-            <img src="/img/landing-page/Doodle stars.png" className="hiasan" />
-          </div>
-          <HomeCarousel data={carouselData[2]} color="green" />
-
-        </div>
-      </div>           */}
       {/* <button
             onClick={() =>
               window.snap.pay("c5142b4e-207e-4cff-b782-dc468c9ffc42")

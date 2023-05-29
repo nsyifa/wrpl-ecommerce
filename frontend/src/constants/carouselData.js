@@ -61,28 +61,32 @@ export const carouselData = [
     color: "#FE1B1B",
     sections: [
       {
-        image: "./img/marvel-logo.png",
-        desc: "Marvel",
+        image: "./img/landing-page-reverie/drunkelephant.png",
+        desc: "Drunk Elephant",
       },
       {
-        image: "./img/nerf.png",
-        desc: "Nerf",
+        image: "./img/landing-page-reverie/fresh.png",
+        desc: "Fresh",
       },
       {
-        image: "./img/hotwheels.png",
-        desc: "Hot Wheels",
+        image: "./img/landing-page-reverie/lamer.png",
+        desc: "La Mer",
       },
       {
-        image: "./img/fisherprice.png",
-        desc: "Fisher Price",
+        image: "./img/landing-page-reverie/laneige.png",
+        desc: "Laneige",
       },
-      // {
-      //   image: "./img/lego.png",
-      //   desc: "LEGO"
-      // },
       {
-        image: "./img/disney.png",
-        desc: "Disney",
+        image: "./img/landing-page-reverie/skii.png",
+        desc: "SK-II",
+      },
+      {
+        image: "./img/landing-page-reverie/sundayriley.png",
+        desc: "Sunday Riley",
+      },
+      {
+        image: "./img/landing-page-reverie/tatcha.png",
+        desc: "Tatcha",
       },
     ],
   },

@@ -1,52 +1,62 @@
-import Carousel, { slidesToShowPlugin } from "@brainhubeu/react-carousel";
+import Carousel, {
+  slidesToShowPlugin,
+  arrowsPlugin,
+} from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
-import CarouselCard from "./ui/CarouselCard";
 import CarouselCardBrand from "./ui/CarouselCardBrand";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-const HomeCarousel = ({ data, color }) => {
-  const cardNumbers = data.title === "by character" ? 5 : 4;
+const HomeCarousel = ({ data }) => {
+  const cardNumbers = 5;
 
   return (
-    <div className="carousel-container">
-      {(data.title == "by character") | (data.title == "by brand") ? (
-        <button
-          className="carousel-button"
-          style={{ backgroundColor: data.color }}
-        >
-          {data.button}
-        </button>
-      ) : (
-        <span></span>
-      )}
+    <div className="hot-carousel-container">
       <Carousel
         plugins={[
           "infinite",
-          "arrows",
           {
             resolve: slidesToShowPlugin,
             options: {
               numberOfSlides: cardNumbers,
             },
           },
+          {
+            resolve: arrowsPlugin,
+            options: {
+              arrowLeft: (
+                <button
+                  style={{
+                    height: "2.5em",
+                    width: "2.5em",
+                    cursor: "pointer",
+                    border: "none",
+                    fontSize: "20px",
+                  }}
+                >
+                  <FaChevronLeft />
+                </button>
+              ),
+              arrowRight: (
+                <button
+                  style={{
+                    height: "2.5em",
+                    width: "2.5em",
+                    border: "none",
+                    cursor: "pointer",
+                    fontSize: "20px",
+                  }}
+                >
+                  <FaChevronRight />
+                </button>
+              ),
+              addArrowClickHandler: true,
+            },
+          },
         ]}
       >
-        {data.title === "by brand"
-          ? data.sections.map((card, index) => (
-              <CarouselCardBrand
-                img={card.image}
-                title={card.desc}
-                color="green"
-                key={index}
-              />
-            ))
-          : data.sections.map((card, index) => (
-              <CarouselCard
-                img={card.image}
-                title={card.desc}
-                color={color}
-                key={index}
-              />
-            ))}
+        {data.sections.map((card, index) => (
+          <CarouselCardBrand img={card.image} key={index} />
+        ))}
       </Carousel>
     </div>
   );
