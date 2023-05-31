@@ -11,7 +11,7 @@ export const useGetCustomerFromCustId = (user) => {
       return;
     }
     axios
-      .get(`http://localhost:8080/api/data/customers/cust_id`, {
+      .get(`http://localhost:8081/api/customer/customers/cust_id`, {
         params: {
           cust_id: user.cust_id,
         },
