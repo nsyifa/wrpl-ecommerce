@@ -3,7 +3,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: -7px;
   margin-left: 5em;
+  cursor: pointer;
 }
 
 .sort-dropdown label {
@@ -26,8 +28,8 @@
 
 .sort-dropdown select:focus {
   outline: none;
-  border-color: #4c9aff;
-  box-shadow: 0px 0px 4px rgba(76, 154, 255, 0.4);
+  border-color: #ce7777;
+  box-shadow: 0px 0px 4px #ce7777;
 }
 
 .sort-dropdown select option {

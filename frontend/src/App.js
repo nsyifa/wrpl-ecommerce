@@ -88,7 +88,6 @@ const App = () => {
             <Products
               filter={{
                 categories: ["clothing"],
-                ages: [],
                 brands: [],
                 prices: [],
               }}
@@ -96,52 +95,204 @@ const App = () => {
           }
         />
         <Route
-          path="products/dolls-collectibles-stuffed-animals"
+          path="products/fresh"
           element={
             <Products
               filter={{
-                categories: ["dolls, collectibles, and stuffed animals"],
-                ages: [],
-                brands: [],
+                categories: [],
+                brands: ["FRESH"],
                 prices: [],
               }}
             />
           }
         />
         <Route
-          path="products/games-puzzles"
+          path="products/la-mer"
           element={
             <Products
               filter={{
-                categories: ["games & puzzles"],
-                ages: [],
-                brands: [],
+                categories: [],
+                brands: ["LA MER"],
                 prices: [],
               }}
             />
           }
         />
         <Route
-          path="products/kids-arts-crafts"
+          path="products/drunk-elephant"
           element={
             <Products
               filter={{
-                categories: ["kids arts and crafts"],
-                ages: [],
-                brands: [],
+                categories: [],
+                brands: ["DRUNK ELEPHANT"],
                 prices: [],
               }}
             />
           }
         />
         <Route
-          path="products/vehicles-remote-controls"
+          path="products/laneige"
           element={
             <Products
               filter={{
-                categories: ["vehicles and remote controls"],
-                ages: [],
-                brands: [],
+                categories: [],
+                brands: ["LANEIGE"],
+                prices: [],
+              }}
+            />
+          }
+        />
+        <Route
+          path="products/sunday-riley"
+          element={
+            <Products
+              filter={{
+                categories: [],
+                brands: ["SUNDAY RILEY"],
+                prices: [],
+              }}
+            />
+          }
+        />
+        <Route
+          path="products/tatcha"
+          element={
+            <Products
+              filter={{
+                categories: [],
+                brands: ["TATCHA"],
+                prices: [],
+              }}
+            />
+          }
+        />
+        <Route
+          path="products/sk-ii"
+          element={
+            <Products
+              filter={{
+                categories: [],
+                brands: ["SK-II"],
+                prices: [],
+              }}
+            />
+          }
+        />
+        <Route
+          path="products/bdk-parfums"
+          element={
+            <Products
+              filter={{
+                categories: [],
+                brands: ["BDK Parfums"],
+                prices: [],
+              }}
+            />
+          }
+        />
+        <Route
+          path="products/vilhelm-parfumerie"
+          element={
+            <Products
+              filter={{
+                categories: [],
+                brands: ["Vilhelm Parfumerie"],
+                prices: [],
+              }}
+            />
+          }
+        />
+        <Route
+          path="products/rook-perfumes"
+          element={
+            <Products
+              filter={{
+                categories: [],
+                brands: ["Rook Perfumes"],
+                prices: [],
+              }}
+            />
+          }
+        />
+        <Route
+          path="products/prin"
+          element={
+            <Products
+              filter={{
+                categories: [],
+                brands: ["PRIN"],
+                prices: [],
+              }}
+            />
+          }
+        />
+        <Route
+          path="products/parx"
+          element={
+            <Products
+              filter={{
+                categories: [],
+                brands: ["PARX"],
+                prices: [],
+              }}
+            />
+          }
+        />
+        <Route
+          path="products/spykar"
+          element={
+            <Products
+              filter={{
+                categories: [],
+                brands: ["SPYKAR"],
+                prices: [],
+              }}
+            />
+          }
+        />
+        <Route
+          path="products/sej"
+          element={
+            <Products
+              filter={{
+                categories: [],
+                brands: ["SEJ by Nisha Gupta"],
+                prices: [],
+              }}
+            />
+          }
+        />
+        <Route
+          path="products/parfait"
+          element={
+            <Products
+              filter={{
+                categories: [],
+                brands: ["PARFAIT"],
+                prices: [],
+              }}
+            />
+          }
+        />
+        <Route
+          path="products/gini-and-jony"
+          element={
+            <Products
+              filter={{
+                categories: [],
+                brands: ["Gini and Jony"],
+                prices: [],
+              }}
+            />
+          }
+        />
+        <Route
+          path="products/others"
+          element={
+            <Products
+              filter={{
+                categories: [],
+                brands: ["others"],
                 prices: [],
               }}
             />

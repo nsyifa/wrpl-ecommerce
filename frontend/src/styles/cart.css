@@ -1,8 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap");
+
 @font-face {
   font-family: 'SomeTimeLater';
   src: local('SomeTimeLater'),
     url("../fonts/SomeTimeLater.otf") format("opentype");
 } 
+
 
 :root {
   --hijau1: #03c958;
@@ -11,8 +14,12 @@
   --abu: #ededed;
   --oren: #fea31b;
   --kuning1: #fbe83f;
-  --kuning2: #FFD700;
+  --kuning2: #fad405;
   --merah: #fe1b1b;
+  --darkblue: #2b3a55;
+  --darkpink: #ce7777;
+  --mediumpink: #e8c4c4;
+  --softpink: #f2e5e5;
 }
 
 .wave-cart-header {
@@ -25,28 +32,27 @@
 }
 
 .cart-title {
-  font-family: SomeTimeLater;
-  color: white;
-  letter-spacing: 0.06em;
-  font-size: 5.5em;
-  position: absolute;
-  top: 80px;
+  font-family: "Inter";
+  color: var(--darkblue);
+  font-size: 4em;
+  width:100%;
+  position: relative;
   left: 155px;
+  margin-bottom: 0.5em;
 }
 
 .cart-wrapper {
   position: relative;
   width: 80%;
   min-height: 23em;
-  margin-top: -110px;
   z-index: 0;
   flex-wrap: nowrap;
 }
 
 .item-list-wrapper {
   background-color: #ffffff;
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25);
   border-radius: 30px 30px 0 0 ;
+  border: solid var(--darkpink) 2px;
   width: 80%;
   display: flex;
   flex-direction: column;
@@ -144,7 +150,7 @@
 }
 
 .cart-total-price-wrapper {
-  background-color: var(--hijau2);
+  background-color: var(--darkpink);
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25);
   border-radius: 0 0 30px 30px;
   width: 80%;
@@ -159,10 +165,9 @@
 }
 
 .cart-total-price-wrapper p:first-child {
-  font-family: SomeTimeLater;
+  font-family: "Inter";
+  font-weight: bold;
   text-align: center;
-  margin-top: 10px;
-  margin-bottom: -5px;
   margin-left: 0.5em;
   color: white;
   font-size: 3em;
@@ -170,7 +175,6 @@
 
 .cart-total-price-wrapper p:last-child {
   color: white;
-  padding-bottom: 3px;
   font-size: 1.5em;
   padding-right: 0.4em;
 }
@@ -185,7 +189,7 @@
 
 .cart-summary-wrapper {
   background-color: #ffffff;
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25);
+  border: solid var(--darkpink) 2px;
   border-radius: 30px;
   width: 30%;
   height: max-content;
@@ -193,8 +197,8 @@
   flex-direction: column;
   margin-right: 8em;
   gap: 1.2em;
+  margin-top: 2em;
   padding: 2em;
-  margin-top: -78px;
 }
 
 .cart-summary-title {
@@ -230,7 +234,7 @@
   width: 100%;
   height: 40px;
   border-radius: 10px;
-  background-color: var(--hijau1);
+  background-color: var(--mediumpink);
   border-style: none;
   color: white;
   font-weight: bold;
@@ -240,7 +244,7 @@
 }
 
 .cart-checkout-btn:hover {
-  background-color: var(--hijau2);
+  background-color: var(--darkpink);
   width: 100.5%;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
 }
@@ -250,9 +254,9 @@
   width: 100%;
   height: 40px;
   border-radius: 10px;
-  border: solid 2px var(--hijau2);
-  background-color: transparent;
-  color: var(--hijau2);
+  background-color: var(--darkpink);
+  border-width: 0;
+  color: var(--abu);
   font-weight: bold;
   font-size: 1em;
   cursor: pointer;
