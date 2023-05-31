@@ -8,19 +8,21 @@ form.price-dropdown {
 
 .price-dropdown label {
   margin-right: 0.5rem;
-  color: white;
+  color: #CE7777;
   margin-bottom: 0.5em;
   font-size: 15px;
+  text-shadow: 1px 1px 2px white;
+  font-weight: bold;
 }
 
 .price-dropdown select {
   padding: 0.25rem;
   margin-right: 1rem;
-  background: rgba(167, 174, 255, 0.47);
+  background: white;
   border: 1px solid #ffffff;
   border-radius: 20px;
   width: 100%;
-  color: white;
+  color: black;
   padding: 0.5em 1em;
   margin-bottom: 1em;
   cursor: pointer;
