@@ -9,9 +9,9 @@ module.exports = (app) => {
 
   router.get("/latest", database.getLatestCustomer);
 
-  router.get("/email/:email", database.getCustomerFromEmail);
+  router.get("/email/:email", database.getCustomerByEmail);
 
-  router.get("/customers/cust_id", database.getCustomerFromCustId);
+  router.get("/customers/cust_id", database.getCustomerByCustId);
 
   router.put("/customer/address/update", database.updateCustomerAddress);
 

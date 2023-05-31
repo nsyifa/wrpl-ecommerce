@@ -70,7 +70,7 @@ const Login = ({ updateUser }) => {
 
     const email = input.email;
     const password = input.password;
-    const customer = (await customerFetchByEmail(email)).data[0];
+    const customer = (await customerFetchByEmail(email)).data[0][0];
     // if (customer) {
     if (customer.password === password) {
       console.log("before update", customer);
@@ -90,22 +90,38 @@ const Login = ({ updateUser }) => {
     const windowHeight = window.innerHeight;
     const objectHeight = objectPosition.height;
 
-    const scrollToPosition = objectPosition.top + window.pageYOffset - (windowHeight / 2) + (objectHeight / 2);
+    const scrollToPosition =
+      objectPosition.top +
+      window.pageYOffset -
+      windowHeight / 2 +
+      objectHeight / 2;
 
     window.scrollTo({
       top: scrollToPosition,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   }, []);
 
   return (
     <div className="login-page">
-      <img className="reglog-img-1" src="/img/ecommerce/image1-reglog.png"></img>
-      <img className="reglog-img-2" src="/img/ecommerce/image2-reglog.png"></img>
-      <img className="reglog-img-3" src="/img/ecommerce/image3-reglog-2.png"></img>
-      <img className="reglog-img-4" src="/img/ecommerce/image4-reglog.png"></img>
-      <form onSubmit={handleSubmit} className="login-form" ref = {objectRef}>
-        <p className="login-title">Sign In</p> 
+      <img
+        className="reglog-img-1"
+        src="/img/ecommerce/image1-reglog.png"
+      ></img>
+      <img
+        className="reglog-img-2"
+        src="/img/ecommerce/image2-reglog.png"
+      ></img>
+      <img
+        className="reglog-img-3"
+        src="/img/ecommerce/image3-reglog-2.png"
+      ></img>
+      <img
+        className="reglog-img-4"
+        src="/img/ecommerce/image4-reglog.png"
+      ></img>
+      <form onSubmit={handleSubmit} className="login-form" ref={objectRef}>
+        <p className="login-title">Sign In</p>
         <div className="login-form__input-container">
           <label htmlFor="email" className="login-form__label">
             Email:

@@ -31,8 +31,8 @@ Database.getLatestCustomer = (result) => {
   );
 };
 
-Database.getCustomerFromEmail = (email, result) => {
-  sql.query(`SELECT * FROM customer WHERE email = ?`, email, (err, res) => {
+Database.getCustomerByEmail = (email, result) => {
+  sql.query(`CALL spGetCustomerByEmail(?)`, email, (err, res) => {
     if (err) {
       console.log("error:", err);
       result(null, err);
@@ -44,8 +44,8 @@ Database.getCustomerFromEmail = (email, result) => {
   });
 };
 
-Database.getCustomerFromCustId = (cust_id, result) => {
-  sql.query(`CALL spGetCustomerFromCustId(?)`, cust_id, (err, res) => {
+Database.getCustomerByCustId = (cust_id, result) => {
+  sql.query(`CALL spGetCustomerByCustId(?)`, cust_id, (err, res) => {
     if (err) {
       console.log("error:", err);
       result(null, err);
