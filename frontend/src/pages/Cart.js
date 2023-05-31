@@ -114,8 +114,7 @@ const Cart = ({ user }) => {
 
   return (
     <div className="cart-container">
-      <img className="wave-cart-header" src="img/wave/Rectangle 43.png"></img>
-      <h3 className="cart-title">Your cart</h3>
+      <h3 className="cart-title">Keranjang Anda</h3>
       <div className="cart-order-container">
         <div className="cart-wrapper">
           <div className="item-list-wrapper">
@@ -177,7 +176,7 @@ const Cart = ({ user }) => {
               to="/products"
             >
               <button className="cart-back-to-shopping-btn">
-                Back to shopping
+                Back to shop
               </button>
             </Link>
           </div>
