@@ -251,65 +251,63 @@ const Checkout = ({ user }) => {
                 <div key={`pesanan-${index1}`}>
                   <h2>{`Pesanan ${index1 + 1}`}</h2>
                   {sellerProducts.map((item, index2) => (
-                    <React.Fragment>
-                      <CheckoutItemRow
-                        key={`checkout-item-${index2}`}
-                        product={item}
-                        image={imageArray[index2 % 6]}
-                      />
-                      <button onClick={() => handleGetShipping(index1)}>
-                        Dapatkan shipping
-                      </button>
-                      {availableShipping[index1]?.length > 0 ? (
-                        <div>
-                          <select
-                            value={currentShippingTypes[index1]}
-                            onChange={() =>
-                              handleCurrentShippingTypesChange(event, index1)
-                            }
+                    <CheckoutItemRow
+                      key={`checkout-item-${index2}`}
+                      product={item}
+                      image={imageArray[index2 % 6]}
+                    />
+                  ))}
+                  <button onClick={() => handleGetShipping(index1)}>
+                    Dapatkan shipping
+                  </button>
+                  {availableShipping[index1]?.length > 0 ? (
+                    <div>
+                      <select
+                        value={currentShippingTypes[index1]}
+                        onChange={() =>
+                          handleCurrentShippingTypesChange(event, index1)
+                        }
+                      >
+                        <option value="">Pilih shipping</option>
+                        {availableShipping[index1].map((shippingType) => (
+                          <option
+                            key={shippingType.service}
+                            value={JSON.stringify(shippingType)}
                           >
-                            <option value="">Pilih shipping</option>
-                            {availableShipping[index1].map((shippingType) => (
-                              <option
-                                key={shippingType.service}
-                                value={JSON.stringify(shippingType)}
-                              >
-                                {shippingType.service +
-                                  `${shippingType.description}`}
-                              </option>
-                            ))}
-                          </select>
-                          <div>
-                            {/* Selected option:{" "}
+                            {shippingType.service +
+                              `${shippingType.description}`}
+                          </option>
+                        ))}
+                      </select>
+                      <div>
+                        {/* Selected option:{" "}
                             {currentShippingTypes[index1].cost[0].value +
                               "etd: " +
                               currentShippingTypes[index1].cost[0].etd} */}
-                            {currentShippingTypes[index1].service ? (
-                              <React.Fragment>
-                                <p>
-                                  {"Pelayanan: " +
-                                    currentShippingTypes[index1].service +
-                                    " (" +
-                                    currentShippingTypes[index1].description +
-                                    ")"}
-                                </p>
-                                <p>
-                                  {"Ongkos Kirim: " +
-                                    currentShippingTypes[index1].cost}
-                                </p>
-                                <p>
-                                  {"Estimasi Hari Pengiriman: " +
-                                    currentShippingTypes[index1].etd}
-                                </p>
-                              </React.Fragment>
-                            ) : (
-                              ""
-                            )}
-                          </div>
-                        </div>
-                      ) : null}
-                    </React.Fragment>
-                  ))}
+                        {currentShippingTypes[index1].service ? (
+                          <React.Fragment>
+                            <p>
+                              {"Pelayanan: " +
+                                currentShippingTypes[index1].service +
+                                " (" +
+                                currentShippingTypes[index1].description +
+                                ")"}
+                            </p>
+                            <p>
+                              {"Ongkos Kirim: " +
+                                currentShippingTypes[index1].cost}
+                            </p>
+                            <p>
+                              {"Estimasi Hari Pengiriman: " +
+                                currentShippingTypes[index1].etd}
+                            </p>
+                          </React.Fragment>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               ) : null
             )}
