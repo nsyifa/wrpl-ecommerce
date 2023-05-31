@@ -15,16 +15,16 @@ function SearchBar(props) {
   };
 
   return (
-    <form className="search-form" onSubmit={handleSubmit}>
+    <form className="search-form-product" onSubmit={handleSubmit}>
       <input
-        className="search-input"
+        className="search-input-product"
         type="text"
         placeholder="Search..."
         value={query}
         onChange={handleInputChange}
       />
       <button className="search-button" type="submit">
-        <img src="/img/ecommerce/search.svg"/>
+        <img src="/img/ecommerce/search-black.svg"/>
       </button>
     </form>
   );

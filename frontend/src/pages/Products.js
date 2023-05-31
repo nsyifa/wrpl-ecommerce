@@ -8,12 +8,9 @@ import ProductCard from "../components/ui/ProductCard";
 import { Link } from "react-router-dom";
 // import { productData } from "../constants/productData";
 const imageArray = [
-  "/img/batman.jpg",
-  "/img/barbie.jpeg",
-  "/img/harrypotter.jpg",
-  "/img/princess.jpg",
-  "/img/batman.jpg",
-  "/img/mlp.jpg",
+  "/img/ecommerce/clothes.jpg", 
+  "/img/ecommerce/cosmetics.jpg", 
+  "/img/ecommerce/parfume.jpg"
 ];
 function Products({
   filter = {
@@ -231,7 +228,8 @@ function Products({
               >
                 <ProductCard
                   product={product}
-                  image={imageArray[index % 6]}
+                  image={product.category == "perfume" ? imageArray[2] : 
+                         (product.category == "cosmetic" ? imageArray[1] : imageArray[0]) }
                   key={product.product_id}
                 />
               </Link>
