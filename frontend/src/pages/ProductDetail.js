@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Rating from "@mui/material/Rating";
 import { useLocation, Link } from "react-router-dom";
 import ProductImageGallery from "../components/ProductImageGallery";
@@ -29,56 +29,28 @@ const ProductDetail = ({ user }) => {
     window.alert("Added to cart!");
   }
 
+  const objectRef = useRef(null);
+  useEffect(() => {
+    const objectElement = objectRef.current;
+    const objectPosition = objectElement.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const objectHeight = objectPosition.height;
+
+    const scrollToPosition =
+      objectPosition.top - 50;
+
+    window.scrollTo({
+      top: scrollToPosition,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
-    <div className="product-detail-wrapper">
+    <div className="product-detail-wrapper" ref={objectRef}>
       <div className="product-image-desc">
         <div className="pd-left-col">
           <div className="image-gallery-wrapper">
             <ProductImageGallery />
-          </div>
-          <div className="quantity-cart-wrapper">
-            {" "}
-            <Quantity
-              quantity={quantity}
-              stock={product.stock}
-              updateQuantity={updateQuantity}
-            />
-            {user.cust_id ? (
-              <button
-                className="pd-cart-button"
-                onClick={() => handleAddCart(quantity)}
-              >
-                <img src="/icons/pd-cart.svg" />
-                Add to Cart
-              </button>
-            ) : (
-              <Link
-                style={{ textDecoration: "none" }}
-                replace={true}
-                to="/login"
-              >
-                <button className="pd-cart-button">
-                  <img src="/icons/pd-cart.svg" />
-                  Add to Cart
-                </button>
-              </Link>
-            )}
-            {user.cust_name ? (
-              <button
-                className="pd-buy-button"
-                // onClick={() => handleAddCart(quantity)}
-              >
-                Buy Now
-              </button>
-            ) : (
-              <Link
-                style={{ textDecoration: "none" }}
-                replace={true}
-                to="/login"
-              >
-                <button className="pd-buy-button">Buy Now</button>
-              </Link>
-            )}
           </div>
         </div>
 
@@ -94,10 +66,11 @@ const ProductDetail = ({ user }) => {
               precision={0.1}
               size="medium"
               readOnly
+              sx = {{color: "#CE7777"}}
             />
             <p>|</p>
             <p>
-              <b>{randomSales.current}</b> people bought this
+              <b>{randomSales.current}</b> terjual
             </p>
           </div>
           <div className="price-share-wrapper">
@@ -106,6 +79,77 @@ const ProductDetail = ({ user }) => {
             <img src="/icons/pd-like.svg" />
           </div>
 
+          <hr></hr>
+          <div className="variance-wrapper">
+            <p className="variance-title">Variansi</p>
+            <div className="variance-size-wrapper">
+              <p>Ukuran</p>
+              <button className = "variance-btn">
+                15ml
+              </button>
+              <button className = "variance-btn">
+                30ml
+              </button>
+              <button className = "variance-btn">
+                50ml
+              </button>
+            </div>
+          </div>
+          <div className="quantity-cart-wrapper">
+            {" "}
+            <Quantity
+              quantity={quantity}
+              stock={product.stock}
+              updateQuantity={updateQuantity}
+            />
+
+            <div className="chat-cart-buy-wrapper">
+              <button className = "pd-chat-button">
+                <img src = "/img/ecommerce/chat.svg" />
+                Chat
+              </button>
+              {user.cust_id ? (
+                <button
+                  className="pd-cart-button"
+                  onClick={() => handleAddCart(quantity)}
+                >
+                  <img src="/img/ecommerce/icon-cart-btn.svg" />
+                  Tambahkan ke keranjang
+                </button>
+              ) : (
+                <Link
+                  style={{ textDecoration: "none" }}
+                  replace={true}
+                  to="/login"
+                >
+                  <button className="pd-cart-button">
+                    <img src="/img/ecommerce/icon-cart-btn.svg" />
+                    Tambahkan ke keranjang
+                  </button>
+                </Link>
+              )}
+              {user.cust_name ? (
+                <button
+                  className="pd-buy-button"
+                  // onClick={() => handleAddCart(quantity)}
+                >
+                  Beli sekarang
+                </button>
+              ) : (
+                <Link
+                  style={{ textDecoration: "none" }}
+                  replace={true}
+                  to="/login"
+                >
+                  <button className="pd-buy-button">Beli sekarang</button>
+                </Link>
+              )}
+            </div>
+            
+          </div>
+        </div>
+
+        <div className="pd-bottom-row">
           <hr />
           <p className="description-heading">Description</p>
           <p className="pd-description">{product.description}</p>

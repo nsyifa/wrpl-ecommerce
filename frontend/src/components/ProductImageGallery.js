@@ -4,32 +4,16 @@ import ImageGallery from "react-image-gallery";
 
 const images = [
   {
-    original: "/img/product-detail-sample/1.jpg",
-    thumbnail: "/img/product-detail-sample/1.jpg",
+    original: "/img/ecommerce/product-detail-sample/1.jpg",
+    thumbnail: "/img/ecommerce/product-detail-sample/1.jpg",
   },
   {
-    original: "/img/product-detail-sample/2.jpg",
-    thumbnail: "/img/product-detail-sample/2.jpg",
+    original: "/img/ecommerce/product-detail-sample/2.jpeg",
+    thumbnail: "/img/ecommerce/product-detail-sample/2.jpeg",
   },
   {
-    original: "/img/product-detail-sample/3.jpg",
-    thumbnail: "/img/product-detail-sample/3.jpg",
-  },
-  {
-    original: "/img/product-detail-sample/4.jpg",
-    thumbnail: "/img/product-detail-sample/4.jpg",
-  },
-  {
-    original: "/img/product-detail-sample/5.jpg",
-    thumbnail: "/img/product-detail-sample/5.jpg",
-  },
-  {
-    original: "/img/product-detail-sample/6.jpg",
-    thumbnail: "/img/product-detail-sample/6.jpg",
-  },
-  {
-    original: "/img/product-detail-sample/7.jpg",
-    thumbnail: "/img/product-detail-sample/7.jpg",
+    original: "/img/ecommerce/product-detail-sample/3.jpeg",
+    thumbnail: "/img/ecommerce/product-detail-sample/3.jpeg",
   },
 ];
 

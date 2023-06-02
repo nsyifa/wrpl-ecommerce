@@ -1,5 +1,15 @@
+:root {
+  --darkblue: #2b3a55;
+  --darkpink: #CE7777;
+  --mediumpink: #E8C4C4;
+  --lightgrey: #ededed;
+  --softpink: #F2E5E5;
+  --bluegrey: #6D8493;
+  --darkred: #C61E1E;
+}
+
 .reviews-ratings-wrapper {
-  width: 90%;
+  width: 100%;
   margin: auto;
   margin-top: 4em;
   padding: 3em 5em;
@@ -9,11 +19,12 @@
 }
 
 .reviews-title {
-  font-family: "Some Time Later";
-  font-size: 3.5em;
-  color: #fea31b;
+  font-size: 2.5em;
+  font-weight: 600;
+  color: var(--darkpink);
   position: absolute;
-  top: -25px;
+  top: -27px;
+  left: 30px;
   background-color: white;
   padding: 0 0.2em;
 }
@@ -37,16 +48,16 @@
 .big-rating {
   color: white;
   display: flex;
-  background-color: #fea31b;
-  padding: 1em;
-  border-radius: 30px;
+  background-color: var(--darkpink);
+  padding: 1em 4.5em;
+  border-radius: 15px;
   gap: 0.2em;
   flex-direction: column;
   align-items: center;
 }
 
 .big-rating .rating {
-  font-size: 2.2em;
+  font-size: 3em;
   font-weight: bold;
 }
 
@@ -73,10 +84,12 @@
   align-items: center;
   gap: 0.8em;
   justify-content: center;
+  padding-right: 2em;
 }
 
 .add-review-ask {
   font-size: 1.6em;
+  font-weight: 500;
 }
 
 .add-review-bonus {
@@ -84,11 +97,11 @@
 }
 
 .add-review-button {
-  color: #fea31b;
+  color: var(--darkpink);
   font-weight: bold;
   font-size: 1.4em;
   padding: 0.5em 1.5em;
-  border: solid #fea31b 2px;
+  border: solid var(--darkpink) 2px;
   border-radius: 10px;
   margin-top: 0.2em;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
