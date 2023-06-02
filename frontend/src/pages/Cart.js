@@ -5,12 +5,9 @@ import { useGetCustomerCart } from "../services/cart";
 import axios from "axios";
 import "../styles/cart.css";
 const imageArray = [
-  "/img/batman.jpg",
-  "/img/barbie.jpeg",
-  "/img/harrypotter.jpg",
-  "/img/princess.jpg",
-  "/img/batman.jpg",
-  "/img/mlp.jpg",
+  "/img/ecommerce/clothes.jpg", 
+  "/img/ecommerce/cosmetics.jpg", 
+  "/img/ecommerce/parfume.jpg"
 ];
 
 //SELECT ALL IMPLEMENTATION INCOMPLETE
@@ -123,7 +120,8 @@ const Cart = ({ user }) => {
                 return (
                   <ItemRow
                     product={item}
-                    image={imageArray[index % 6]}
+                    image={item.category == "perfume" ? imageArray[2] : 
+                    (item.category == "cosmetic" ? imageArray[1] : imageArray[0]) }
                     checkAll={checkAll}
                     checkedIdPrice={checkedIdPrice}
                     updateCheckedIdPrice={updateCheckedIdPrice}

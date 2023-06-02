@@ -125,7 +125,7 @@ const ItemRow = ({
       <div className="item-information-wrapper">
         <p>{product.product_name.replace(/[^\w\s]/gi, "")}</p>
         <p>{capitalizeFirst(product.category)}</p>
-        <p>{product.weight / 100 + " kg/item"}</p>
+        {/* <p>{product.weight / 100 + " kg/item"}</p> */}
         <p>{"Rp " + parseInt(product.price).toLocaleString()}</p>
       </div>
       <CartQuantity quantity={quantity} updateQuantity={updateQuantity} />
