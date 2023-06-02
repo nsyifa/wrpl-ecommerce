@@ -290,3 +290,80 @@ hr {
   font-size: 1.2em;
   list-style-position: inside;
 }
+
+.pd-seller-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 4em;
+  border: 1px solid var(--bluegrey);
+  border-radius: 10px;
+  padding: 1.5em 2em;
+  margin-bottom: 2em;
+}
+
+.pd-seller {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 1.5em;
+  gap: 0.7em;
+}
+
+.seller-name {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.pd-seller-btn {
+  padding: 0.5em 2em;
+  background-color: var(--darkblue);
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  width: max-content;
+  font-size: 0.9em;
+}
+
+.pd-seller-btn:hover {
+  scale: 1.03;
+}
+
+.pd-seller-information {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  left: 20em;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.pd-seller-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0 1.5em;
+}
+
+.operasional {
+  border: none;
+}
+
+.col-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 2em;
+  gap: 0.5em;
+}
+
+.col-top img {
+  width: 25px;
+  height: 25px;
+}
+
+.col-top p {
+  font-weight: 600;
+  font-size: 1.4em;
+}

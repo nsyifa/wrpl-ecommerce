@@ -45,6 +45,7 @@ const ProductDetail = ({ user }) => {
     });
   }, []);
 
+  console.log(product.product_id);
   return (
     <div className="product-detail-wrapper" ref={objectRef}>
       <div className="product-image-desc">
@@ -155,21 +156,56 @@ const ProductDetail = ({ user }) => {
           <hr />
           <p className="description-heading">Description</p>
           <p className="pd-description">{product.description}</p>
-          {/* <ul className="pd-description-list">
-            <li>
-              Arcu cursus vitae congue mauris rhoncus aenean vel elit
-              scelerisque.
-            </li>
-            <li>
-              Accumsan sit amet nulla facilisi morbi tempus iaculis urna id.
-            </li>
-            <li>Dui sapien eget mi proin sed libero enim sed faucibus.</li>
-            <li>Facilisis gravida neque convallis a cras semper auctor.</li>
-            <li>
-              Justo eget magna fermentum iaculis eu non. Nisi lacus sed viverra
-              tellus in.
-            </li>
-          </ul> */}
+          
+          <div className = "pd-seller-container">
+            {product.product_id.startsWith("P") ? <img src = "/img/ecommerce/effe.svg"/> : 
+            (product.product_id.startsWith("F") ? <img src = "/img/ecommerce/zalya.svg" /> : <img src = "/img/ecommerce/lumiere.svg" />)}
+
+            <div className = "pd-seller">
+              <p className = "seller-name">
+              {product.product_id.startsWith("P") ? "EFFE" : 
+              (product.product_id.startsWith("F") ? "ZALYA" : "LUMIERE")}
+              </p>
+              
+
+              <p>Aktif 15 menit yang lalu</p>
+              <button className="pd-seller-btn">Kunjungi toko</button>
+            </div>
+
+            <div className = "pd-seller-information">
+              <div className = "pd-seller-col rating">
+                <div className = "col-top">
+                  <img src = "/img/ecommerce/star.svg" />
+                  <p>4.8</p>
+                </div>
+                <p className="col-bottom">Penilaian</p>
+              </div>
+
+              <div className = "pd-seller-col count">
+                <div className = "col-top">
+                  <img src = "/img/ecommerce/bag.svg" />
+                  <p>100</p>
+                </div>
+                <p className="col-bottom">Jumlah Produk</p>
+              </div>
+
+              <div className = "pd-seller-col chat">
+                <div className = "col-top">
+                  <img src = "/img/ecommerce/seller-chat.svg" />
+                  <p>97%</p>
+                </div>
+                <p className="col-bottom">Performa Chat</p>
+              </div>
+
+              <div className = "pd-seller-col operasional">
+                <div className = "col-top">
+                  <img src = "/img/ecommerce/toko.svg" />
+                  <p>24 JAM</p>
+                </div>
+                <p className="col-bottom">Jam Operasional Toko</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <ReviewsRatings
