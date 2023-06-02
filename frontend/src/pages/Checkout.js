@@ -11,7 +11,11 @@ import { cityData } from "../constants/cityData";
 import { provinceData } from "../constants/provinceData";
 import {
   useGetCustomerFromCustId,
+  updateCustomerCity,
+  useGetAllSellers,
   getLatestOrder,
+  getTransactionToken,
+  getTransactionTokenAll,
   getLatestPayment,
   getAllShippers,
   insertPayment,
@@ -27,11 +31,24 @@ const imageArray = [
   "/img/batman.jpg",
   "/img/mlp.jpg",
 ];
-const rajaongkir_api_key = "cebede57946ae90275354d457c56888a";
 // each seller's product id's unique identifier. P = Effe, C = Lumiere, F = Zalya.
 const sellerProductId = ["C", "F", "P"];
+const sellerNames = ["Lumiere", "Zalya", "Effe"];
 
 const Checkout = ({ user }) => {
+  // midtrans snap initiation
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://app.sandbox.midtrans.com/snap/snap.js";
+    script.setAttribute("data-client-key", " 	SB-Mid-client-qRblT6mkL5qyO3HK");
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   // get products from cart
   const { state } = useLocation();
   const products = state;
@@ -43,6 +60,13 @@ const Checkout = ({ user }) => {
   // get customer data
   const { data: customerFetch } = useGetCustomerFromCustId(user);
   const [customer, setCustomer] = useState(user);
+
+  // set state for customer address
+  const [currentAddress, setCurrentAddress] = useState();
+
+  // get seller data
+  const { data: sellersFetch } = useGetAllSellers();
+  const [sellers, setSellers] = useState();
 
   // set province and city
   const [currentProvince, setCurrentProvince] = useState();
@@ -77,11 +101,13 @@ const Checkout = ({ user }) => {
     0
   );
 
+  // define province select options
   const provinceOptions = provinceData.map((data) => ({
     value: data.province_id,
     label: data.province,
   }));
 
+  // define shipping company / courier options
   const shippingOptions = [
     { value: "jne", label: "JNE" },
     { value: "pos", label: "POS Indonesia" },
@@ -90,6 +116,7 @@ const Checkout = ({ user }) => {
 
   useEffect(() => {
     console.log(currentProvince);
+    // if current province is chosen, show the dropdown for cities for that province
     if (currentProvince?.value) {
       const cityOptions = cityData
         .filter((data) => data.province_id === currentProvince.value)
@@ -106,12 +133,45 @@ const Checkout = ({ user }) => {
     setPaymentMethod(new_pay_method);
   }
 
+  // set seller to fetched seller data from database
+  useEffect(() => {
+    if (sellersFetch && sellersFetch.length > 0) {
+      setSellers(sellersFetch);
+    }
+  }, [sellersFetch]);
+
   useEffect(() => {
     if (customerFetch && customerFetch.length > 0) {
+      // set initial city and province to data from customer database if they are not empty
       setCustomer(customerFetch[0][0]);
+      if (customerFetch[0][0].city) {
+        const cityProvince = {
+          value: cityData.find(
+            (city) => city.city_name === customerFetch[0][0].city
+          ).province_id,
+          label: cityData.find(
+            (city) => city.city_name === customerFetch[0][0].city
+          ).province,
+        };
+        console.log("SUP", cityProvince);
+        setCurrentProvince(cityProvince);
+        setCurrentCity({
+          value: cityData.find(
+            (city) => city.city_name === customerFetch[0][0].city
+          ).city_id,
+          label: customerFetch[0][0].city,
+        });
+      }
     }
   }, [customerFetch]);
 
+  // change handler for city dropdown
+  const handleCurrentCityChange = async (currentCity) => {
+    setCurrentCity(currentCity);
+    const res = await updateCustomerCity(user, currentCity.label);
+  };
+
+  // change handler for shipping service type dropdown
   function handleCurrentShippingTypesChange(event, index) {
     const shipType = JSON.parse(event.target.value);
     setCurrentShippingTypes((prevShippingTypes) => {
@@ -127,17 +187,20 @@ const Checkout = ({ user }) => {
     console.log("Shipping", currentShippingTypes);
   }
 
+  // get shipping info from rajaongkir
   async function handleGetShipping(index) {
     if (currentCity && currentProvince && currentShipping) {
       const weight = productsBySeller[index].reduce(
         (acc, item) => acc + item.weight,
         0
       );
+
+      const sellerCityId = getSellerCityId(index);
       const rajaOngkirRes = await axios.post(
         "http://localhost:8086/api/shipping/rajaongkir",
         {
-          origin: currentCity.value,
-          destination: "419",
+          origin: sellerCityId,
+          destination: currentCity.value,
           weight: weight,
           courier: currentShipping.value,
         }
@@ -148,6 +211,15 @@ const Checkout = ({ user }) => {
         newShippings[index] = rajaOngkirRes.data.rajaongkir.results[0].costs; // Modify the desired subarray
         return newShippings; // Update the state with the modified copy
       });
+    }
+  }
+
+  function getSellerCityId(index) {
+    if (sellers) {
+      const sellerCityId = cityData.find(
+        (city) => city.city_name === sellers[index].city
+      ).city_id;
+      return sellerCityId;
     }
   }
 
@@ -199,6 +271,125 @@ const Checkout = ({ user }) => {
     }
   }
 
+  async function handleBayar(index) {
+    const latest_order = await (await getLatestOrder()).data[0][0];
+    let order_number =
+      parseInt(latest_order.order_number.replace("OR", "")) + 1;
+    order_number = "OR" + order_number;
+    const total_cost =
+      productsBySeller[index].reduce((acc, item) => acc + item.price, 0) +
+      currentShippingTypes[index].cost;
+    console.log(productsBySeller[index].concat(currentShippingTypes[index]));
+    const transaction_info = {
+      order_id: order_number,
+      gross_amount: total_cost,
+      items: productsBySeller[index].concat(currentShippingTypes[index]),
+      cust_first_name: customer.first_name,
+      cust_last_name: customer.last_name,
+      cust_email: customer.email,
+      cust_phone: customer.phone,
+      cust_address: currentAddress,
+      cust_city: currentCity.label,
+      cust_postal_code: cityData.find(
+        (city) => city.city_id === currentCity.value
+      ).postal_code,
+      seller_id: sellers.find(
+        (seller) => sellerNames[index] === seller.seller_name
+      ).seller_id,
+      seller_name: sellerNames[index],
+      seller_address: sellers[index].address,
+      seller_city: sellers[index].city,
+      seller_postal_code: cityData.find(
+        (city) => city.city_name === sellers[index].city
+      ).postal_code,
+    };
+    const trans_data = await getTransactionToken(transaction_info);
+  }
+
+  const isPayValid = () => {
+    const valid =
+      ((productsBySeller[0].length > 0 &&
+        currentShippingTypes[0]?.service.length > 0) ||
+        !productsBySeller[0].length > 0) &&
+      ((productsBySeller[1].length > 0 &&
+        currentShippingTypes[1]?.service.length > 0) ||
+        !productsBySeller[1].length > 0) &&
+      ((productsBySeller[2].length > 0 &&
+        currentShippingTypes[2]?.service.length > 0) ||
+        !productsBySeller[2].length > 0);
+    return valid;
+  };
+
+  async function handlePayment() {
+    console.log(isPayValid());
+    if (isPayValid()) {
+      const latest_order = await (await getLatestOrder()).data[0][0];
+      let order_number =
+        parseInt(latest_order.order_number.replace("OR", "")) - 9000 + 9;
+      order_number = "OR" + order_number;
+      // const total_cost =
+      //   products.reduce((acc, item) => acc + item.price, 0) +
+      //   currentShippingTypes.reduce((acc, shipping) => acc + shipping.cost, 0);
+      const items = [];
+      for (let j = 0; j < productsBySeller.length; j++) {
+        if (productsBySeller[j].length > 0) {
+          const curr_items = productsBySeller[j]
+            .map((item) => ({
+              id: item.product_id,
+              price: item.unit_price,
+              quantity: item.quantity,
+              name: item.product_name.replace(/[^\w\s]/gi, "").slice(0, 50),
+              brand: item.brand,
+              merchant: sellerNames[j],
+              category: item.category,
+            }))
+            .concat([
+              {
+                id: `shipping-${sellerNames[j].toLowerCase()}`,
+                price: currentShippingTypes[j].cost,
+                name: currentShippingTypes[j].description,
+                quantity: 1,
+              },
+            ]);
+          for (let i = 0; i < curr_items.length; i++) {
+            items.push(curr_items[i]);
+          }
+        }
+      }
+      console.log(items);
+      const total_cost = items.reduce(
+        (acc, item) => acc + item.price * item.quantity,
+        0
+      );
+      const transaction_info = {
+        order_id: order_number,
+        gross_amount: total_cost,
+        items: items,
+        cust_first_name: customer.first_name,
+        cust_last_name: customer.last_name,
+        cust_email: customer.email,
+        cust_phone: customer.phone,
+        cust_address: currentAddress,
+        cust_city: currentCity.label,
+        cust_postal_code: cityData.find(
+          (city) => city.city_id === currentCity.value
+        ).postal_code,
+      };
+      const trans = await getTransactionTokenAll(transaction_info);
+      const token = trans.data?.token;
+      console.log("token", token);
+      if (token) {
+        window.snap.pay(token, {
+          onSuccess: (result) => {
+            console.log(result);
+            navigate("/", { replace: true }); // this one doesnt always work?????????
+            // window.location.replace("/");
+          },
+        });
+      }
+    }
+  }
+
   return (
     <div className="checkout-container">
       <img className="wave-cart-header" src="img/wave/Rectangle 44.png"></img>
@@ -206,7 +397,12 @@ const Checkout = ({ user }) => {
       <div className="checkout-content-container">
         <div className="checkout-address-wrapper">
           <div className="checkout-address-container">
-            <CheckoutAddress user={customer} />
+            <CheckoutAddress
+              user={customer}
+              handleAddressChange={(newAddress) =>
+                setCurrentAddress(newAddress)
+              }
+            />
 
             {/* reminder: the select components select the id value, NOT name */}
             <Select
@@ -223,7 +419,7 @@ const Checkout = ({ user }) => {
                 menuPortalTarget={document.body}
                 styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
                 value={currentCity}
-                onChange={(newCity) => setCurrentCity(newCity)}
+                onChange={handleCurrentCityChange}
                 options={availableCities}
                 isSearchable={true}
                 placeholder="Masukkan kota Anda..."
@@ -233,23 +429,10 @@ const Checkout = ({ user }) => {
             )}
           </div>
           <div className="checkout-list-wrapper">
-            {/* <h2>Products</h2>
-            {products && products.length > 0 ? (
-              products.map((item, index) => {
-                return (
-                  <CheckoutItemRow
-                    product={item}
-                    image={imageArray[index % 6]}
-                  />
-                );
-              })
-            ) : (
-              <p className="no-items-cart">No items in cart</p>
-            )} */}
             {productsBySeller.map((sellerProducts, index1) =>
               sellerProducts.length > 0 ? (
                 <div key={`pesanan-${index1}`}>
-                  <h2>{`Pesanan ${index1 + 1}`}</h2>
+                  <h2>{`Pesanan Toko ${sellerNames[index1]}`}</h2>
                   {sellerProducts.map((item, index2) => (
                     <CheckoutItemRow
                       key={`checkout-item-${index2}`}
@@ -280,10 +463,6 @@ const Checkout = ({ user }) => {
                         ))}
                       </select>
                       <div>
-                        {/* Selected option:{" "}
-                            {currentShippingTypes[index1].cost[0].value +
-                              "etd: " +
-                              currentShippingTypes[index1].cost[0].etd} */}
                         {currentShippingTypes[index1].service ? (
                           <React.Fragment>
                             <p>
@@ -306,6 +485,18 @@ const Checkout = ({ user }) => {
                           ""
                         )}
                       </div>
+                    </div>
+                  ) : null}
+                  {currentShippingTypes[index1].service ? (
+                    <div>
+                      {"Total: Rp " +
+                        (
+                          productsBySeller[index1].reduce(
+                            (acc, item) => acc + item.price,
+                            0
+                          ) + currentShippingTypes[index1].cost
+                        ).toLocaleString()}
+                      {/* <button onClick={() => handleBayar(index1)}>Bayar</button> */}
                     </div>
                   ) : null}
                 </div>
@@ -335,7 +526,7 @@ const Checkout = ({ user }) => {
                 {"$" + (total_product_price + 10).toFixed(2)}
               </p>
             </div>
-            <button className="order-pay-button" onClick={handlePay}>
+            <button className="order-pay-button" onClick={handlePayment}>
               Pay
             </button>
           </div>

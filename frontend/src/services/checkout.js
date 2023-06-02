@@ -28,10 +28,29 @@ export const useGetCustomerFromCustId = (user) => {
   return { data: customer, error: error };
 };
 
+export const useGetAllSellers = () => {
+  const [sellers, setSellers] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8085/api/ecommerce/sellers`, {})
+      .then((res) => {
+        if (!res.data) throw new Error("error on get seller info");
+        setSellers(res.data ? res.data : "");
+      })
+      .catch((err) => {
+        setError(err);
+      });
+  }, []);
+
+  return { data: sellers, error: error };
+};
+
 export const updateCustomerAddress = async (user, new_address) => {
   try {
     const res = await axios.put(
-      "http://localhost:8080/api/data/customer/address/update",
+      "http://localhost:8081/api/customer/address/update",
       null,
       {
         params: {
@@ -41,6 +60,183 @@ export const updateCustomerAddress = async (user, new_address) => {
       }
     );
     if (!res.data.ok) throw new Error(res.data.error);
+
+    return {
+      ok: true,
+      data: res.data,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
+};
+
+export const updateCustomerCity = async (user, new_city) => {
+  try {
+    const res = await axios.put(
+      "http://localhost:8081/api/customer/city/update",
+      null,
+      {
+        params: {
+          cust_id: user.cust_id,
+          new_city: new_city,
+        },
+      }
+    );
+    if (!res.data.ok) throw new Error(res.data.error);
+
+    return {
+      ok: true,
+      data: res.data,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
+};
+
+export const getTransactionToken = async (transaction_info) => {
+  const shipping_item =
+    transaction_info.items[transaction_info.items.length - 1];
+  const data = {
+    transaction_details: {
+      order_id: transaction_info.order_id,
+      gross_amount: transaction_info.gross_amount,
+    },
+    credit_card: {
+      secure: true,
+    },
+    item_details: transaction_info.items
+      .slice(0, -1)
+      .map((item) => ({
+        id: item.product_id,
+        price: item.unit_price,
+        quantity: item.quantity,
+        name: item.product_name.replace(/[^\w\s]/gi, "").slice(0, 50),
+        brand: item.brand,
+        category: item.category,
+      }))
+      .concat([
+        {
+          id: "shipping",
+          price: shipping_item.cost,
+          name: shipping_item.description,
+          quantity: 1,
+        },
+      ]),
+    customer_details: {
+      first_name: transaction_info.cust_first_name,
+      last_name: transaction_info.cust_last_name,
+      email: transaction_info.cust_email,
+      phone: transaction_info.cust_phone,
+      billing_address: {
+        first_name: transaction_info.cust_first_name,
+        last_name: transaction_info.cust_last_name,
+        email: transaction_info.cust_email,
+        phone: transaction_info.cust_phone,
+        address: transaction_info.cust_adress,
+        city: transaction_info.cust_city,
+        postal_code: transaction_info.cust_postal_code,
+        country_code: "IDN",
+      },
+      shipping_address: {
+        first_name: transaction_info.cust_first_name,
+        last_name: transaction_info.cust_last_name,
+        email: transaction_info.cust_email,
+        phone: transaction_info.cust_phone,
+        address: transaction_info.cust_adress,
+        city: transaction_info.cust_city,
+        postal_code: transaction_info.cust_postal_code,
+        country_code: "IDN",
+      },
+    },
+    seller_details: {
+      id: transaction_info.seller_id,
+      name: transaction_info.seller_name,
+      email: "placeholder@email.com",
+      url: "https://placeholderurl.com",
+      address: {
+        first_name: "Placeholder",
+        last_name: "Name",
+        phone: "0811111111111",
+        address: transaction_info.seller_address,
+        city: transaction_info.seller_city,
+        postal_code: transaction_info.seller_postal_code,
+        country_code: "IDN",
+      },
+    },
+  };
+  console.log("gross", data.transaction_details.gross_amount);
+  console.log("items", data.item_details);
+  try {
+    const res = await axios.post(
+      "http://localhost:8085/api/ecommerce/transaction",
+      data
+    );
+    console.log(res);
+
+    if (!res.data) throw new Error(res.data.error);
+
+    return {
+      ok: true,
+      data: res.data,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
+};
+
+export const getTransactionTokenAll = async (transaction_info) => {
+  const data = {
+    transaction_details: {
+      order_id: transaction_info.order_id,
+      gross_amount: transaction_info.gross_amount,
+    },
+    credit_card: {
+      secure: true,
+    },
+    item_details: transaction_info.items,
+    customer_details: {
+      first_name: transaction_info.cust_first_name,
+      last_name: transaction_info.cust_last_name,
+      email: transaction_info.cust_email,
+      phone: transaction_info.cust_phone,
+      billing_address: {
+        first_name: transaction_info.cust_first_name,
+        last_name: transaction_info.cust_last_name,
+        email: transaction_info.cust_email,
+        phone: transaction_info.cust_phone,
+        address: transaction_info.cust_adress,
+        city: transaction_info.cust_city,
+        postal_code: transaction_info.cust_postal_code,
+        country_code: "IDN",
+      },
+      shipping_address: {
+        first_name: transaction_info.cust_first_name,
+        last_name: transaction_info.cust_last_name,
+        email: transaction_info.cust_email,
+        phone: transaction_info.cust_phone,
+        address: transaction_info.cust_adress,
+        city: transaction_info.cust_city,
+        postal_code: transaction_info.cust_postal_code,
+        country_code: "IDN",
+      },
+    },
+  };
+  console.log("gross", data.transaction_details.gross_amount);
+  console.log("items", data.item_details);
+  try {
+    const res = await axios.post(
+      "http://localhost:8085/api/ecommerce/transaction",
+      data
+    );
+    console.log(res);
+
+    if (!res.data) throw new Error(res.data.error);
 
     return {
       ok: true,
@@ -75,7 +271,7 @@ export const getLatestPayment = async () => {
 export const getLatestOrder = async () => {
   try {
     const res = await axios.get(
-      "http://localhost:8080/api/data/orders/latest",
+      "http://localhost:8085/api/ecommerce/order/latest",
       null
     );
     if (!res.data) throw new Error(res.data.error);

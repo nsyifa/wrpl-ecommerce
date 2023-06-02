@@ -17,7 +17,7 @@ const modalStyles = {
     borderRadius: "10px",
   },
 };
-const CheckoutAddress = ({ user }) => {
+const CheckoutAddress = ({ user, handleAddressChange }) => {
   const [address, setAddress] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -44,6 +44,7 @@ const CheckoutAddress = ({ user }) => {
     event.preventDefault();
     console.log(`Input value: ${inputValue}`);
     setAddress(inputValue);
+    handleAddressChange(inputValue);
     const res = await updateCustomerAddress(user, inputValue);
     closeModal();
   }
