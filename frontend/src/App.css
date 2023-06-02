@@ -40,8 +40,10 @@ header {
   z-index: 100;
 }
 .home-container {
-  margin-bottom: 50px;
+  margin-top: 2em;
+  margin-bottom: 8em;
   width: 100%;
+  padding: 0 4em;
 }
 
 .nav-area {

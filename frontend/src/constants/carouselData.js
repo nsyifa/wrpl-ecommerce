@@ -1,61 +1,5 @@
 export const carouselData = [
   {
-    title: "by age",
-    sections: [
-      {
-        image: "/img/0-2.jpg",
-        desc: "0-2 years",
-      },
-      {
-        image: "./img/5-7.png",
-        desc: "3-6 years",
-      },
-      {
-        image: "./img/8-10.jpg",
-        desc: "7-10 years",
-      },
-      {
-        image: "./img/10.jpg",
-        desc: "10+ years",
-      },
-    ],
-  },
-  {
-    title: "by character",
-    button: "Shop All Characters",
-    color: "#fea31b",
-    sections: [
-      {
-        image: "./img/marvel.jpg",
-        desc: "Action figures & playsets",
-      },
-      {
-        image: "./img/category/baby-learning.jpg",
-        desc: "Baby, toddler, and preschool learning toys",
-      },
-      {
-        image: "./img/category/blocks.jpg",
-        desc: "Building sets and blocks",
-      },
-      {
-        image: "./img/category/dolls.jpg",
-        desc: "Dolls, collectibles, and stuffed animals",
-      },
-      {
-        image: "./img/category/puzzle.jpg",
-        desc: "Games & puzzles",
-      },
-      {
-        image: "./img/category/crafts.jpg",
-        desc: "Kids arts and crafts",
-      },
-      {
-        image: "./img/category/vehicles.jpg",
-        desc: "Vehicles and remote controls",
-      },
-    ],
-  },
-  {
     title: "by brand",
     button: "Shop All Brands",
     color: "#FE1B1B",
@@ -63,30 +7,37 @@ export const carouselData = [
       {
         image: "./img/landing-page-reverie/drunkelephant.png",
         desc: "Drunk Elephant",
+        url: "/products/drunk-elephant"
       },
       {
         image: "./img/landing-page-reverie/fresh.png",
         desc: "Fresh",
+        url: "/products/fresh"
       },
       {
         image: "./img/landing-page-reverie/lamer.png",
         desc: "La Mer",
+        url: "/products/la-mer"
       },
       {
         image: "./img/landing-page-reverie/laneige.png",
         desc: "Laneige",
+        url: "/products/laneige"
       },
       {
         image: "./img/landing-page-reverie/skii.png",
         desc: "SK-II",
+        url: "/products/sk-ii"
       },
       {
         image: "./img/landing-page-reverie/sundayriley.png",
         desc: "Sunday Riley",
+        url: "/products/sunday-riley"
       },
       {
         image: "./img/landing-page-reverie/tatcha.png",
         desc: "Tatcha",
+        url: "/products/tatcha"
       },
     ],
   },
