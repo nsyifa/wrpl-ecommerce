@@ -104,3 +104,32 @@ exports.updateCustomerAddress = (req, res) => {
     }
   );
 };
+
+exports.updateCustomerCity = (req, res) => {
+  // Validate Request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!",
+    });
+  }
+
+  console.log(req.body);
+
+  Database.updateCustomerCity(
+    req.query.cust_id,
+    req.query.new_city,
+    (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found customer with cust_id ${req.query.cust_id}.`,
+          });
+        } else {
+          res.status(500).send({
+            message: `Error updating customer with cust_id ${req.query.cust_id}.`,
+          });
+        }
+      } else res.send(data);
+    }
+  );
+};

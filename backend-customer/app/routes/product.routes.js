@@ -13,7 +13,9 @@ module.exports = (app) => {
 
   router.get("/customers/cust_id", database.getCustomerByCustId);
 
-  router.put("/customer/address/update", database.updateCustomerAddress);
+  router.put("/address/update", database.updateCustomerAddress);
+
+  router.put("/city/update", database.updateCustomerCity);
 
   app.use("/api/customer", router);
 };

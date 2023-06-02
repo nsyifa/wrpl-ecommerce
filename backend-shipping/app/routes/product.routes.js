@@ -5,9 +5,11 @@ module.exports = (app) => {
 
   // Retrieve all Products
 
-  router.get("/snap", database.getSnap);
-
   router.post("/rajaongkir", database.getShippingInfo);
+
+  router.get("/latest", database.getLatestShipping);
+
+  router.post("/create", database.insertShipping);
 
   app.use("/api/shipping", router);
 };

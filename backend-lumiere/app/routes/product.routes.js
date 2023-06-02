@@ -6,5 +6,7 @@ module.exports = (app) => {
   // Retrieve all Products
   router.get("/products", database.getAllProducts);
 
+  router.post("/transaction", database.insertTransaction);
+
   app.use("/api/lumiere", router);
 };

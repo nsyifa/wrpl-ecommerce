@@ -102,4 +102,132 @@ Database.deleteCart = (cust_id, product_id, result) => {
   );
 };
 
+Database.getAllSellers = (result) => {
+  sql.query("SELECT * FROM seller", (err, res) => {
+    if (err) {
+      console.log("error:", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("sellers:", res);
+    result(null, res);
+  });
+};
+
+Database.getLatestOrder = (result) => {
+  sql.query("CALL spGetLatestOrder()", (err, res) => {
+    if (err) {
+      console.log("error:", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("order:", res);
+    result(null, res);
+  });
+};
+
+Database.insertOrder = (
+  order_number,
+  cust_id,
+  total_payment,
+  transaction_id,
+  result
+) => {
+  sql.query(
+    "CALL spInsertOrders(?,?,?,?)",
+    [order_number, cust_id, total_payment, transaction_id],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+
+      console.log("created order: ", {
+        order_number: order_number,
+        cust_id: cust_id,
+        total_payment: total_payment,
+        transaction_id: transaction_id,
+      });
+      result(null, {
+        order_number: order_number,
+        cust_id: cust_id,
+        total_payment: total_payment,
+        transaction_id: transaction_id,
+      });
+    }
+  );
+};
+
+Database.insertOrderPerSeller = (
+  order_number,
+  cust_id,
+  seller_id,
+  shipping_id,
+  payment_amount,
+  result
+) => {
+  sql.query(
+    "CALL spInsertOrderPerSeller(?,?,?,?,?)",
+    [order_number, cust_id, seller_id, shipping_id, payment_amount],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+
+      console.log("created order per seller: ", {
+        order_number: order_number,
+        cust_id: cust_id,
+        seller_id: seller_id,
+        shipping_id: shipping_id,
+        payment_amount: payment_amount,
+      });
+      result(null, {
+        order_number: order_number,
+        cust_id: cust_id,
+        seller_id: seller_id,
+        shipping_id: shipping_id,
+        payment_amount: payment_amount,
+      });
+    }
+  );
+};
+
+Database.insertOrderDetail = (
+  order_number,
+  product_id,
+  quantity,
+  total_price,
+  result
+) => {
+  sql.query(
+    "CALL spInsertOrderDetails(?,?,?,?)",
+    [order_number, product_id, quantity, total_price],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+
+      console.log("created order detail: ", {
+        order_number: order_number,
+        product_id: product_id,
+        quantity: quantity,
+        total_price: total_price,
+      });
+      result(null, {
+        order_number: order_number,
+        product_id: product_id,
+        quantity: quantity,
+        total_price: total_price,
+      });
+    }
+  );
+};
+
 module.exports = Database;

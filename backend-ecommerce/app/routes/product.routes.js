@@ -11,5 +11,17 @@ module.exports = (app) => {
 
   router.delete("/cart/:cust_id/:product_id", database.deleteCart);
 
+  router.get("/sellers", database.getAllSellers);
+
+  router.get("/order/latest", database.getLatestOrder);
+
+  router.post("/transaction", database.getSnap);
+
+  router.post("/order", database.insertOrder);
+
+  router.post("/orderperseller", database.insertOrderPerSeller);
+
+  router.post("/orderdetail", database.insertOrderDetail);
+
   app.use("/api/ecommerce", router);
 };

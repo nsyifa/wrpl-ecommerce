@@ -16,4 +16,54 @@ Database.getAllProducts = (result) => {
   });
 };
 
+Database.insertTransaction = (
+  transaction_id,
+  payment_type,
+  cust_id,
+  product_id,
+  quantity,
+  unit_price,
+  total_price,
+  result
+) => {
+  sql.query(
+    "CALL spInsertTransaction(?,?,?,?,?,?,?)",
+    [
+      transaction_id,
+      payment_type,
+      cust_id,
+      product_id,
+      quantity,
+      unit_price,
+      total_price,
+    ],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+
+      console.log("created transaction: ", {
+        transaction_id: transaction_id,
+        payment_type: payment_type,
+        cust_id: cust_id,
+        product_id: product_id,
+        quantity: quantity,
+        unit_price: unit_price,
+        total_price: total_price,
+      });
+      result(null, {
+        transaction_id: transaction_id,
+        payment_type: payment_type,
+        cust_id: cust_id,
+        product_id: product_id,
+        quantity: quantity,
+        unit_price: unit_price,
+        total_price: total_price,
+      });
+    }
+  );
+};
+
 module.exports = Database;

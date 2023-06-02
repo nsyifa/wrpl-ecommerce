@@ -4,9 +4,8 @@ module.exports = (app) => {
   var router = require("express").Router();
 
   // Retrieve all Products
-  router.get("/products", database.getAllProducts);
 
-  router.post("/transaction", database.insertTransaction);
+  router.post("/create", database.insertPayment);
 
-  app.use("/api/effe", router);
+  app.use("/api/payment", router);
 };

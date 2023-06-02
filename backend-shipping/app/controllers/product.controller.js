@@ -30,39 +30,44 @@ exports.getShippingInfo = (req, res) => {
     });
 };
 
-exports.getSnap = (req, res) => {
-  midtransClient = require("midtrans-client");
-  // Create Snap API instance
-  let snap = new midtransClient.Snap({
-    // Set to true if you want Production Environment (accept real transaction).
-    isProduction: false,
-    serverKey: "SB-Mid-server-vTzqtjNj5C4pEfhGgm0PVsrY",
+exports.getLatestShipping = (req, res) => {
+  Database.getLatestShipping((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving shipping.",
+      });
+    else res.send(data);
   });
+};
 
-  let parameter = {
-    transaction_details: {
-      order_id: "O233",
-      gross_amount: 10000,
-    },
-    credit_card: {
-      secure: true,
-    },
-    customer_details: {
-      first_name: "budi",
-      last_name: "pratama",
-      email: "budi.pra@example.com",
-      phone: "08111222333",
-    },
-  };
-
-  snap.createTransaction(parameter).then((transaction) => {
-    // transaction token
-    let transactionToken = transaction.token;
-    let redirectUrl = transaction.redirect_url;
-    console.log("transactionToken:", transactionToken);
-    res.send({
-      token: transactionToken,
-      redirect_url: redirectUrl,
+exports.insertShipping = (req, res) => {
+  // Validate request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!",
     });
-  });
+  }
+
+  Database.insertShipping(
+    req.body.shipping_number,
+    req.body.shipping_company,
+    req.body.sender_name,
+    req.body.sender_city,
+    req.body.sender_address,
+    req.body.receiver_name,
+    req.body.receiver_city,
+    req.body.receiver_address,
+    req.body.shipping_type,
+    req.body.product_weight,
+    req.body.shipping_fee,
+    (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while inserting shipping.",
+        });
+      else res.send(data);
+    }
+  );
 };

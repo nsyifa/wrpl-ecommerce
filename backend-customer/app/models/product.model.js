@@ -73,7 +73,7 @@ Database.createCustomer = (newCustomer, result) => {
 Database.updateCustomerAddress = (cust_id, new_address, result) => {
   sql.query(
     "CALL spUpdateCustomerAddress(?,?)",
-    [cust_id, new_address],
+    [new_address, cust_id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -82,7 +82,7 @@ Database.updateCustomerAddress = (cust_id, new_address, result) => {
       }
 
       if (res.affectedRows == 0) {
-        // not found Tutorial with the id
+        // not found customer with the id
         result({ kind: "not_found" }, null);
         return;
       }
@@ -94,6 +94,35 @@ Database.updateCustomerAddress = (cust_id, new_address, result) => {
       result(null, {
         cust_id: cust_id,
         address: new_address,
+      });
+    }
+  );
+};
+
+Database.updateCustomerCity = (cust_id, new_city, result) => {
+  sql.query(
+    "CALL spUpdateCustomerCity(?,?)",
+    [new_city, cust_id],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      if (res.affectedRows == 0) {
+        // not found customer with the id
+        result({ kind: "not_found" }, null);
+        return;
+      }
+
+      console.log("updated customer city: ", {
+        cust_id: cust_id,
+        city: new_city,
+      });
+      result(null, {
+        cust_id: cust_id,
+        city: new_city,
       });
     }
   );

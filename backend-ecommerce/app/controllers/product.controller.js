@@ -95,3 +95,117 @@ exports.deleteCart = (req, res) => {
     }
   );
 };
+
+exports.getAllSellers = (req, res) => {
+  Database.getAllSellers((err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving sellers.",
+      });
+    else res.send(data);
+  });
+};
+
+exports.getLatestOrder = (req, res) => {
+  Database.getLatestOrder((err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving order.",
+      });
+    else res.send(data);
+  });
+};
+
+exports.getSnap = (req, res) => {
+  midtransClient = require("midtrans-client");
+  // Create Snap API instance
+  let snap = new midtransClient.Snap({
+    // Set to true if you want Production Environment (accept real transaction).
+    isProduction: false,
+    serverKey: "SB-Mid-server-vTzqtjNj5C4pEfhGgm0PVsrY",
+  });
+
+  snap.createTransaction(req.body).then((transaction) => {
+    // transaction token
+    let transactionToken = transaction.token;
+    let redirectUrl = transaction.redirect_url;
+    console.log("transactionToken:", transactionToken);
+    res.send({
+      token: transactionToken,
+      redirect_url: redirectUrl,
+    });
+  });
+};
+
+exports.insertOrder = (req, res) => {
+  // Validate request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!",
+    });
+  }
+
+  Database.insertOrder(
+    req.body.order_number,
+    req.body.cust_id,
+    req.body.total_payment,
+    req.body.transaction_id,
+    (err, data) => {
+      if (err)
+        res.status(500).send({
+          message: err.message || "Some error occurred while inserting order.",
+        });
+      else res.send(data);
+    }
+  );
+};
+
+exports.insertOrderPerSeller = (req, res) => {
+  // Validate request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!",
+    });
+  }
+
+  Database.insertOrderPerSeller(
+    req.body.order_number,
+    req.body.cust_id,
+    req.body.seller_id,
+    req.body.shipping_id,
+    req.body.payment_amount,
+    (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message ||
+            "Some error occurred while inserting order per seller.",
+        });
+      else res.send(data);
+    }
+  );
+};
+
+exports.insertOrderDetail = (req, res) => {
+  // Validate request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!",
+    });
+  }
+
+  Database.insertOrderDetail(
+    req.body.order_number,
+    req.body.product_id,
+    req.body.quantity,
+    req.body.total_price,
+    (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while inserting order detail.",
+        });
+      else res.send(data);
+    }
+  );
+};
