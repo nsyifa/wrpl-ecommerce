@@ -109,13 +109,15 @@ const ProductDetail = ({ user }) => {
                 Chat
               </button>
               {user.cust_id ? (
-                <button
-                  className="pd-cart-button"
-                  onClick={() => handleAddCart(quantity)}
-                >
-                  <img src="/img/ecommerce/icon-cart-btn.svg" />
-                  Tambahkan ke keranjang
-                </button>
+                  <div>
+                  <button
+                    className="pd-cart-button"
+                    onClick={() => handleAddCart(quantity)}
+                  >
+                    <img src="/img/ecommerce/icon-cart-btn.svg" />
+                    Tambahkan ke keranjang
+                  </button>
+                </div>
               ) : (
                 <Link
                   style={{ textDecoration: "none" }}
