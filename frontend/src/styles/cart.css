@@ -28,17 +28,16 @@
 }
 
 .cart-container {
-  margin-bottom: 100px;
+  margin-bottom: 10em;
 }
 
 .cart-title {
-  font-family: "Inter";
+  /* font-family: "Inter"; */
   color: var(--darkblue);
-  font-size: 4em;
+  font-size: 3em;
   width:100%;
-  position: relative;
-  left: 155px;
-  margin-bottom: 0.5em;
+  padding-left: 3em;
+  margin-top: 1em;
 }
 
 .cart-wrapper {
@@ -112,7 +111,7 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  width: 100px;
+  width: max-content;
   margin: auto 0 auto 2.2em;
 }
 
@@ -121,6 +120,8 @@
   align-self: flex-end;
   margin-left: 1em;
   text-align: right;
+  flex-wrap: nowrap;
+  width: max-content;
 }
 
 .cart-delete-icon {
@@ -165,12 +166,11 @@
 }
 
 .cart-total-price-wrapper p:first-child {
-  font-family: "Inter";
   font-weight: bold;
   text-align: center;
   margin-left: 0.5em;
   color: white;
-  font-size: 3em;
+  font-size: 2em;
 }
 
 .cart-total-price-wrapper p:last-child {
@@ -205,7 +205,7 @@
   border-bottom: solid lightgray 1px;
   padding-bottom: 0.8em;
   margin: 0;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .cart-summary-price-wrapper {
@@ -234,18 +234,16 @@
   width: 100%;
   height: 40px;
   border-radius: 10px;
-  background-color: var(--mediumpink);
-  border-style: none;
-  color: white;
+  border: 1px solid var(--darkpink);
+  color: var(--darkpink);
   font-weight: bold;
   font-size: 1em;
   cursor:pointer;
-  transition: background-color 0.3s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .cart-checkout-btn:hover {
-  background-color: var(--darkpink);
-  width: 100.5%;
+  scale: 1.01;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
 }
 
@@ -260,12 +258,12 @@
   font-weight: bold;
   font-size: 1em;
   cursor: pointer;
-  transition: 0.3s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .cart-back-to-shopping-btn:hover {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
-  width: 100.5%;
+  scale: 1.01;
 }
 
 .no-items-cart {

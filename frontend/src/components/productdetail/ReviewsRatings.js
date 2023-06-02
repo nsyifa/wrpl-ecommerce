@@ -38,7 +38,7 @@ const ReviewsRatings = ({ rating, ratingamount }) => {
                   color: "white",
                 },
 
-                fontSize: "3rem",
+                fontSize: "2rem",
               }}
               readOnly
             />
@@ -56,6 +56,8 @@ const ReviewsRatings = ({ rating, ratingamount }) => {
                     precision={0.1}
                     size="medium"
                     readOnly
+
+                    sx = {{color: "#CE7777"}}
                   />
                   {amount}
                 </div>
@@ -65,11 +67,11 @@ const ReviewsRatings = ({ rating, ratingamount }) => {
         </div>
 
         <div className="add-review-wrapper">
-          <p className="add-review-ask">Have you tried this product?</p>
+          <p className="add-review-ask">Sudahkah kamu mencoba produk ini?</p>
           <p className="add-review-bonus">
-            Add your own review here and get 25 points!
+            Review sekarang dan dapatkan 25 poin!
           </p>
-          <button className="add-review-button">ADD REVIEW</button>
+          <button className="add-review-button">TAMBAH REVIEW</button>
         </div>
       </div>
 
@@ -85,6 +87,7 @@ const ReviewsRatings = ({ rating, ratingamount }) => {
                   precision={0.1}
                   size="medium"
                   readOnly
+                  sx = {{color: "#CE7777"}}
                 />
                 {review.date}
               </div>

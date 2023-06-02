@@ -55,7 +55,7 @@ const HomeCarousel = ({ data }) => {
         ]}
       >
         {data.sections.map((card, index) => (
-          <CarouselCardBrand img={card.image} key={index} />
+          <CarouselCardBrand img={card.image} url={card.url} key={index} />
         ))}
       </Carousel>
     </div>

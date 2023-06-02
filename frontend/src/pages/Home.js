@@ -80,6 +80,10 @@ const Home = ({ user }) => {
     },
     [productData]
   );
+  
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div className="home-container">
@@ -162,7 +166,7 @@ const Home = ({ user }) => {
         style={{ height: "200px", marginTop: "8em" }}
       >
         <h2 className="hottest-products-text">Choose Your Brand</h2>
-        {productData ? <HomeCarousel data={carouselData[2]} /> : ""}
+        {productData ? <HomeCarousel data={carouselData[0]} /> : ""}
       </div>
       <div
         className="hottest-products"
