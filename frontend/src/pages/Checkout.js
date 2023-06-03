@@ -16,11 +16,15 @@ import {
   getLatestOrder,
   getTransactionToken,
   getTransactionTokenAll,
-  getLatestPayment,
-  getAllShippers,
+  getLatestShipping,
+  insertShipping,
   insertPayment,
   insertOrder,
+  insertOrderPerSeller,
   insertOrderDetail,
+  insertTransactionEffe,
+  insertTransactionLumiere,
+  insertTransactionZalya,
 } from "../services/checkout";
 import "../styles/checkout.css";
 const imageArray = [
@@ -223,54 +227,6 @@ const Checkout = ({ user }) => {
     }
   }
 
-  async function handlePay() {
-    if (paymentMethod.length > 0) {
-      const latest_payment = await (await getLatestPayment()).data[0][0];
-      let payment_id =
-        parseInt(latest_payment.payment_id.replace("PA", "")) + 1;
-      payment_id = "PA" + payment_id;
-
-      const res1 = await insertPayment(payment_id, paymentMethod);
-      const shippers = await (await getAllShippers()).data[0];
-      const random_shipper =
-        shippers[Math.floor(Math.random() * shippers.length)];
-      const shipper_id = random_shipper.shipper_id;
-
-      const latest_order = await (await getLatestOrder()).data[0][0];
-      let order_number =
-        parseInt(latest_order.order_number.replace("O", "")) + 1;
-      order_number = "O" + order_number;
-      orderID = order_number;
-      paymentType = paymentMethod;
-
-      const res2 = await insertOrder(
-        order_number,
-        user.cust_id,
-        shipper_id,
-        payment_id,
-        null,
-        "Belum Dibayar"
-      );
-
-      for (let i = 0; i < products.length; i++) {
-        let res3 = await insertOrderDetail(
-          order_number,
-          products[i].product_id,
-          products[i].quantity,
-          products[i].price
-        );
-      }
-
-      navigate("/payment", {
-        state: {
-          products: products,
-          paymentType: paymentType,
-          orderID: orderID,
-        },
-      });
-    }
-  }
-
   async function handleBayar(index) {
     const latest_order = await (await getLatestOrder()).data[0][0];
     let order_number =
@@ -316,7 +272,8 @@ const Checkout = ({ user }) => {
         !productsBySeller[1].length > 0) &&
       ((productsBySeller[2].length > 0 &&
         currentShippingTypes[2]?.service.length > 0) ||
-        !productsBySeller[2].length > 0);
+        !productsBySeller[2].length > 0) &&
+      (currentAddress?.length > 0 || customer?.address?.length > 0);
     return valid;
   };
 
@@ -325,11 +282,8 @@ const Checkout = ({ user }) => {
     if (isPayValid()) {
       const latest_order = await (await getLatestOrder()).data[0][0];
       let order_number =
-        parseInt(latest_order.order_number.replace("OR", "")) - 9000 + 9;
+        parseInt(latest_order.order_number.replace("OR", "")) + 1;
       order_number = "OR" + order_number;
-      // const total_cost =
-      //   products.reduce((acc, item) => acc + item.price, 0) +
-      //   currentShippingTypes.reduce((acc, shipping) => acc + shipping.cost, 0);
       const items = [];
       for (let j = 0; j < productsBySeller.length; j++) {
         if (productsBySeller[j].length > 0) {
@@ -356,6 +310,7 @@ const Checkout = ({ user }) => {
           }
         }
       }
+
       console.log(items);
       const total_cost = items.reduce(
         (acc, item) => acc + item.price * item.quantity,
@@ -375,19 +330,174 @@ const Checkout = ({ user }) => {
           (city) => city.city_id === currentCity.value
         ).postal_code,
       };
+
       const trans = await getTransactionTokenAll(transaction_info);
       const token = trans.data?.token;
       console.log("token", token);
       if (token) {
         window.snap.pay(token, {
-          onSuccess: (result) => {
+          onSuccess: async (result) => {
             console.log(result);
-            navigate("/", { replace: true }); // this one doesnt always work?????????
+
+            const shipping_number_arr = [null, null, null];
+
+            //insert shipping info into shipping database
+            for (let i = 0; i < currentShippingTypes.length; i++) {
+              if (currentShippingTypes[i]?.service?.length > 0) {
+                const latest_shipping = await (
+                  await getLatestShipping()
+                ).data[0][0];
+                let shipping_number =
+                  parseInt(latest_shipping.shipping_number.replace("SH", "")) +
+                  1;
+                shipping_number = "SH" + shipping_number;
+                console.log("shipping number", shipping_number);
+                shipping_number_arr[i] = shipping_number;
+                const shipping_data = {
+                  shipping_number: shipping_number,
+                  shipping_company: currentShipping.label,
+                  sender_name: sellerNames[i],
+                  sender_city: sellers[i].city,
+                  sender_address: sellers[i].address,
+                  receiver_name: customer.first_name + " " + customer.last_name,
+                  receiver_city: currentCity.label,
+                  receiver_address:
+                    currentAddress?.length > 0
+                      ? currentAddress
+                      : customer.address,
+                  shipping_type: currentShippingTypes[i].service,
+                  product_weight: productsBySeller[i].reduce(
+                    (acc, item) => acc + item.weight,
+                    0
+                  ),
+                  shipping_fee: currentShippingTypes[i].cost,
+                };
+                console.log("shipping_data", shipping_data);
+                const res_shipping = await insertShipping(shipping_data);
+              }
+            }
+
+            console.log("shipping number arr", shipping_number_arr);
+
+            // insert transaction info into payment database
+            const transaction_data = {
+              fraud_status: result.fraud_status,
+              gross_amount: result.gross_amount,
+              order_id: result.order_id,
+              payment_type: result.payment_type,
+              pdf_url: result.pdf_url,
+              status_code: result.status_code,
+              status_message: result.status_message,
+              transaction_id: result.transaction_id,
+              transaction_status: result.transaction_status,
+              transaction_time: result.transaction_time,
+            };
+            console.log("transaction data", transaction_data);
+            const res_payment = await insertPayment(transaction_data);
+
+            //insert order data into order table on ecommerce database
+            const order_data = {
+              order_number: order_number,
+              cust_id: customer.cust_id,
+              total_payment: total_cost,
+              transaction_id: token,
+            };
+
+            console.log("order data", order_data);
+            const res_order = await insertOrder(order_data);
+
+            // insert order per seller for each seller in the order into order per seller table on ecommerce database
+            for (let i = 0; i < productsBySeller.length; i++) {
+              if (productsBySeller[i].length > 0) {
+                const orderperseller_data = {
+                  order_number: order_number,
+                  cust_id: customer.cust_id,
+                  seller_id: sellers[i].seller_id,
+                  shipping_id: shipping_number_arr[i],
+                  payment_amount:
+                    productsBySeller[i].reduce(
+                      (acc, item) => acc + item.price,
+                      0
+                    ) + currentShippingTypes[i].cost,
+                };
+                console.log("order per seller data", orderperseller_data);
+                const res_orderperseller = await insertOrderPerSeller(
+                  orderperseller_data
+                );
+              }
+            }
+
+            // insert order detail for each product into order detail table in dbecommerce
+            for (let i = 0; i < products.length; i++) {
+              const orderdetail_data = {
+                order_number: order_number,
+                product_id: products[i].product_id,
+                quantity: products[i].quantity,
+                total_price: products[i].price,
+              };
+              console.log("order detail data", orderdetail_data);
+              const res_orderdetail = await insertOrderDetail(orderdetail_data);
+            }
+
+            // insert transaction data into transaction table for each seller db
+            for (let i = 0; i < products.length; i++) {
+              const sellertrans_data = {
+                order_number: order_number,
+                transaction_id: token,
+                payment_type: result.payment_type,
+                cust_id: customer.cust_id,
+                product_id: products[i].product_id,
+                quantity: products[i].quantity,
+                unit_price: products[i].unit_price,
+                total_price: products[i].price,
+              };
+              console.log(sellertrans_data);
+              if (sellertrans_data.product_id[0] == "C") {
+                const res_sellertrans = await insertTransactionLumiere(
+                  sellertrans_data
+                );
+              } else if (sellertrans_data.product_id[0] == "F") {
+                const res_sellertrans = await insertTransactionZalya(
+                  sellertrans_data
+                );
+              } else if (sellertrans_data.product_id[0] == "P") {
+                const res_sellertrans = await insertTransactionEffe(
+                  sellertrans_data
+                );
+              }
+            }
+
+            navigate("/orderdetail", {
+              replace: true,
+              state: {
+                products: products,
+                productsBySeller: productsBySeller,
+                order_number: order_number,
+                customer: customer,
+                address:
+                  currentAddress?.length > 0
+                    ? currentAddress
+                    : customer.address,
+                city: currentCity,
+                currentShippingTypes: currentShippingTypes,
+                shipping_number_arr: shipping_number_arr,
+              },
+            }); // this one works only if user has visited the base url
             // window.location.replace("/");
           },
         });
       }
     }
+  }
+
+  function getShippingCost() {
+    let shipping_cost = 0;
+    for (let i = 0; i < currentShippingTypes.length; i++) {
+      if (currentShippingTypes[i]?.service?.length > 0) {
+        shipping_cost += currentShippingTypes[i].cost;
+      }
+    }
+    return shipping_cost;
   }
 
   return (
@@ -519,11 +629,15 @@ const Checkout = ({ user }) => {
           />
 
           <div className="order-summary-container">
-            <OrderSummary product_price={total_product_price} />
+            <OrderSummary
+              product_price={total_product_price}
+              shipping_cost={getShippingCost()}
+            />
             <div className="total-pay-wrapper">
               <p>Total</p>
               <p className="total-pay-price">
-                {"$" + (total_product_price + 10).toFixed(2)}
+                {"Rp " +
+                  (total_product_price + getShippingCost()).toLocaleString()}
               </p>
             </div>
             <button className="order-pay-button" onClick={handlePayment}>

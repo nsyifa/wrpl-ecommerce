@@ -249,6 +249,198 @@ export const getTransactionTokenAll = async (transaction_info) => {
   }
 };
 
+export const getLatestShipping = async () => {
+  try {
+    const res = await axios.get(
+      "http://localhost:8086/api/shipping/latest",
+      null
+    );
+    if (!res.data) throw new Error(res.data.error);
+
+    return {
+      ok: true,
+      data: res.data,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
+};
+
+export const insertShipping = async (shipping_data) => {
+  try {
+    const res = await axios.post(
+      "http://localhost:8086/api/shipping/create",
+      shipping_data
+    );
+    console.log(res);
+
+    if (!res.data) throw new Error(res.data.error);
+
+    return {
+      ok: true,
+      data: res.data,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
+};
+
+export const insertPayment = async (transaction_data) => {
+  try {
+    const res = await axios.post(
+      "http://localhost:8087/api/payment/create",
+      transaction_data
+    );
+    console.log(res);
+
+    if (!res.data) throw new Error(res.data.error);
+
+    return {
+      ok: true,
+      data: res.data,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
+};
+
+export const insertOrder = async (order_data) => {
+  try {
+    const res = await axios.post(
+      "http://localhost:8085/api/ecommerce/order",
+      order_data
+    );
+    console.log(res);
+
+    if (!res.data) throw new Error(res.data.error);
+
+    return {
+      ok: true,
+      data: res.data,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
+};
+
+export const insertOrderPerSeller = async (orderperseller_data) => {
+  try {
+    const res = await axios.post(
+      "http://localhost:8085/api/ecommerce/orderperseller",
+      orderperseller_data
+    );
+    console.log(res);
+
+    if (!res.data) throw new Error(res.data.error);
+
+    return {
+      ok: true,
+      data: res.data,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
+};
+
+export const insertOrderDetail = async (orderdetail_data) => {
+  try {
+    const res = await axios.post(
+      "http://localhost:8085/api/ecommerce/orderdetail",
+      {
+        order_number: orderdetail_data.order_number,
+        product_id: orderdetail_data.product_id,
+        quantity: orderdetail_data.quantity,
+        total_price: orderdetail_data.total_price,
+      }
+    );
+    console.log(res);
+
+    if (!res.data) throw new Error(res.data.error);
+
+    return {
+      ok: true,
+      data: res.data,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
+};
+
+export const insertTransactionLumiere = async (lumieretrans_data) => {
+  try {
+    const res = await axios.post(
+      "http://localhost:8083/api/lumiere/transaction",
+      lumieretrans_data
+    );
+    console.log(res);
+
+    if (!res.data) throw new Error(res.data.error);
+
+    return {
+      ok: true,
+      data: res.data,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
+};
+
+export const insertTransactionZalya = async (zalyatrans_data) => {
+  try {
+    const res = await axios.post(
+      "http://localhost:8084/api/zalya/transaction",
+      zalyatrans_data
+    );
+    console.log(res);
+
+    if (!res.data) throw new Error(res.data.error);
+
+    return {
+      ok: true,
+      data: res.data,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
+};
+
+export const insertTransactionEffe = async (effetrans_data) => {
+  try {
+    const res = await axios.post(
+      "http://localhost:8082/api/effe/transaction",
+      effetrans_data
+    );
+    console.log(res);
+
+    if (!res.data) throw new Error(res.data.error);
+
+    return {
+      ok: true,
+      data: res.data,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
+};
+
 export const getLatestPayment = async () => {
   try {
     const res = await axios.get(
@@ -306,86 +498,86 @@ export const getAllShippers = async () => {
   }
 };
 
-export const insertPayment = async (payment_id, payment_type) => {
-  try {
-    const res = await axios.post("http://localhost:8080/api/data/payments", {
-      payment_id: payment_id,
-      payment_type: payment_type,
-    });
-    console.log(res);
+// export const insertPayment = async (payment_id, payment_type) => {
+//   try {
+//     const res = await axios.post("http://localhost:8080/api/data/payments", {
+//       payment_id: payment_id,
+//       payment_type: payment_type,
+//     });
+//     console.log(res);
 
-    if (!res.data) throw new Error(res.data.error);
+//     if (!res.data) throw new Error(res.data.error);
 
-    return {
-      ok: true,
-      data: res.data,
-    };
-  } catch (error) {
-    return {
-      ok: false,
-    };
-  }
-};
+//     return {
+//       ok: true,
+//       data: res.data,
+//     };
+//   } catch (error) {
+//     return {
+//       ok: false,
+//     };
+//   }
+// };
 
-export const insertOrder = async (
-  order_number,
-  cust_id,
-  shipper_id,
-  payment_id,
-  ship_date,
-  status
-) => {
-  try {
-    const res = await axios.post("http://localhost:8080/api/data/orders", {
-      order_number: order_number,
-      cust_id: cust_id,
-      shipper_id: shipper_id,
-      payment_id: payment_id,
-      ship_date: ship_date,
-      status: status,
-    });
-    console.log(res);
+// export const insertOrder = async (
+//   order_number,
+//   cust_id,
+//   shipper_id,
+//   payment_id,
+//   ship_date,
+//   status
+// ) => {
+//   try {
+//     const res = await axios.post("http://localhost:8080/api/data/orders", {
+//       order_number: order_number,
+//       cust_id: cust_id,
+//       shipper_id: shipper_id,
+//       payment_id: payment_id,
+//       ship_date: ship_date,
+//       status: status,
+//     });
+//     console.log(res);
 
-    if (!res.data) throw new Error(res.data.error);
+//     if (!res.data) throw new Error(res.data.error);
 
-    return {
-      ok: true,
-      data: res.data,
-    };
-  } catch (error) {
-    return {
-      ok: false,
-    };
-  }
-};
+//     return {
+//       ok: true,
+//       data: res.data,
+//     };
+//   } catch (error) {
+//     return {
+//       ok: false,
+//     };
+//   }
+// };
 
-export const insertOrderDetail = async (
-  order_number,
-  product_id,
-  quantity,
-  total_price
-) => {
-  try {
-    const res = await axios.post(
-      "http://localhost:8080/api/data/orderdetails",
-      {
-        order_number: order_number,
-        product_id: product_id,
-        quantity: quantity,
-        total_price: total_price,
-      }
-    );
-    console.log(res);
+// export const insertOrderDetail = async (
+//   order_number,
+//   product_id,
+//   quantity,
+//   total_price
+// ) => {
+//   try {
+//     const res = await axios.post(
+//       "http://localhost:8080/api/data/orderdetails",
+//       {
+//         order_number: order_number,
+//         product_id: product_id,
+//         quantity: quantity,
+//         total_price: total_price,
+//       }
+//     );
+//     console.log(res);
 
-    if (!res.data) throw new Error(res.data.error);
+//     if (!res.data) throw new Error(res.data.error);
 
-    return {
-      ok: true,
-      data: res.data,
-    };
-  } catch (error) {
-    return {
-      ok: false,
-    };
-  }
-};
+//     return {
+//       ok: true,
+//       data: res.data,
+//     };
+//   } catch (error) {
+//     return {
+//       ok: false,
+//     };
+//   }
+// };

@@ -1,6 +1,6 @@
 import React from "react";
 
-const OrderSummary = ({ product_price }) => {
+const OrderSummary = ({ product_price, shipping_cost }) => {
   return (
     <div className="order-summary-wrapper">
       <h2 className="order-summary-header">Order Summary</h2>
@@ -11,11 +11,7 @@ const OrderSummary = ({ product_price }) => {
         </div>
         <div className="order-list-item">
           <p>Shipping cost</p>
-          <p>$10.00</p>
-        </div>
-        <div className="order-list-item">
-          <p>Sales tax</p>
-          <p>$5.00</p>
+          <p>{shipping_cost}</p>
         </div>
         <div className="order-list-item-discount">
           <p>Product discount</p>
@@ -23,7 +19,7 @@ const OrderSummary = ({ product_price }) => {
         </div>
         <div className="order-list-item-discount">
           <p>Shipping discount</p>
-          <p>- $5.00</p>
+          <p>- $0.00</p>
         </div>
         <div className="order-list-item-discount">
           <p>Promo coupon discount</p>

@@ -21,6 +21,7 @@ exports.insertTransaction = (req, res) => {
   }
 
   Database.insertTransaction(
+    req.body.order_number,
     req.body.transaction_id,
     req.body.payment_type,
     req.body.cust_id,

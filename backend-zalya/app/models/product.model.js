@@ -17,6 +17,7 @@ Database.getAllProducts = (result) => {
 };
 
 Database.insertTransaction = (
+  order_number,
   transaction_id,
   payment_type,
   cust_id,
@@ -27,8 +28,9 @@ Database.insertTransaction = (
   result
 ) => {
   sql.query(
-    "CALL spInsertTransaction(?,?,?,?,?,?,?)",
+    "CALL spInsertTransaction(?,?,?,?,?,?,?,?)",
     [
+      order_number,
       transaction_id,
       payment_type,
       cust_id,
@@ -45,6 +47,7 @@ Database.insertTransaction = (
       }
 
       console.log("created transaction: ", {
+        order_number: order_number,
         transaction_id: transaction_id,
         payment_type: payment_type,
         cust_id: cust_id,
@@ -54,6 +57,7 @@ Database.insertTransaction = (
         total_price: total_price,
       });
       result(null, {
+        order_number: order_number,
         transaction_id: transaction_id,
         payment_type: payment_type,
         cust_id: cust_id,
