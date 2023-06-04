@@ -265,13 +265,13 @@ const Checkout = ({ user }) => {
   const isPayValid = () => {
     const valid =
       ((productsBySeller[0].length > 0 &&
-        currentShippingTypes[0]?.service.length > 0) ||
+        currentShippingTypes[0]?.service?.length > 0) ||
         !productsBySeller[0].length > 0) &&
       ((productsBySeller[1].length > 0 &&
-        currentShippingTypes[1]?.service.length > 0) ||
+        currentShippingTypes[1]?.service?.length > 0) ||
         !productsBySeller[1].length > 0) &&
       ((productsBySeller[2].length > 0 &&
-        currentShippingTypes[2]?.service.length > 0) ||
+        currentShippingTypes[2]?.service?.length > 0) ||
         !productsBySeller[2].length > 0) &&
       (currentAddress?.length > 0 || customer?.address?.length > 0);
     return valid;
@@ -487,6 +487,8 @@ const Checkout = ({ user }) => {
           },
         });
       }
+    } else {
+      window.alert("Tolong isi alamat, kota, dan shipping yang diinginkan!");
     }
   }
 
