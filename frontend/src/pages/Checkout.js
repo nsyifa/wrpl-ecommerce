@@ -471,6 +471,7 @@ const Checkout = ({ user }) => {
               replace: true,
               state: {
                 products: products,
+                transaction_data: transaction_data,
                 productsBySeller: productsBySeller,
                 order_number: order_number,
                 customer: customer,
@@ -479,7 +480,9 @@ const Checkout = ({ user }) => {
                     ? currentAddress
                     : customer.address,
                 city: currentCity,
+                province: currentProvince,
                 currentShippingTypes: currentShippingTypes,
+                currentShipping: currentShipping,
                 shipping_number_arr: shipping_number_arr,
               },
             }); // this one works only if user has visited the base url
