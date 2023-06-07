@@ -269,6 +269,31 @@
   font-weight: bold;
 }
 
+.btn-shipping {
+  width: 100%;
+  background-color: var(--mediumpink);
+  color: var(--darkblue);
+  padding: 10px 0;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.btn-shipping-choose select {
+  margin-top: 10px;
+  width: max-content;
+  background-color: none;
+  border-radius: 5px;
+  color: var(--darkblue);
+  padding: 8px;
+}
+
+.shipping-information-detail {
+  margin-top: 10px;
+  font-size: 0.9em;
+}
+
 .order-pay-button {
   border: none;
   padding: 0.5em 0 0.5em 0;

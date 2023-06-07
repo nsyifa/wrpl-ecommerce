@@ -555,11 +555,11 @@ const Checkout = ({ user }) => {
                       image={imageArray[index2 % 6]}
                     />
                   ))}
-                  <button onClick={() => handleGetShipping(index1)}>
+                  <button className = "btn-shipping" onClick={() => handleGetShipping(index1)}>
                     Dapatkan shipping
                   </button>
                   {availableShipping[index1]?.length > 0 ? (
-                    <div>
+                    <div className = "btn-shipping-choose">
                       <select
                         value={currentShippingTypes[index1]}
                         onChange={() =>
@@ -577,7 +577,7 @@ const Checkout = ({ user }) => {
                           </option>
                         ))}
                       </select>
-                      <div>
+                      <div className="shipping-information-detail">
                         {currentShippingTypes[index1].service ? (
                           <React.Fragment>
                             <p>
@@ -603,7 +603,7 @@ const Checkout = ({ user }) => {
                     </div>
                   ) : null}
                   {currentShippingTypes[index1].service ? (
-                    <div>
+                    <div className = "shipping-information-detail">
                       {"Total: Rp " +
                         (
                           productsBySeller[index1].reduce(
