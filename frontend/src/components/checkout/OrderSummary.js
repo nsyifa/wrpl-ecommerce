@@ -7,7 +7,7 @@ const OrderSummary = ({ product_price, shipping_cost }) => {
       <div className="order-list-wrapper">
         <div className="order-list-item">
           <p>Total product price</p>
-          <p>{"$" + product_price.toFixed(2)}</p>
+          <p>{"Rp" + product_price.toFixed(2)}</p>
         </div>
         <div className="order-list-item">
           <p>Shipping cost</p>
@@ -15,15 +15,15 @@ const OrderSummary = ({ product_price, shipping_cost }) => {
         </div>
         <div className="order-list-item-discount">
           <p>Product discount</p>
-          <p>- $0.00</p>
+          <p>- Rp0.00</p>
         </div>
         <div className="order-list-item-discount">
           <p>Shipping discount</p>
-          <p>- $0.00</p>
+          <p>- Rp0.00</p>
         </div>
         <div className="order-list-item-discount">
           <p>Promo coupon discount</p>
-          <p>- $0.00</p>
+          <p>- Rp0.00</p>
         </div>
       </div>
     </div>

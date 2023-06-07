@@ -50,19 +50,19 @@ const CheckoutAddress = ({ user, handleAddressChange }) => {
   }
   return (
     <div>
-      <h2>Address</h2>
+      <h2>Alamat</h2>
       {address ? (
         <div>
           <p>{address}</p>
           <button className="checkout-address-add-button" onClick={openModal}>
-            Edit your address
+            Ubah Alamat
           </button>
         </div>
       ) : (
         <div>
-          <p>There is no registered address yet</p>
+          <p>Belum ada alamat yang terdaftar</p>
           <button className="checkout-address-add-button" onClick={openModal}>
-            + Add new address
+            + Tambah Alamat Baru
           </button>
         </div>
       )}

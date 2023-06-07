@@ -507,7 +507,7 @@ const Checkout = ({ user }) => {
 
   return (
     <div className="checkout-container">
-      <img className="wave-cart-header" src="img/wave/Rectangle 44.png"></img>
+      {/* <img className="wave-cart-header" src="img/wave/Rectangle 44.png"></img> */}
       <h3 className="checkout-title">Checkout</h3>
       <div className="checkout-content-container">
         <div className="checkout-address-wrapper">
@@ -621,17 +621,16 @@ const Checkout = ({ user }) => {
         </div>
         <div className="checkout-payment-wrapper">
           <div className="pay-method-container">
-            <PaymentMethod handleChange={handlePaymentMethodChange} />
+            <h2>Metode Pengiriman</h2>                
+            <Select
+              menuPortalTarget={document.body}
+              styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
+              value={currentShipping}
+              onChange={(newShipping) => setCurrentShipping(newShipping)}
+              options={shippingOptions}
+              placeholder="Pilih kurir"
+            />
           </div>
-
-          <Select
-            menuPortalTarget={document.body}
-            styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
-            value={currentShipping}
-            onChange={(newShipping) => setCurrentShipping(newShipping)}
-            options={shippingOptions}
-            placeholder="Pilih kurir"
-          />
 
           <div className="order-summary-container">
             <OrderSummary
