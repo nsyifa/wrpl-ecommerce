@@ -7,11 +7,11 @@ const OrderSummary = ({ product_price, shipping_cost }) => {
       <div className="order-list-wrapper">
         <div className="order-list-item">
           <p>Total product price</p>
-          <p>{"Rp" + product_price.toFixed(2)}</p>
+          <p>{"Rp" + product_price.toLocaleString()}</p>
         </div>
         <div className="order-list-item">
           <p>Shipping cost</p>
-          <p>{shipping_cost}</p>
+          <p>{"Rp" + shipping_cost.toLocaleString()}</p>
         </div>
         <div className="order-list-item-discount">
           <p>Product discount</p>
