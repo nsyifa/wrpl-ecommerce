@@ -265,14 +265,14 @@
 }
 
 .total-pay-price {
-  color: var(--biru);
+  color: var(--darkblue);
   font-weight: bold;
 }
 
 .order-pay-button {
   border: none;
   padding: 0.5em 0 0.5em 0;
-  background: var(--biru);
+  background: var(--darkpink);
   color: white;
   font-size: 1.4em;
   font-weight: bold;
