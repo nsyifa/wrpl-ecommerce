@@ -28,12 +28,9 @@ import {
 } from "../services/checkout";
 import "../styles/checkout.css";
 const imageArray = [
-  "/img/batman.jpg",
-  "/img/barbie.jpeg",
-  "/img/harrypotter.jpg",
-  "/img/princess.jpg",
-  "/img/batman.jpg",
-  "/img/mlp.jpg",
+  "/img/ecommerce/clothes.jpg",
+  "/img/ecommerce/cosmetics.jpg",
+  "/img/ecommerce/parfume.jpg",
 ];
 // each seller's product id's unique identifier. P = Effe, C = Lumiere, F = Zalya.
 const sellerProductId = ["C", "F", "P"];
@@ -552,14 +549,23 @@ const Checkout = ({ user }) => {
                     <CheckoutItemRow
                       key={`checkout-item-${index2}`}
                       product={item}
-                      image={imageArray[index2 % 6]}
+                      image={
+                        item.category == "perfume"
+                          ? imageArray[2]
+                          : item.category == "cosmetic"
+                          ? imageArray[1]
+                          : imageArray[0]
+                      }
                     />
                   ))}
-                  <button className = "btn-shipping" onClick={() => handleGetShipping(index1)}>
+                  <button
+                    className="btn-shipping"
+                    onClick={() => handleGetShipping(index1)}
+                  >
                     Dapatkan shipping
                   </button>
                   {availableShipping[index1]?.length > 0 ? (
-                    <div className = "btn-shipping-choose">
+                    <div className="btn-shipping-choose">
                       <select
                         value={currentShippingTypes[index1]}
                         onChange={() =>
@@ -603,7 +609,7 @@ const Checkout = ({ user }) => {
                     </div>
                   ) : null}
                   {currentShippingTypes[index1].service ? (
-                    <div className = "shipping-information-detail">
+                    <div className="shipping-information-detail">
                       {"Total: Rp " +
                         (
                           productsBySeller[index1].reduce(
@@ -621,7 +627,7 @@ const Checkout = ({ user }) => {
         </div>
         <div className="checkout-payment-wrapper">
           <div className="pay-method-container">
-            <h2>Metode Pengiriman</h2>                
+            <h2>Metode Pengiriman</h2>
             <Select
               menuPortalTarget={document.body}
               styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}

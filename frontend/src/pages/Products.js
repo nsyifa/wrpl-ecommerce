@@ -8,9 +8,9 @@ import ProductCard from "../components/ui/ProductCard";
 import { Link } from "react-router-dom";
 // import { productData } from "../constants/productData";
 const imageArray = [
-  "/img/ecommerce/clothes.jpg", 
-  "/img/ecommerce/cosmetics.jpg", 
-  "/img/ecommerce/parfume.jpg"
+  "/img/ecommerce/clothes.jpg",
+  "/img/ecommerce/cosmetics.jpg",
+  "/img/ecommerce/parfume.jpg",
 ];
 function Products({
   filter = {
@@ -95,22 +95,22 @@ function Products({
     switch (option) {
       case "price-asc":
         setFilteredProducts(
-          [...filteredProducts].sort((a, b) => a.price - b.price)
+          [...unsortedProducts].sort((a, b) => a.price - b.price)
         );
         break;
       case "price-desc":
         setFilteredProducts(
-          [...filteredProducts].sort((a, b) => b.price - a.price)
+          [...unsortedProducts].sort((a, b) => b.price - a.price)
         );
         break;
       case "rating-asc":
         setFilteredProducts(
-          [...filteredProducts].sort((a, b) => a.rating - b.rating)
+          [...unsortedProducts].sort((a, b) => a.rating - b.rating)
         );
         break;
       case "rating-desc":
         setFilteredProducts(
-          [...filteredProducts].sort((a, b) => b.rating - a.rating)
+          [...unsortedProducts].sort((a, b) => b.rating - a.rating)
         );
         break;
       default:
@@ -228,8 +228,13 @@ function Products({
               >
                 <ProductCard
                   product={product}
-                  image={product.category == "perfume" ? imageArray[2] : 
-                         (product.category == "cosmetic" ? imageArray[1] : imageArray[0]) }
+                  image={
+                    product.category == "perfume"
+                      ? imageArray[2]
+                      : product.category == "cosmetic"
+                      ? imageArray[1]
+                      : imageArray[0]
+                  }
                   key={product.product_id}
                 />
               </Link>
