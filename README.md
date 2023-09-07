@@ -1,14 +1,33 @@
-# Reverie
+# Reverie E-Commerce Website
+![image](https://github.com/nsyifa/wrpl-ecommerce/assets/89928533/7043fab9-9ebb-4280-ae0e-20d3821bc6b4)
 
-## Link Drive
-[link]
+Reverie is a full-stack e-commerce website demo for a fashion, perfume, and skincare/cosmetics retailer. Made with a React.js frontend, Node.js backend, and a local MySQL database.
+
+## Features
+   1) Landing page
+   2) User log-in and registration
+   3) Product catalogue with filtering and sorting
+   4) Shopping cart
+   5) Checkout page with integrated shipping cost calculation feature using RajaOngkir API
+   6) Payment using Midtrans payment gateway API
+
+## Screenshots
+![image](https://github.com/nsyifa/wrpl-ecommerce/assets/89928533/36c3a14e-e616-4531-ad18-cba685176536)
+![image](https://github.com/nsyifa/wrpl-ecommerce/assets/89928533/a40746ac-5718-429c-ade3-483d7be13782)
+![image](https://github.com/nsyifa/wrpl-ecommerce/assets/89928533/a10eb120-f94f-4ee2-98b6-b5ab41c68245)
+![image](https://github.com/nsyifa/wrpl-ecommerce/assets/89928533/f86568b0-8dfd-4eb0-88f6-b943e3802250)
+![image](https://github.com/nsyifa/wrpl-ecommerce/assets/89928533/490f657d-bf46-43ea-99d5-cd7083366bb4)
+![image](https://github.com/nsyifa/wrpl-ecommerce/assets/89928533/6ef6f32d-2468-4d27-bce6-0d4a5b93f90b)
+
+## Drive Link (Documentation and database)
+https://drive.google.com/drive/u/0/folders/13fD4w3zE_djtIpPpfn_JI_DmtZFs9mhy
 
 ## Requirements:
 1) Node.js
 2) MySQL
 
 ## How to run the backend servers:
-1) Make sure that you have all the needed databases in your local MySQL.
+1) Make sure that you have all the needed databases in your local MySQL (you can download them through the drive link above).
 2) Open the project folder in VSCode (or another terminal/IDE)
 3) For each of the backend folders, you have to:
    a) go to the backend folder directory by typing cd [backend folder name]
